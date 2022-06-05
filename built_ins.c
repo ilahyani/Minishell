@@ -1,15 +1,5 @@
 #include "minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
 int my_echo(int ac, char **av)
 {
     int i;
@@ -21,7 +11,7 @@ int my_echo(int ac, char **av)
         return (0);
     }
     i = 1;
-    if (!ft_strcmp(av[i], "-n"))
+    if (!ft_strncmp(av[i], "-n", sizeof(av[i])))
     {
         new_line = 0;
         i++;

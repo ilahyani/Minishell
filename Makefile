@@ -1,4 +1,7 @@
-all:
-	cc -Wall -Wextra -Werror -lreadline *.c -o minishell
+LIB = ./libft/libft.a
+
+all: $(LIB)
+	@cc -Wall -Wextra -Werror -lreadline $(LIB) *.c -o minishell
+
 clean:
-	rm minishell
+	@rm -rf minishell
