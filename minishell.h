@@ -11,6 +11,8 @@
 #include <readline/history.h>
 
 int	ft_strcmp(const char *s1, const char *s2);
-int my_echo(int ac, char **av);
+int my_echo(int ac, char *av);
+int my_cd(int ac, char *av);
+int my_pwd(int ac, char *av);
 
 # endif
