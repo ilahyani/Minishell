@@ -15,12 +15,13 @@
 int main()
 {
     char    *line;
+    char    *av[2]={"ls", NULL};
     char    **data;
-    int     i;
+    // int     i;
+    pid_t   child;
 
     while (1)
     {
-        i = 0;
         line = readline("🐌🐌🐌 ~ ");
         data = parser(line);
         if (!ft_strcmp(data[0], "pwd"))
@@ -32,6 +33,15 @@ int main()
         else if(!ft_strcmp(data[0], "exit"))
             exit(0);
         else
-            execve("ls", NULL, NULL);
+        {
+            // i = -1;
+            // while (data[++i])
+                // ft_strlcpy(av[i], data[i], sizeof(data[i]));
+            // printf("here\n");
+            child = fork();
+            if (child == 0)
+                execve(data[0], av, NULL);
+        }
     }
+    return (0);
 }
