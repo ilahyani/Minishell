@@ -40,3 +40,12 @@ char	**parser(char *line)
 	data = ft_split(line, ' ');
 	return (data);
 }
+
+int	ft_exec(char **data)
+{
+	char	*path;
+	char	**path_grp;
+
+	path = getenv("PATH");
+	path_grp = ft_split(path, ":");
+}

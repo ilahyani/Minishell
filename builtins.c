@@ -38,6 +38,8 @@ int my_echo(char **data)
     }
     if (new_line)
         printf("\n");
+    else
+        printf("%\n");
     return (0);
 }
 

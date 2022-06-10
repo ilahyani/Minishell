@@ -15,6 +15,7 @@ int my_echo(char **data);
 int my_cd(char **data);
 int my_pwd(char **data);
 int	sizeof_array(char **arr);
+int	ft_exec(char **data);
 char **parser(char *line);
 
 # endif

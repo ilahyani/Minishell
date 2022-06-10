@@ -15,15 +15,20 @@
 int main()
 {
     char    *line;
-    char    *av[2]={"ls", NULL};
+    //char    *av[2]={"ls", NULL};
     char    **data;
     // int     i;
-    pid_t   child;
+    pid_t   parent;
 
     while (1)
     {
         line = readline("🐌🐌🐌 ~ ");
-        data = parser(line);
+        if (!ft_strcmp(line, ""))
+            return (0);
+        // data = parser(line);
+        data = ft_split(line, ' ');
+        if (!data)
+            return (0);
         if (!ft_strcmp(data[0], "pwd"))
             my_pwd(data);
         else if (!ft_strcmp(data[0], "cd"))
@@ -33,15 +38,7 @@ int main()
         else if(!ft_strcmp(data[0], "exit"))
             exit(0);
         else
-        {
-            // i = -1;
-            // while (data[++i])
-                // ft_strlcpy(av[i], data[i], sizeof(data[i]));
-            // printf("here\n");
-            child = fork();
-            if (child == 0)
-                execve(data[0], av, NULL);
-        }
+            ft_exec(data);
     }
     return (0);
 }
