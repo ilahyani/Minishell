@@ -12,14 +12,15 @@
 
 #include "minishell.h"
 
-int main()
+int main(int ac, char **av, char **env)
 {
     char    *line;
-    //char    *av[2]={"ls", NULL};
     char    **data;
     // int     i;
-    pid_t   parent;
+    // pid_t   parent;
 
+    (void)ac;
+    (void)av;
     while (1)
     {
         line = readline("🐌🐌🐌 ~ ");
@@ -36,9 +37,9 @@ int main()
         else if (!ft_strcmp(data[0], "echo"))
             my_echo(data);
         else if(!ft_strcmp(data[0], "exit"))
-            exit(0);
-        else
-            ft_exec(data);
+            my_exit(data);
+        else if(!ft_strcmp(data[0], "export"))
+            my_export(data, env);
     }
     return (0);
 }

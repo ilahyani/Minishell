@@ -31,6 +31,17 @@ int	sizeof_array(char **arr)
 	return (i);
 }
 
+int	is_int(char *c)
+{
+	int	i;
+
+	i = -1;
+	while (c[++i])
+		if (c[i] < '0' || c[i] > '9')
+			return (0);
+	return (1);
+}
+
 char	**parser(char *line)
 {
 	char **data;
@@ -43,9 +54,16 @@ char	**parser(char *line)
 
 int	ft_exec(char **data)
 {
-	char	*path;
-	char	**path_grp;
+	// char	*path;
+	// char	**path_grp;
+	pid_t	f;
+	char	*av[2]={"ls", NULL};
 
-	path = getenv("PATH");
-	path_grp = ft_split(path, ":");
+	// path = getenv("PATH");
+	// path_grp = ft_split(path, ":");
+	//join data[0] with each path_grp[i] till you get the right one;
+	f = fork();
+	if (f == 0)
+		execve(data[0], av, NULL);
+	return (0);
 }
