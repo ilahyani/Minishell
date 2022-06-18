@@ -32,11 +32,12 @@ int     ft_strcmp(const char *s1, const char *s2);
 int     sizeof_array(char **arr);
 int     is_int(char *c);
 int     ft_exec(char **data);
-char	**sort_tab(char **tab);
+t_list   *ft_sort(char **tab);
+// char	**sort_tab(char **tab);
 char    **parser(char *line);
 char	*strchr_plus(const char *s, int c);
-void	env_print(char	*env);
+void	env_print(void	*env);
 size_t	ft_strcpy(char *dst, char *src);
-size_t	find_char(char *s, char c);
+int find_char(char *s, char c);
 
 # endif

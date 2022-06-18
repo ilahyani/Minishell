@@ -68,33 +68,63 @@ int	ft_exec(char **data)
 	return (0);
 }
 
-char	**sort_tab(char **tab)
-{
-	char	**sorted;
-	char	*tmp;
-	int		i;
-	int		j;
+// char	**sort_tab(char **tab)
+// {
+// 	char	**sorted;
+// 	char	*tmp;
+// 	int		i;
+// 	int		j;
 
-	sorted = (char **) malloc(sizeof(char *) * (sizeof_array(tab) + 1));
+// 	sorted = (char **) malloc(sizeof(char *) * (sizeof_array(tab) + 1));
+// 	i = -1;
+// 	while (tab[++i])
+// 		sorted[i] = ft_strdup(tab[i]);
+// 	sorted[i] = NULL;
+// 	i = 0;
+//     while (sorted[i])
+//     {
+// 		j = i + 1;
+//         while (sorted[j])
+//         {
+//             if (ft_strcmp(sorted[i], sorted[j]) > 0)
+//             {
+// 				tmp = sorted[i];
+//                 sorted[i] = sorted[j];
+//                 sorted[j] = tmp;
+//             }
+//             j++;
+//         }
+//         i++;
+//     }
+// 	return (sorted);
+// }
+
+t_list	*ft_sort(char **tab)
+{
+	t_list	*sorted=NULL;
+	t_list	*lst_tmp;
+	t_list	*lst_tmp2;
+	char	*char_tmp;
+	int		i;
+
 	i = -1;
 	while (tab[++i])
-		sorted[i] = ft_strdup(tab[i]);
-	sorted[i] = NULL;
-	i = 0;
-    while (sorted[i])
+		ft_lstadd_back(&sorted, ft_lstnew(tab[i]));
+	lst_tmp2 = sorted;
+    while (lst_tmp2->next)
     {
-		j = i + 1;
-        while (sorted[j])
+		lst_tmp = lst_tmp2->next;
+        while (lst_tmp->next)
         {
-            if (ft_strcmp(sorted[i], sorted[j]) > 0)
+            if (ft_strcmp(lst_tmp2->content, lst_tmp->content) > 0)
             {
-				tmp = sorted[i];
-                sorted[i] = sorted[j];
-                sorted[j] = tmp;
+				char_tmp = lst_tmp2->content;
+                lst_tmp2->content = lst_tmp->content;
+                lst_tmp->content = char_tmp;
             }
-            j++;
+            lst_tmp = lst_tmp->next;
         }
-        i++;
+        lst_tmp2 = lst_tmp2->next;
     }
 	return (sorted);
 }
@@ -113,12 +143,12 @@ char	*strchr_plus(const char *s, int c)
 	return (0);
 }
 
-size_t	find_char(char *s, char c)
+int	find_char(char *s, char c)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < ft_strlen(s) + 1)
+	while (i < (int)ft_strlen(s) + 1)
 	{
 		if (s[i] == (char)c)
 			return (i);
@@ -127,16 +157,18 @@ size_t	find_char(char *s, char c)
 	return (-1);
 }
 
-void	env_print(char	*env)
+void	env_print(void	*env)
 {
 	int	p;
+	char	*str;
 
 	p = -1;
+	str = env;
 	printf("declare -x ");
-    while (env[++p])
+    while (str[++p])
     {
-        printf("%c", env[p]);
-        if (env[p] == '=')
+        printf("%c", str[p]);
+        if (str[p] == '=')
             printf("\"");
     }
     printf("\"\n");

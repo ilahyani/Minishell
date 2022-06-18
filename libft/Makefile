@@ -43,9 +43,8 @@ SRCS        =   ft_isalpha.c\
 				ft_putchar_fd.c\
 				ft_putstr_fd.c\
 				ft_putendl_fd.c\
-				ft_putnbr_fd.c
-
-BNS_SRC		=	ft_lstnew.c\
+				ft_putnbr_fd.c\
+                ft_lstnew.c\
 				ft_lstadd_front.c\
 				ft_lstsize.c\
 				ft_lstlast.c\
@@ -57,8 +56,6 @@ BNS_SRC		=	ft_lstnew.c\
 
 HDR = ./libft.h
 
-BNS_OBJS 	=	$(BNS_SRC:.c=.o)
-
 OBJS		= 	$(SRCS:.c=.o)
 
 NAME		= 	libft.a
@@ -66,8 +63,6 @@ NAME		= 	libft.a
 CC 			=	/usr/bin/gcc
 
 CFLAGS		= 	-Wall -Wextra -Werror
-
-BONUS		= 	bonus
 
 RM			= 	/bin/rm -f
 
@@ -77,18 +72,13 @@ $(NAME):	$(OBJS)
 
 all:		$(NAME)
 
-$(BONUS):	$(OBJS) $(BNS_OBJS)
-			ar rcs $(NAME) $(OBJS) $(BNS_OBJS)
-
 %.o: %.c $(HDR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-			$(RM) $(OBJS) $(BNS_OBJS)
+			$(RM) $(OBJS)
 
 fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean all
-
-.PHONY:		all clean re fclean
