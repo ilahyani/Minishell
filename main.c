@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/07 14:57:51 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:22:02 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int main(int ac, char **av, char **env)
             my_exit(data);
         else if(!ft_strcmp(data[0], "export"))
             my_export(data, env);
+        else if(!ft_strcmp(data[0], "env"))
+            my_env(env);
+        // if clear sig cmd+k default behavior
     }
     return (0);
 }

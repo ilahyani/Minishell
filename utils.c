@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/07 13:42:48 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:02:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,19 @@ int	ft_exec(char **data)
 char	**sort_tab(char **tab)
 {
 	char	**sorted;
-	char	*tmp=NULL;
+	char	*tmp;
 	int		i;
 	int		j;
-	int		z;
 
-	sorted = (char **) malloc(sizeof(char *) * (sizeof(tab) + 1));
+	sorted = (char **) malloc(sizeof(char *) * (sizeof_array(tab) + 1));
 	i = -1;
 	while (tab[++i])
-	{
-		sorted[i] = (char *) malloc(ft_strlen(tab[i]) + 1);
-		z = ft_strlcpy(sorted[i], tab[i], ft_strlen(tab[i]) + 1);
-		if (i == 5)
-			printf("z = %d\ntab: |%s|\nsorted: |%s| | %lu\n", z, tab[i], sorted[i], ft_strlen(sorted[i]));
-	}
-	sorted[i + 1] = NULL;
-	printf("---------------------\n");
-	for (int j = 0; j < i; j++)
-	{
-        printf("|%s|\n", sorted[j]);
-		if (j == 5)
-			printf("-->%lu\n", sizeof(sorted[i]));
-	}
-    printf("---------------------\n");
+		sorted[i] = ft_strdup(tab[i]);
+	sorted[i] = NULL;
 	i = 0;
     while (sorted[i])
     {
 		j = i + 1;
-		//printf(">>>|%d -> %s|\n", i, sorted[i]);
         while (sorted[j])
         {
             if (ft_strcmp(sorted[i], sorted[j]) > 0)
@@ -139,7 +124,7 @@ size_t	find_char(char *s, char c)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 void	env_print(char	*env)
@@ -155,15 +140,4 @@ void	env_print(char	*env)
             printf("\"");
     }
     printf("\"\n");
-}
-
-size_t	ft_strcpy(char *dst, const char *src)
-{
-	int	i;
-
-	i = -1;
-	while (src[++i])
-		dst[i] = src[i];
-	dst[i] = '\0';
-	return (ft_strlen(src));
 }

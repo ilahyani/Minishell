@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/07 14:58:51 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:59:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,7 @@ int my_export(char **data, char **env)
     int     i;
 
     args = sizeof_array(data);
-    sorted_env = sort_tab(env); // FREE THIS SHIT BEFORE EXIT;
-    // for (i = 0; env[i]; i++)
-    //     printf("|%s|\n", env[i]);
-    // printf("---------------------\n");
-    // for (i = 0; sorted_env[i]; i++)
-    //     printf("|%s|\n", sorted_env[i]);
-    // printf("---------------------\n");
+    sorted_env = sort_tab(env);
     if (args == 1)
     {
         i = -1;
@@ -115,11 +109,39 @@ int my_export(char **data, char **env)
         while (env[i] && ft_strncmp(env[i], data[1], find_char(env[i], '=')))
             i++;
         if (env[i])
-            env[i] = data[1];
-        // else
-        //     return (1);
+        {
+            if (data[1][find_char(data[1], '=') - 1] == '+')
+            {
+                printf("+=\n");
+                ft_memcpy(env[i] + ft_strlen(env[i]), data[1] + find_char(data[1], '=') + 1, ft_strlen(data[1] + find_char(data[1], '=') + 1));
+            }
+            else
+            {
+                printf("=\n");
+                env[i] = data[1];
+            }
+        }
+        // else if (!env[i])
+        // {
+        //     if (find_char(data[1], '=') == -1)
+        //         //add variable to sorted_env
+        //     else
+        //         //add variable to env
+        // }
+        else
+            return (1);
     }
+    //FREE sorted_env
     return (0);
+}
+
+void    my_env(char **env)
+{
+    int i;
+
+    i = -1;
+    while (env[++i])
+        printf("%s\n", env[i]);
 }
 
 // Export x; x->export
