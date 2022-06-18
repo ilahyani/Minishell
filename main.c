@@ -16,8 +16,7 @@ int main(int ac, char **av, char **env)
 {
     char    *line;
     char    **data;
-    // int     i;
-    // pid_t   parent;
+    //MAKE DATA A STRUCT TO MAKA INTEGRATION WITH THE PARSER EASIER!
 
     (void)ac;
     (void)av;

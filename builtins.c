@@ -69,10 +69,10 @@ int my_cd(char **data)
     if (args == 1)
     {
         if (chdir(getenv("HOME")) != 0)
-            printf("No such file or directory\n");
+            perror("minishell: cd: ");
     }
     else if (chdir(data[1]) != 0)
-        printf("No such file or directory\n");
+        perror("minishell: cd: ");
     return (0);
 }
 
@@ -91,25 +91,37 @@ void    my_exit(char **data)
 
 int my_export(char **data, char **env)
 {
-    int args;
-    int i;
+    char    **sorted_env;
+    int     args;
+    int     i;
 
     args = sizeof_array(data);
+    sorted_env = sort_tab(env); // FREE THIS SHIT BEFORE EXIT;
+    // for (i = 0; env[i]; i++)
+    //     printf("|%s|\n", env[i]);
+    // printf("---------------------\n");
+    // for (i = 0; sorted_env[i]; i++)
+    //     printf("|%s|\n", sorted_env[i]);
+    // printf("---------------------\n");
     if (args == 1)
     {
-        i = 0;
-        while (env[i])
-            printf("%s\n", env[i++]);
+        i = -1;
+        while (sorted_env[++i])
+            env_print(sorted_env[i]);
     }
     else
     {
         i = 0;
-        while (env[i] && ft_strncmp(env[i], data[1], sizeof(env[1])))
+        while (env[i] && ft_strncmp(env[i], data[1], find_char(env[i], '=')))
             i++;
         if (env[i])
             env[i] = data[1];
-        else
-            return (1);
+        // else
+        //     return (1);
     }
     return (0);
 }
+
+// Export x; x->export
+// Export a=asdf; x->(env-malloc, export)
+// Export +=

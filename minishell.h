@@ -19,6 +19,11 @@ void    my_exit(char **data);
 int     sizeof_array(char **arr);
 int     is_int(char *c);
 int     ft_exec(char **data);
+char	**sort_tab(char **tab);
 char    **parser(char *line);
+char	*strchr_plus(const char *s, int c);
+void	env_print(char	*env);
+size_t	ft_strcpy(char *dst, const char *src);
+size_t	find_char(char *s, char c);
 
 # endif
