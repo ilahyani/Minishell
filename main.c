@@ -41,6 +41,8 @@ int main(int ac, char **av, char **env)
             my_export(data, env);
         else if(!ft_strcmp(data[0], "env"))
             my_env(env);
+        else if(!ft_strcmp(data[0], "unset"))
+            my_unset(env, data);
         // if clear sig cmd+k default behavior
     }
     return (0);

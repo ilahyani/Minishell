@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
@@ -99,36 +99,6 @@ char	**sort_tab(char **tab)
 	return (sorted);
 }
 
-// t_list	*ft_sort(char **tab)
-// {
-// 	t_list	*sorted=NULL;
-// 	t_list	*lst_tmp;
-// 	t_list	*lst_tmp2;
-// 	char	*char_tmp;
-// 	int		i;
-
-// 	i = -1;
-// 	while (tab[++i])
-// 		ft_lstadd_back(&sorted, ft_lstnew(tab[i]));
-// 	lst_tmp2 = sorted;
-//     while (lst_tmp2->next)
-//     {
-// 		lst_tmp = lst_tmp2->next;
-//         while (lst_tmp->next)
-//         {
-//             if (ft_strcmp(lst_tmp2->content, lst_tmp->content) > 0)
-//             {
-// 				char_tmp = lst_tmp2->content;
-//                 lst_tmp2->content = lst_tmp->content;
-//                 lst_tmp->content = char_tmp;
-//             }
-//             lst_tmp = lst_tmp->next;
-//         }
-//         lst_tmp2 = lst_tmp2->next;
-//     }
-// 	return (sorted);
-// }
-
 char	*strchr_plus(const char *s, int c)
 {
 	size_t	i;
@@ -154,7 +124,7 @@ int	find_char(char *s, char c)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
 void	env_print(void	*env)
