@@ -33,7 +33,7 @@ int     sizeof_array(char **arr);
 int     is_int(char *c);
 int     ft_exec(char **data);
 t_list   *ft_sort(char **tab);
-// char	**sort_tab(char **tab);
+char    **sort_tab(char **tab);
 char    **parser(char *line);
 char	*strchr_plus(const char *s, int c);
 void	env_print(void	*env);

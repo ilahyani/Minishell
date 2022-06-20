@@ -68,66 +68,66 @@ int	ft_exec(char **data)
 	return (0);
 }
 
-// char	**sort_tab(char **tab)
-// {
-// 	char	**sorted;
-// 	char	*tmp;
-// 	int		i;
-// 	int		j;
-
-// 	sorted = (char **) malloc(sizeof(char *) * (sizeof_array(tab) + 1));
-// 	i = -1;
-// 	while (tab[++i])
-// 		sorted[i] = ft_strdup(tab[i]);
-// 	sorted[i] = NULL;
-// 	i = 0;
-//     while (sorted[i])
-//     {
-// 		j = i + 1;
-//         while (sorted[j])
-//         {
-//             if (ft_strcmp(sorted[i], sorted[j]) > 0)
-//             {
-// 				tmp = sorted[i];
-//                 sorted[i] = sorted[j];
-//                 sorted[j] = tmp;
-//             }
-//             j++;
-//         }
-//         i++;
-//     }
-// 	return (sorted);
-// }
-
-t_list	*ft_sort(char **tab)
+char	**sort_tab(char **tab)
 {
-	t_list	*sorted=NULL;
-	t_list	*lst_tmp;
-	t_list	*lst_tmp2;
-	char	*char_tmp;
+	char	**sorted;
+	char	*tmp;
 	int		i;
+	int		j;
 
+	sorted = (char **) malloc(sizeof(char *) * (sizeof_array(tab) + 1));
 	i = -1;
 	while (tab[++i])
-		ft_lstadd_back(&sorted, ft_lstnew(tab[i]));
-	lst_tmp2 = sorted;
-    while (lst_tmp2->next)
+		sorted[i] = ft_strdup(tab[i]);
+	sorted[i] = NULL;
+	i = 0;
+    while (sorted[i])
     {
-		lst_tmp = lst_tmp2->next;
-        while (lst_tmp->next)
+		j = i + 1;
+        while (sorted[j])
         {
-            if (ft_strcmp(lst_tmp2->content, lst_tmp->content) > 0)
+            if (ft_strcmp(sorted[i], sorted[j]) > 0)
             {
-				char_tmp = lst_tmp2->content;
-                lst_tmp2->content = lst_tmp->content;
-                lst_tmp->content = char_tmp;
+				tmp = sorted[i];
+                sorted[i] = sorted[j];
+                sorted[j] = tmp;
             }
-            lst_tmp = lst_tmp->next;
+            j++;
         }
-        lst_tmp2 = lst_tmp2->next;
+        i++;
     }
 	return (sorted);
 }
+
+// t_list	*ft_sort(char **tab)
+// {
+// 	t_list	*sorted=NULL;
+// 	t_list	*lst_tmp;
+// 	t_list	*lst_tmp2;
+// 	char	*char_tmp;
+// 	int		i;
+
+// 	i = -1;
+// 	while (tab[++i])
+// 		ft_lstadd_back(&sorted, ft_lstnew(tab[i]));
+// 	lst_tmp2 = sorted;
+//     while (lst_tmp2->next)
+//     {
+// 		lst_tmp = lst_tmp2->next;
+//         while (lst_tmp->next)
+//         {
+//             if (ft_strcmp(lst_tmp2->content, lst_tmp->content) > 0)
+//             {
+// 				char_tmp = lst_tmp2->content;
+//                 lst_tmp2->content = lst_tmp->content;
+//                 lst_tmp->content = char_tmp;
+//             }
+//             lst_tmp = lst_tmp->next;
+//         }
+//         lst_tmp2 = lst_tmp2->next;
+//     }
+// 	return (sorted);
+// }
 
 char	*strchr_plus(const char *s, int c)
 {

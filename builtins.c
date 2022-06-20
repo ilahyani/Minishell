@@ -89,20 +89,75 @@ void    my_exit(char **data)
     }
 }
 
+int my_export(char **data, char **env)
+{
+    char    **sorted;
+    int     args;
+    int     i;
+    int     j;
+
+    args = sizeof_array(data);
+    sorted = sort_tab(env);
+    if (args == 1)
+    {
+        i = -1;
+        while (sorted[++i])
+        {
+            if (find_char(sorted[i], '=') == -1)
+                printf("%s\n", sorted[i]);
+            else
+                env_print(sorted[i]);
+        }
+    }
+    else
+    {
+        i = 0;
+        while (env[i] && ft_strncmp(env[i], data[1], find_char(data[1], '=')))
+            i++;
+        if (env[i])
+        {
+            if (data[1][find_char(data[1], '=') - 1] == '+')
+            {
+                // printf("+=\n");
+                env[i] = ft_strjoin(env[i], data[1] + find_char(data[1], '=') + 1);
+                // printf("|%s|\n", env[i]);
+            }
+            else
+            {
+                //printf("=\n");
+                env[i] = data[1];
+                //printf ("|%s|\n", env[i]);
+            }
+        }
+        else
+        {
+            //printf("!\n");
+            j = -1;
+            while(env[++j]);
+            env[j] = ft_strdup(data[1]);
+            env[j + 1] = NULL;
+        }
+    }
+    //FREE sorted
+    return (0);
+}
+
 // int my_export(char **data, char **env)
 // {
-//     char    **sorted;
-//     int     args;
+//     t_list   *sorted=NULL;
+//     t_list   *tmp=NULL;
 //     int     i;
 //     int     j;
 
-//     args = sizeof_array(data);
-//     sorted = sort_tab(env);
-//     if (args == 1)
+//     sorted = ft_sort(env);
+//     if (sizeof_array(data) == 1)
 //     {
-//         i = -1;
-//         while (sorted[++i])
-//             env_print(sorted[i]);
+//         tmp = sorted;
+//         while (tmp->next)
+//         {
+//             env_print(tmp->content);
+//             tmp = tmp->next;
+//         }
 //     }
 //     else
 //     {
@@ -114,26 +169,17 @@ void    my_exit(char **data)
 //             if (data[1][find_char(data[1], '=') - 1] == '+')
 //             {
 //                 printf("+=\n");
-//                 ft_memcpy(env[i] + ft_strlen(env[i]), data[1] + find_char(data[1], '=') + 1, ft_strlen(data[1] + find_char(data[1], '=') + 1));
+//                 ft_strjoin(env[i], data[1] + find_char(data[1], '='));
 //             }
 //             else
-//             {
-//                 printf("=\n");
 //                 env[i] = data[1];
-//             }
 //         }
 //         else if (!env[i])
 //         {
-//             if ((int) find_char(data[1], '=') == -1)
-//             {
-//                 //add data[1] to sorted
-//             }
-//             else
-//             {
-//                 j = -1;
-//                 while(env[++j]);
-//                 env[j] = ft_strdup(data[1]);
-//             }
+//             j = 0;
+//             while(env[j++]);
+//             env[j] = ft_strdup(data[1]);
+//             env[j + 1] = NULL;
 //         }
 //         else
 //             return (1);
@@ -142,75 +188,18 @@ void    my_exit(char **data)
 //     return (0);
 // }
 
-int my_export(char **data, char **env)
-{
-    t_list   *sorted=NULL;
-    t_list   *tmp=NULL;
-    int     i;
-    int     j;
-
-    sorted = ft_sort(env);
-    if (sizeof_array(data) == 1)
-    {
-        tmp = sorted;
-        while (tmp->next)
-        {
-            env_print(tmp->content);
-            tmp = tmp->next;
-        }
-    }
-    else
-    {
-        i = 0;
-        while (env[i] && ft_strncmp(env[i], data[1], find_char(env[i], '=')))
-            i++;
-        if (env[i])
-        {
-            if (data[1][find_char(data[1], '=') - 1] == '+')
-            {
-                printf("+=\n");
-                ft_memcpy(env[i] + ft_strlen(env[i]), data[1] + find_char(data[1], '=') + 1, ft_strlen(data[1] + find_char(data[1], '=') + 1));
-            }
-            else
-            {
-                printf("=\n");
-                env[i] = data[1];
-            }
-        }
-        else if (!env[i])
-        {
-            // if ((int) find_char(data[1], '=') == -1)
-            // {
-            //     printf("here\n");
-            //     ft_lstadd_back(&sorted, ft_lstnew(data[1]));
-            // }
-            // else
-            // {
-            //     j = -1;
-            //     while(env[++j]);
-            //     env[j] = ft_strdup(data[1]);
-            // }
-            j = -1;
-            while(env[++j]);
-            env[j] = ft_strdup(data[1]);
-        }
-        else
-            return (1);
-    }
-    //FREE sorted
-    return (0);
-}
-
 void    my_env(char **env)
 {
     int i;
 
     i = -1;
     while (env[++i])
-        if (find_char(env[i], '=') != -1)
+        if (find_char(env[i], '=') != -1 && env[find_char(env[i], '=') + 1])
             printf("%s\n", env[i]);
 }
 
+
+
 // Export x; x->export
-// Export a=asdf; x->(env-malloc, export)
-// Export +=
+// Export a=asdf; x->(env, export)
+// Export x+=faf
