@@ -117,6 +117,8 @@ int	find_char(char *s, char c)
 {
 	int	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (i < (int)ft_strlen(s) + 1)
 	{
@@ -143,3 +145,33 @@ void	env_print(void	*env)
     }
     printf("\"\n");
 }
+
+// t_list	*ft_sort(char **env)
+// {
+// 	t_list	*sorted=NULL;
+// 	t_list	*lst_tmp;
+// 	t_list	*lst_tmp2;
+// 	char	*char_tmp;
+// 	int		i;
+//
+// 	i = -1;
+// 	while (env[++i])
+// 		ft_lstadd_back(&sorted, ft_lstnew(env[i]));
+// 	lst_tmp2 = sorted;
+//     while (lst_tmp2->next)
+//     {
+// 		lst_tmp = lst_tmp2->next;
+//         while (lst_tmp->next)
+//         {
+//             if (ft_strcmp(lst_tmp2->content, lst_tmp->content) > 0)
+//             {
+// 				char_tmp = lst_tmp2->content;
+//                 lst_tmp2->content = lst_tmp->content;
+//                 lst_tmp->content = char_tmp;
+//             }
+//             lst_tmp = lst_tmp->next;
+//         }
+//         lst_tmp2 = lst_tmp2->next;
+//     }
+// 	return (sorted);
+// }

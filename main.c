@@ -15,11 +15,16 @@
 int main(int ac, char **av, char **env)
 {
     char    *line;
-    char    **data;
-    //MAKE DATA A STRUCT TO MAKA INTEGRATION WITH THE PARSER EASIER!
+    char    **data; //MAKE DATA A STRUCT TO MAKA INTEGRATION WITH THE PARSER EASIER!
+    t_list  *lst_env;
+    int i;
 
     (void)ac;
     (void)av;
+    lst_env = NULL;
+    i = -1;
+    while (env[++i])
+	    ft_lstadd_back(&lst_env, ft_lstnew(env[i]));
     while (1)
     {
         line = readline("🐌🐌🐌 ~ ");
@@ -40,10 +45,10 @@ int main(int ac, char **av, char **env)
         else if(!ft_strcmp(data[0], "export"))
             my_export(data, env);
         else if(!ft_strcmp(data[0], "env"))
-            my_env(env);
+            my_env(lst_env);
         else if(!ft_strcmp(data[0], "unset"))
-            my_unset(env, data);
-        // if clear sig cmd+k default behavior
+            my_unset(lst_env, data);
+        // if clear -> sig cmd+k default behavior
     }
     return (0);
 }

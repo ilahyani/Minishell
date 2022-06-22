@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+// TIDY UP BUILTINS (ERRORS AND NORM) then move to signals
+
 int my_echo(char **data)
 {
     int i;
@@ -137,33 +139,41 @@ int my_export(char **data, char **env)
     return (0);
 }
 
-void    my_env(char **env)
+void    my_env(t_list *env)
 {
-    int i;
+    t_list  *tmp;
 
-    i = -1;
-    while (env[++i])
-        if (find_char(env[i], '=') != -1 && env[find_char(env[i], '=') + 1])
-            printf("%s\n", env[i]);
-}
-
-void    my_unset(char **env, char **data)
-{
-    int i;
-    int j;
-
-    i = 1;
-    while (data[i])
+    tmp = env;
+    while (tmp->next)
     {
-        j = 0;
-        // printf("%lu\n", ft_strlen(data[i]));
-        while (env[j] && ft_strncmp(env[j], data[i], ft_strlen(data[i])))
-            j++;
-        // printf("|%s|\n", env[j]);
-        if (env[j])
+        if (tmp->content && find_char(tmp->content, '='))
+            printf("%s\n", (char *)tmp->content);
+        tmp = tmp->next;
+    }
+}
+ 
+void    my_unset(t_list *env, char **data)
+{
+    t_list  *tmp;
+    t_list  *tmp2;
+    int     i;
+
+    i = 0;
+    while (data[++i])
+    {
+        if (find_char(data[i], '=') || (data[i][0] >= '0' && data[i][0] <= '9'))
         {
-            free(env[j]);
+            printf("minishell: unset: %s: not a valid identifier\n", data[i]);
+            return ;
         }
-        i++;
+        tmp = env;
+        while (tmp->next && ft_strncmp(tmp->next->content, data[i], ft_strlen(data[i])))
+            tmp = tmp->next;
+        if (tmp->next)
+        {
+            tmp2 = tmp->next;
+            tmp->next = tmp->next->next;
+            free(tmp2);
+        }
     }
 }
