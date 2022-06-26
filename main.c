@@ -15,7 +15,7 @@
 int main(int ac, char **av, char **env)
 {
     char    *line;
-    char    **data; //MAKE DATA A STRUCT TO MAKA INTEGRATION WITH THE PARSER EASIER!
+    char    **data; //MAKE DATA A STRUCT TO MAKE INTEGRATION WITH THE PARSER EASIER!
     t_list  *lst_env;
     int i;
 
@@ -35,9 +35,9 @@ int main(int ac, char **av, char **env)
         if (!data)
             return (0);
         if (!ft_strcmp(data[0], "pwd"))
-            my_pwd(data);
+            my_pwd();
         else if (!ft_strcmp(data[0], "cd"))
-            my_cd(data);
+            my_cd(data, lst_env);
         else if (!ft_strcmp(data[0], "echo"))
             my_echo(data);
         else if(!ft_strcmp(data[0], "exit"))

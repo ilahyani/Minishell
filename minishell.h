@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/18 12:19:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:27:42 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,17 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <limits.h>
+
+typedef struct list
+{
+	void			*content;
+	struct list     *next;
+}	t_env;
 
 int     my_echo(char **data);
-int     my_cd(char **data);
-int     my_pwd(char **data);
+int     my_cd(char **data, t_list *env);
+int     my_pwd(void);
 int     my_export(char **data, char **env);
 void    my_exit(char **data);
 void    my_env(t_list *env);
