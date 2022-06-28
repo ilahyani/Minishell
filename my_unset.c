@@ -6,28 +6,32 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:20:18 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/26 12:20:34 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:37:55 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    my_unset(t_list *env, char **data)
+int my_unset(t_env *env, char **data)
 {
-    t_list  *tmp;
-    t_list  *tmp2;
+    t_env  *tmp;
+    t_env  *tmp2;
     int     i;
 
+    if (!data[1])
+        return (1);
     i = 0;
     while (data[++i])
     {
         if (find_char(data[i], '=') || (data[i][0] >= '0' && data[i][0] <= '9'))
         {
-            printf("minishell: unset: %s: not a valid identifier\n", data[i]);
-            return ;
+            ft_putstr_fd("minishell: unset: ", 2);
+            ft_putstr_fd(data[i], 2);
+            ft_putstr_fd(": not a valid identifier", 2);
+            return (1);
         }
         tmp = env;
-        while (tmp->next && ft_strncmp(tmp->next->content, data[i], ft_strlen(data[i])))
+        while (tmp->next && ft_strcmp(tmp->next->var, data[i]))
             tmp = tmp->next;
         if (tmp->next)
         {
@@ -36,4 +40,5 @@ void    my_unset(t_list *env, char **data)
             free(tmp2);
         }
     }
+    return (0);
 }

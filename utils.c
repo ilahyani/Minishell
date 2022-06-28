@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/18 12:02:51 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:29:18 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,33 +145,3 @@ void	env_print(void	*env)
     }
     printf("\"\n");
 }
-
-// t_list	*ft_sort(char **env)
-// {
-// 	t_list	*sorted=NULL;
-// 	t_list	*lst_tmp;
-// 	t_list	*lst_tmp2;
-// 	char	*char_tmp;
-// 	int		i;
-//
-// 	i = -1;
-// 	while (env[++i])
-// 		ft_lstadd_back(&sorted, ft_lstnew(env[i]));
-// 	lst_tmp2 = sorted;
-//     while (lst_tmp2->next)
-//     {
-// 		lst_tmp = lst_tmp2->next;
-//         while (lst_tmp->next)
-//         {
-//             if (ft_strcmp(lst_tmp2->content, lst_tmp->content) > 0)
-//             {
-// 				char_tmp = lst_tmp2->content;
-//                 lst_tmp2->content = lst_tmp->content;
-//                 lst_tmp->content = char_tmp;
-//             }
-//             lst_tmp = lst_tmp->next;
-//         }
-//         lst_tmp2 = lst_tmp2->next;
-//     }
-// 	return (sorted);
-// }

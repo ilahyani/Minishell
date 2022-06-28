@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/26 12:27:42 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:33:55 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,33 @@
 #include <readline/history.h>
 #include <limits.h>
 
-typedef struct list
+typedef struct s_env
 {
-	void			*content;
-	struct list     *next;
+	char			*var;
+    char            *value;
+	struct s_env     *next;
 }	t_env;
 
 int     my_echo(char **data);
-int     my_cd(char **data, t_list *env);
+int     my_cd(t_env *lst_env, char **data);
 int     my_pwd(void);
-int     my_export(char **data, char **env);
+int     my_export(char **data, t_env *env);
 void    my_exit(char **data);
-void    my_env(t_list *env);
-void    my_unset(t_list *env, char **data);
+void    my_env(t_env *env);
+int		my_unset(t_env *env, char **data);
 int     ft_strcmp(char *s1, char *s2);
 int     sizeof_array(char **arr);
 int     is_int(char *c);
 int     ft_exec(char **data);
-t_list   *ft_sort(char **tab);
+void	ft_sort(t_env *env);
 char    **sort_tab(char **tab);
 char    **parser(char *line);
 char	*strchr_plus(const char *s, int c);
 void	env_print(void	*env);
 size_t	ft_strcpy(char *dst, char *src);
-int find_char(char *s, char c);
+int     find_char(char *s, char c);
+t_env	*env_lstlast(t_env *lst);
+void	env_lstadd_back(t_env **lst, t_env *new);
+t_env	*env_lstnew(char *var, char *value);
 
 # endif
