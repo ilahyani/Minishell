@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/28 16:33:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:43:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ void	ft_sort(t_env *env);
 char    **sort_tab(char **tab);
 char    **parser(char *line);
 char	*strchr_plus(const char *s, int c);
-void	env_print(void	*env);
+void	env_print(t_env	*env);
 size_t	ft_strcpy(char *dst, char *src);
 int     find_char(char *s, char c);
 t_env	*env_lstlast(t_env *lst);
 void	env_lstadd_back(t_env **lst, t_env *new);
 t_env	*env_lstnew(char *var, char *value);
+t_env	*env_lstnew_plus(char *buff);
 
 # endif

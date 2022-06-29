@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/28 16:32:30 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:32:49 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ t_env	*env_lstnew(char *var, char *value)
 	if (!res)
 		return (0);
 	res->var = ft_strdup(var);
-    res->value = ft_strdup(value);
+    if (value)
+        res->value = ft_strdup(value);
+    else
+        res->value = NULL;
 	res->next = NULL;
 	return (res);
 }
@@ -56,7 +59,6 @@ t_env    *env_init(char **env, t_env *lst_env)
 {
     char **buff;
     int i;
-    int j;
 
     i = -1;
     while (env[++i])
@@ -65,9 +67,8 @@ t_env    *env_init(char **env, t_env *lst_env)
         if (!buff[1])
             buff[1] = NULL;
 	    env_lstadd_back(&lst_env, env_lstnew(buff[0], buff[1]));
-        j = 0;
-        while (buff[j])
-            free(buff[j++]);
+        free(buff[0]);
+        free(buff[1]);
         free(buff);
     }
     return (lst_env);

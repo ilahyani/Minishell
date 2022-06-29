@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/28 16:29:18 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/29 10:26:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,21 +127,4 @@ int	find_char(char *s, char c)
 		i++;
 	}
 	return (0);
-}
-
-void	env_print(void	*env)
-{
-	int	p;
-	char	*str;
-
-	p = -1;
-	str = env;
-	printf("declare -x ");
-    while (str[++p])
-    {
-        printf("%c", str[p]);
-        if (str[p] == '=')
-            printf("\"");
-    }
-    printf("\"\n");
 }
