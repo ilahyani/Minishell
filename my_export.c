@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/29 21:38:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/29 21:40:21 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,12 @@ int my_export(char **data, t_env *env)
             while (lst_tmp && ft_strncmp(lst_tmp->var, data[i], ft_strlen(lst_tmp->var)))
                 lst_tmp = lst_tmp->next;
             if (lst_tmp && lst_tmp->value && !find_char(data[i], '='))
-            {
                 continue ;
             if (lst_tmp)
             {
                 if (data[i][find_char(data[i], '=') - 1] == '+')
                     lst_tmp->value = ft_strjoin(lst_tmp->value, data[i] + find_char(data[i], '=') + 1);//free old value
                 else
-                {
                     lst_tmp->value = ft_strdup(&data[i][find_char(data[i], '=') + 1]);
             }
             else
