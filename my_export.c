@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/29 21:40:21 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/06/29 21:47:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,14 +139,14 @@ int my_export(char **data, t_env *env)
     sorted = NULL;
     sorted = lst_copy(env); //check if this is reversed
     ft_sort(sorted);
-    if (sizeof_array(data) == 1)
+    if (sizeof_array(data) == 1 || data[1][0] == '#' || data[1][0] == '$')
         env_print(sorted);
     else
     {
         i = 0;
         while (data[++i])
         {
-            if (error_check(data[i]))
+            if (!ft_isalpha(data[i][0]) && data[i][0] != '_')
                 return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1);
             lst_tmp = env;
             while (lst_tmp && ft_strncmp(lst_tmp->var, data[i], ft_strlen(lst_tmp->var)))

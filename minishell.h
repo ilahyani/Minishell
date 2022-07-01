@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/29 20:43:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/01 17:11:01 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <limits.h>
+
+int g_exit;
 
 typedef struct s_env
 {
@@ -40,7 +42,7 @@ int		my_unset(t_env *env, char **data);
 int     ft_strcmp(char *s1, char *s2);
 int     sizeof_array(char **arr);
 int     is_int(char *c);
-int     ft_exec(char **data);
+int		ft_exec(char **data, char **av, t_env *lst_env);
 void	ft_sort(t_env *env);
 char    **sort_tab(char **tab);
 char    **parser(char *line);
@@ -52,5 +54,6 @@ t_env	*env_lstlast(t_env *lst);
 void	env_lstadd_back(t_env **lst, t_env *new);
 t_env	*env_lstnew(char *var, char *value);
 t_env	*env_lstnew_plus(char *buff);
+int	ft_exec2(char **data, char **env);
 
 # endif

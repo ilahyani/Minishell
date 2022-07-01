@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/29 10:26:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/01 16:45:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	is_int(char *c)
 	int	i;
 
 	i = -1;
+	if (c[0] == '-' || c[0] == '+')
+		i++;
 	while (c[++i])
 		if (c[i] < '0' || c[i] > '9')
 			return (0);
@@ -50,22 +52,6 @@ char	**parser(char *line)
 		return (0);
 	data = ft_split(line, ' ');
 	return (data);
-}
-
-int	ft_exec(char **data)
-{
-	// char	*path;
-	// char	**path_grp;
-	int	f;
-	char	*av[2]={"ls", NULL};
-
-	// path = getenv("PATH");
-	// path_grp = ft_split(path, ":");
-	//join data[0] with each path_grp[i] till you get the right one;
-	f = fork();
-	if (f == 0)
-		execve(data[0], av, NULL);
-	return (0);
 }
 
 char	**sort_tab(char **tab)

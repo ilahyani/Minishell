@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/29 20:32:49 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/01 17:17:01 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,20 @@ t_env    *env_init(char **env, t_env *lst_env)
     return (lst_env);
 }
 
+// int ft_expand(char **data)
+// {
+//     int i;
+//     t_env   *expand;
+
+//     expand = NULL;
+//     i = -1;
+//     while (data[++i])
+//     {
+//         if (sizeof_array(data) == 1)
+//             env_lstadd_back(&expand, env_lstnew_plus(data[i]));
+//     }
+// }
+
 int main(int ac, char **av, char **env)
 {
     char    *line;
@@ -106,7 +120,11 @@ int main(int ac, char **av, char **env)
             my_env(lst_env);
         else if(!ft_strcmp(data[0], "unset"))
             my_unset(lst_env, data);
-        // if clear -> sig cmd+k default behavior
+        else
+            ft_exec2(data, env);
+        //expantion
+        //free data
+        //if clear -> sig cmd+k default behavior
     }
     return (0);
 }
