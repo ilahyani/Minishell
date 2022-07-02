@@ -1,0 +1,21 @@
+total 160
+drwxr-xr-x  20 ilahyani  candidate    680 Jul  2 20:36 .
+drwxr-xr-x  23 ilahyani  candidate    850 Jul  2 19:02 ..
+drwxr-xr-x  13 ilahyani  candidate    442 Jul  2 18:51 .git
+drwxr-xr-x   7 ilahyani  candidate    238 Jul  2 09:26 .vscode
+-rw-r--r--   1 ilahyani  candidate    216 Jul  2 09:26 Makefile
+-rw-r--r--   1 ilahyani  candidate     86 Jul  2 09:26 README.md
+-rw-r--r--   1 ilahyani  candidate   2456 Jul  2 19:02 execve.c
+-rw-r--r--   1 ilahyani  candidate      0 Jul  2 20:36 file
+drwxr-xr-x  92 ilahyani  candidate   3128 Jul  2 18:54 libft
+-rw-r--r--   1 ilahyani  candidate   3521 Jul  2 18:58 main.c
+-rwxr-xr-x   1 ilahyani  candidate  23412 Jul  2 20:35 minishell
+-rw-r--r--   1 ilahyani  candidate   2082 Jul  2 16:37 minishell.h
+-rw-r--r--   1 ilahyani  candidate   2357 Jul  2 09:26 my_cd.c
+-rw-r--r--   1 ilahyani  candidate   1708 Jul  2 20:35 my_echo.c
+-rw-r--r--   1 ilahyani  candidate   1126 Jul  2 18:49 my_env.c
+-rw-r--r--   1 ilahyani  candidate   1923 Jul  2 11:56 my_exit.c
+-rw-r--r--   1 ilahyani  candidate   4463 Jul  2 09:26 my_export.c
+-rw-r--r--   1 ilahyani  candidate   1129 Jul  2 09:26 my_pwd.c
+-rw-r--r--   1 ilahyani  candidate   1629 Jul  2 09:26 my_unset.c
+-rw-r--r--   1 ilahyani  candidate   2344 Jul  2 09:26 utils.c

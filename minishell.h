@@ -55,5 +55,6 @@ t_env	*env_lstnew(char *var, char *value);
 t_env	*env_lstnew_plus(char *buff);
 int		ft_exec(char **data, t_env *lst_env);
 char    *ft_getenv(char *env, t_env *env_list);
+char    *ft_strldup(char *src, size_t len);
 
 # endif

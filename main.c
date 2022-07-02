@@ -88,15 +88,30 @@ t_env    *env_init(char **env, t_env *lst_env)
 //     }
 // }
 
+void    check_expantion(char *arg, t_env *expantion)
+{
+    char    *key;
+    char    *value;
+
+    if (ft_strlen(strchr_plus(arg)) > 0)
+    {
+        key = ft_strldup(arg, find_char(arg, '=')); //free
+        value = strchr_plus(buff, '=');
+        env_lstadd_back(&expantion, env_lstnew(key, value));
+    }
+}
+
 int main(int ac, char **av, char **env)
 {
     char    *line;
     char    **data;
-    t_env  *lst_env;
+    t_env   *lst_env;
+    t_env   *expand;
 
     (void)ac;
     (void)av;
     lst_env = NULL;
+    expand = NULL;
     lst_env = env_init(env, lst_env);
     while (1) // put each cmd' return into g_exit
     {
@@ -120,17 +135,22 @@ int main(int ac, char **av, char **env)
             my_env(lst_env);
         else if(!ft_strcmp(data[0], "unset"))
             my_unset(lst_env, data);
-        //expantion
         else
         {
-            if (ft_exec(data, lst_env))
+            if (find_char(data[0]), '=')
             {
-                ft_putstr_fd("minisell: ", 2);
-                ft_putstr_fd(data[0], 2);
-                ft_putstr_fd(": command not found\n", 2);
-                g_exit = 127;
+                if (ft_exec(data, lst_env))
+                {
+                    ft_putstr_fd("minisell: ", 2);
+                    ft_putstr_fd(data[0], 2);
+                    ft_putstr_fd(": command not found\n", 2);
+                    g_exit = 127;
+                }
+                else
+                    check_expantion(data, expand);
             }
         }
+        add_history(line);
         //free data
         //if clear -> sig cmd+k default behavior
     }

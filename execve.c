@@ -88,10 +88,15 @@ int	ft_exec(char **data, t_env *lst_env)
 	char	**env;
 
 	env = list_to_tab(lst_env);
-	path = get_path(data[0], lst_env);
-	if (!path)
-		return (ft_putstr_fd("error\n", 2), 1);
-	if (create_process(path, data, env))
-		return (1);
+	if (data[0][0] == '.')
+		create_process(data[0], data, env);
+	else
+	{
+		path = get_path(data[0], lst_env);
+		if (!path)
+			return (ft_putstr_fd("error\n", 2), 1);
+		if (create_process(path, data, env))
+			return (1);
+	}
 	return (0);
 }

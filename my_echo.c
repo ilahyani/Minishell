@@ -27,6 +27,14 @@ int flag_check(char *arg)
     return (0);
 }
 
+void    ft_print(char *str)
+{
+    if (!ft_strcmp(str, "$?"))
+        printf("%d\n", g_exit);
+    else
+        printf("%s", str);
+}
+
 int my_echo(char **data)
 {
     int i;
@@ -35,16 +43,14 @@ int my_echo(char **data)
 
     args = sizeof_array(data);
     if (args == 1)
+        return (printf("\n"), 0);
+    i = 0;
+    while (flag_check(data[++i]) == 1);
+    if (i > 1)
+        new_line = 1;
+    while (data[i])
     {
-        printf("\n");
-        return (0);
-    }
-    i = 1;
-    if ((new_line = flag_check(data[i])) == 1)
-        i++;
-    while (i < args)
-    {
-        printf("%s", data[i]);
+        ft_print(data[i]);
         if (i++ != args - 1)
             printf(" ");
     }
