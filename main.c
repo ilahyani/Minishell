@@ -98,11 +98,11 @@ int main(int ac, char **av, char **env)
     (void)av;
     lst_env = NULL;
     lst_env = env_init(env, lst_env);
-    while (1)
+    while (1) // put each cmd' return into g_exit
     {
         line = readline("🐌🐌🐌 ~ ");
         if (!ft_strcmp(line, ""))
-            return (0);
+           continue ;
         data = ft_split(line, ' ');
         if (!data)
             return (0);
@@ -120,9 +120,17 @@ int main(int ac, char **av, char **env)
             my_env(lst_env);
         else if(!ft_strcmp(data[0], "unset"))
             my_unset(lst_env, data);
-        else
-            ft_exec2(data, env);
         //expantion
+        else
+        {
+            if (ft_exec(data, lst_env))
+            {
+                ft_putstr_fd("minisell: ", 2);
+                ft_putstr_fd(data[0], 2);
+                ft_putstr_fd(": command not found\n", 2);
+                g_exit = 127;
+            }
+        }
         //free data
         //if clear -> sig cmd+k default behavior
     }

@@ -54,6 +54,5 @@ void    my_exit(char **data)
         ft_putstr_fd("minisehll: exit: too many arguments\n", 2);
         g_exit = 0;
     }
-    printf("%d\n", g_exit);
     exit(g_exit);
 }

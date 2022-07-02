@@ -12,89 +12,86 @@
 
 #include "minishell.h"
 
+char	*get_path(char *cmd, t_env *lst_env)
+{
+	char	**path;
+	int		i;
+
+	path = ft_split(ft_getenv("PATH", lst_env), ':');
+	i = -1;
+	while (path[++i])
+	{
+		path[i] = ft_strjoin(path[i], "/");
+		path[i] = ft_strjoin(path[i], cmd); //check for leaks
+		if (!access(path[i], F_OK))
+			break ;
+	}
+	return (path[i]);
+}
+
 char **list_to_tab(t_env *lst_env)
 {
-	char **tab;
+	char	**tab;
 	t_env	*tmp;
-    char    *char_tmp;
-	int	i;
+	int		i;
 
 	i = 0;
 	tmp = lst_env;
-	while (tmp && i++)
+	while (tmp)
+	{
+		i++;
 		tmp = tmp->next;
-	tab = (char **) malloc (sizeof(char *) * (i + 1));
+	}
+	tab = (char **) malloc(sizeof(char *) * (i + 1));
+	if (!tab)
+		return (NULL);
 	tmp = lst_env;
 	i = 0;
 	while (tmp)
 	{
-		char_tmp = ft_strjoin(tmp->var, "=");
-		tab[i] = ft_strjoin(char_tmp, tmp->value); //check for leaks
+		tab[i] = ft_strjoin(tmp->var, "=");
+		tab[i] = ft_strjoin(tab[i], tmp->value); //free old value
 		tmp = tmp->next;
-        // free(char_tmp);
 		i++;
 	}
 	tab[i] = NULL;
-    i = -1;
-    tmp = lst_env;
-	while (tmp && tab[++i])
-    {
-        printf("%s=%s | %s\n", tmp->var, tmp->value, tab[i]);
-		tmp = tmp->next;
-    }
 	return (tab);
 }
 
-int	ft_exec(char **data, char **av, t_env *lst_env)
+int	create_process(char *path, char **data, char **env)
 {
 	pid_t	c_pid;
-	char	**env;
+	pid_t	w_pid;
+	int		status;
 
-	env = list_to_tab(lst_env);
-	if ((c_pid = fork()) == -1)
-	{
-		printf("here\n");
-		ft_putstr_fd("error\n", 2);
-		g_exit = 127;
-	}
+	c_pid = fork();
+	if (c_pid == -1)
+		return (ft_putstr_fd("error\n", 2), 1);
 	else if (c_pid == 0)
 	{
-		if (execve(data[0], av, env) == -1)
-		{
-			printf("here2\n");
-			ft_putstr_fd("error\n", 2);
-			g_exit = 127;
-		}
+		if (execve(path, data, env) == -1)
+			return (ft_putstr_fd("error\n", 2), 1);
 		g_exit = 0;
 	}
-	exit(g_exit);
+	else
+	{
+		w_pid = waitpid(c_pid, &status, WUNTRACED);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			w_pid = waitpid(c_pid, &status, WUNTRACED);
+	}
 	return (0);
 }
 
-int	ft_exec2(char **data, char **env)
+int	ft_exec(char **data, t_env *lst_env)
 {
-	pid_t	c_pid;
-    char    **av;
-	//char	**env;
+	char	*path;
+	char	**env;
 
-	//env = list_to_tab(lst_env);
-    
-	if ((c_pid = fork()) == -1)
-	{
-		printf("here\n");
-		ft_putstr_fd("error\n", 2);
-		g_exit = 127;
-	}
-	else if (c_pid == 0)
-	{
-		if (execve(data[0], av, env) == -1)
-		{
-			printf("here2\n");
-			ft_putstr_fd("error\n", 2);
-			g_exit = 127;
-		}
-		g_exit = 0;
-	}
-	exit(g_exit);
+	env = list_to_tab(lst_env);
+	path = get_path(data[0], lst_env);
+	if (!path)
+		return (ft_putstr_fd("error\n", 2), 1);
+	if (create_process(path, data, env))
+		return (1);
 	return (0);
 }
