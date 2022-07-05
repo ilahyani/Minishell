@@ -32,7 +32,7 @@ typedef struct s_env
 	struct s_env     *next;
 }	t_env;
 
-int     my_echo(char **data);
+int     my_echo(char **data, t_env *lst_env, t_env *expand);
 int     my_cd(t_env *lst_env, char **data);
 int     my_pwd(void);
 int     my_export(char **data, t_env *env);
@@ -56,5 +56,8 @@ t_env	*env_lstnew_plus(char *buff);
 int		ft_exec(char **data, t_env *lst_env);
 char    *ft_getenv(char *env, t_env *env_list);
 char    *ft_strldup(char *src, size_t len);
-
+t_env    *env_init(char **env, t_env *lst_env);
+void    check_cmd(char **cmd, t_env *lst_env, t_env *expand);
+int		check_arg(char **args);
+t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion);
 # endif

@@ -94,9 +94,14 @@ int	ft_exec(char **data, t_env *lst_env)
 	{
 		path = get_path(data[0], lst_env);
 		if (!path)
-			return (ft_putstr_fd("error\n", 2), 1);
+			return (ft_putstr_fd("error\n", 2), 127);
 		if (create_process(path, data, env))
-			return (1);
+		{
+			ft_putstr_fd("minisell: ", 2);
+            ft_putstr_fd(data[0], 2);
+            ft_putstr_fd(": command not found\n", 2);
+			return (127);
+		}
 	}
 	return (0);
 }

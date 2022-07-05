@@ -27,15 +27,39 @@ int flag_check(char *arg)
     return (0);
 }
 
-void    ft_print(char *str)
+void    print_arg(t_env *expand, t_env *lst_env, char *arg)
 {
-    if (!ft_strcmp(str, "$?"))
-        printf("%d\n", g_exit);
+    t_env   *tmp;
+
+    tmp = expand;
+    while (tmp && ft_strcmp(tmp->var, arg))
+        tmp = tmp->next;
+    if (tmp)
+        printf("%s", tmp->value);
+    else
+    {
+        tmp = lst_env;
+        while (tmp && ft_strcmp(tmp->var, arg))
+            tmp = tmp->next;
+        if (tmp)
+            printf("%s", tmp->value);
+    }
+}
+
+void    ft_print(char *str, t_env *lst_env, t_env *expand)
+{
+    if (str[0] == '$')
+    {
+        if (!ft_strcmp(str, "$?"))
+            printf("%d", g_exit);
+        else
+            print_arg(expand, lst_env, str + 1);
+    }
     else
         printf("%s", str);
 }
 
-int my_echo(char **data)
+int my_echo(char **data, t_env *lst_env, t_env *expand)
 {
     int i;
     int args;
@@ -45,12 +69,13 @@ int my_echo(char **data)
     if (args == 1)
         return (printf("\n"), 0);
     i = 0;
+    new_line = 0;
     while (flag_check(data[++i]) == 1);
     if (i > 1)
         new_line = 1;
     while (data[i])
     {
-        ft_print(data[i]);
+        ft_print(data[i], lst_env, expand);
         if (i++ != args - 1)
             printf(" ");
     }
