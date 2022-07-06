@@ -12,10 +12,6 @@
 
 #include "minishell.h"
 
-//TODO: 
-//Tidy this shit up
-//Tidy up main()
-
 void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
 {
     if (!ft_strcmp(cmd[0], "pwd"))
@@ -45,33 +41,34 @@ int check_arg(char **args)
     return (i);
 }
 
-void    add_node(char *buff, t_env *tmp)
+t_env   *add_node(char *buff, t_env *expantion)
 {
     char    *key;
     char    *value;
-
     key = ft_strldup(buff, find_char(buff, '=')); //free
     if (ft_strlen(strchr_plus(buff, '=')) > 0)
     {
         value = ft_strdup(strchr_plus(buff, '=')); //free
-        env_lstadd_back(&tmp, env_lstnew(key, value));
+        env_lstadd_back(&expantion, env_lstnew(key, value));
     }
     else
-        env_lstadd_back(&tmp, env_lstnew(key, ""));
+        env_lstadd_back(&expantion, env_lstnew(key, ""));
+    printf("var1 = %s\n",expantion->var);
+    printf("value1 = %s\n",expantion->value);
+    return expantion;
 }
 
-void    update_node(char *buff, t_env *expand)
+t_env   *update_node(char *buff, t_env *expantion)
 {
     if (ft_strlen(strchr_plus(buff, '=')) > 0)
-        expand->value = ft_strdup(strchr_plus(buff, '='));
+        expantion->value = ft_strdup(strchr_plus(buff, '='));
     else
-        expand->value = ft_strdup("");
+        expantion->value = ft_strdup("");
+    return (expantion);
 }
 
 t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion)
 {
-    // char    *key;
-    // char    *value;
     t_env   *tmp;
     int     i;
 
@@ -84,25 +81,9 @@ t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion)
             while (tmp && ft_strcmp(tmp->var, ft_strldup(args[i], find_char(args[i], '='))))
                 tmp = tmp->next;
             if (!tmp)
-            {
-                add_node(args[i], tmp);
-                // key = ft_strldup(args[i], find_char(args[i], '=')); //free
-                // if (ft_strlen(strchr_plus(args[i], '=')) > 0)
-                // {
-                //     value = ft_strdup(strchr_plus(args[i], '=')); //free
-                //     env_lstadd_back(&expantion, env_lstnew(key, value));
-                // }
-                // else
-                //     env_lstadd_back(&expantion, env_lstnew(key, ""));
-            }
+                expantion = add_node(args[i], expantion);
             else
-            {
-                update_node(args[i], tmp);
-            //  if (ft_strlen(strchr_plus(args[i], '=')) > 0)
-            //      tmp->value = ft_strdup(strchr_plus(args[i], '='));
-            //  else
-            //      tmp->value = ft_strdup("");
-            }
+                expantion = update_node(args[i], expantion);
         }
     }
     else
