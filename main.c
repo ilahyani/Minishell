@@ -91,21 +91,47 @@ t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion)
     return (expantion);
 }
 
+void    handler(int signum, siginfo_t *info, void *context)
+{
+    (void)info;
+    (void)context;
+
+    if (signum == SIGINT)
+    {
+        write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+    }
+    else if (signum == SIGQUIT)
+}
+
 int main(int ac, char **av, char **env)
 {
     char    *line;
     char    **data;
     t_env   *lst_env;
     t_env   *expand;
+    // struct sigaction    sa;
 
     (void)ac;
     (void)av;
+    sa.sa_sigaction = &handler;
+	sa.sa_flags = SA_SIGINFO;
+	sigaction(SIGINT, &sa, NULL);  //Ctrl+C
+    sigaction(SIGQUIT, &sa, NULL); //Ctrl+bs
     lst_env = NULL;
     expand = NULL;
     lst_env = env_init(env, lst_env);
     while (1)
     {
         line = readline("🐌🐌🐌 ~ ");
+        if (!line)
+        {
+            g_exit = 0;
+            printf("exit\n");
+            exit(g_exit);
+        }
         if (!ft_strcmp(line, ""))
            continue ;
         data = ft_split(line, ' ');

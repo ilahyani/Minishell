@@ -15,3 +15,5 @@ clean:
 
 fclean:	clean
 		rm $(NAME)
+
+re:	fclean make
