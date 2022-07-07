@@ -91,11 +91,8 @@ t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion)
     return (expantion);
 }
 
-void    handler(int signum, siginfo_t *info, void *context)
+void    handler(int signum)
 {
-    (void)info;
-    (void)context;
-
     if (signum == SIGINT)
     {
         write(1, "\n", 1);
@@ -113,16 +110,13 @@ int main(int ac, char **av, char **env)
     char    **data;
     t_env   *lst_env;
     t_env   *expand;
-    // struct sigaction    sa;
 
     (void)ac;
     (void)av;
-    sa.sa_sigaction = &handler;
-	sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGINT, &sa, NULL);  //Ctrl+C
-    sigaction(SIGQUIT, &sa, NULL); //Ctrl+bs
     lst_env = NULL;
     expand = NULL;
+    signal(SIGINT, handler);
+    signal(SIGQUIT, handler);
     lst_env = env_init(env, lst_env);
     while (1)
     {
