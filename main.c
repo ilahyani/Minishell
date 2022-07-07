@@ -104,6 +104,7 @@ void    handler(int signum, siginfo_t *info, void *context)
 		rl_redisplay();
     }
     else if (signum == SIGQUIT)
+        return ;
 }
 
 int main(int ac, char **av, char **env)
