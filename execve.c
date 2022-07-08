@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/01 17:13:40 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:52:14 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	ft_exec(char **data, t_env *lst_env)
 			ft_putstr_fd("minisell: ", 2);
             ft_putstr_fd(data[0], 2);
             ft_putstr_fd(": command not found\n", 2);
-			return (127);
+			g_exit = 127;
+			return (g_exit);
 		}
 	}
 	return (0);

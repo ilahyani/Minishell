@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/01 17:17:01 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:56:28 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
     else if (!ft_strcmp(cmd[0], "export"))
         g_exit = my_export(cmd, lst_env);
     else if (!ft_strcmp(cmd[0], "env"))
-        my_env(lst_env);
+        g_exit = my_env(lst_env, cmd);
     else if (!ft_strcmp(cmd[0], "unset"))
         g_exit = my_unset(lst_env, cmd);
     else

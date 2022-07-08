@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/01 17:11:01 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:55:05 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int     my_cd(t_env *lst_env, char **data);
 int     my_pwd(void);
 int     my_export(char **data, t_env *env);
 void    my_exit(char **data);
-void    my_env(t_env *env);
+int		my_env(t_env *env, char **data);
 int		my_unset(t_env *env, char **data);
 int     ft_strcmp(char *s1, char *s2);
 int     sizeof_array(char **arr);
