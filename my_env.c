@@ -6,17 +6,17 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:52 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 16:56:10 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:27:15 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int my_env(t_env *env)
+int my_env(t_env *env, char **data)
 {
     t_env  *tmp;
 
-    if (sizeof_array(cmd) > 1)
+    if (sizeof_array(data) > 1)
     {
         ft_putstr_fd("env: ", 2);
         ft_putstr_fd(data[0], 2);

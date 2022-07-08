@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 17:01:11 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:37:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
            continue ;
         data = ft_split(line, ' ');
         if (!data)
-            return (0);
+            return ;
         if (find_char(data[0], '='))
             expand = check_expantion(data, lst_env, expand);
         else
@@ -143,7 +143,7 @@ int main(int ac, char **av, char **env)
     expand = NULL;
     signal(SIGINT, handler);
     signal(SIGQUIT, handler);
-    lst_env = env_init(env, lst_env);
+    lst_env = env_init(env, lst_env); //send address instead of value here and above + manage lists in a seperate file
     ft_readline(lst_env, expand);
     return (0);
 }

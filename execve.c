@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 16:52:14 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:33:02 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char **list_to_tab(t_env *lst_env)
 int	create_process(char *path, char **data, char **env)
 {
 	pid_t	c_pid;
-	pid_t	w_pid;
 	int		status;
 
 	c_pid = fork();
@@ -74,11 +73,8 @@ int	create_process(char *path, char **data, char **env)
 		g_exit = 0;
 	}
 	else
-	{
-		w_pid = waitpid(c_pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			w_pid = waitpid(c_pid, &status, WUNTRACED);
-	}
+			waitpid(c_pid, &status, WUNTRACED);
 	return (0);
 }
 
