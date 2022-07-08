@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 16:56:28 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:01:11 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,11 @@ void    handler(int signum)
         return ;
 }
 
-int main(int ac, char **av, char **env)
+void    ft_readline(t_env *lst_env, t_env *expand)
 {
-    char    *line;
     char    **data;
-    t_env   *lst_env;
-    t_env   *expand;
+    char    *line;
 
-    (void)ac;
-    (void)av;
-    lst_env = NULL;
-    expand = NULL;
-    signal(SIGINT, handler);
-    signal(SIGQUIT, handler);
-    lst_env = env_init(env, lst_env);
     while (1)
     {
         line = readline("🐌🐌🐌 ~ ");
@@ -139,5 +130,20 @@ int main(int ac, char **av, char **env)
         add_history(line);
         //free data
     }
+}
+
+int main(int ac, char **av, char **env)
+{
+    t_env   *lst_env;
+    t_env   *expand;
+
+    (void)ac;
+    (void)av;
+    lst_env = NULL;
+    expand = NULL;
+    signal(SIGINT, handler);
+    signal(SIGQUIT, handler);
+    lst_env = env_init(env, lst_env);
+    ft_readline(lst_env, expand);
     return (0);
 }
