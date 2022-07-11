@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 12:51:58 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:35:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,26 @@ char    *ft_strldup(char *src, size_t len)
     return (dst);
 }
 
+void    fill_node(char *buff, t_env **lst)
+{
+    char **tab;
+
+    tab = ft_split(buff, '=');
+    (*lst)->var = ft_strdup(tab[0]);
+    if (tab[1])
+        (*lst)->value = ft_strdup(tab[1]);
+    else
+        (*lst)->value = NULL;
+    (*lst)->next = NULL;
+    free(tab[0]);
+    free(tab[1]);
+    free(tab);   
+}
+
 t_env	*env_lstnew_plus(char *buff)
 {
 	t_env	*res;
-    char    **tab;
+    // char    **tab;
 
     if (!buff)
         return (NULL);
@@ -111,16 +127,17 @@ t_env	*env_lstnew_plus(char *buff)
 		return (NULL);
     if (!find_char(buff, '='))
     {
-        tab = ft_split(buff, '=');
-        res->var = ft_strdup(tab[0]);
-        if (tab[1])
-            res->value = ft_strdup(tab[1]);
-        else
-            res->value = NULL;
-        res->next = NULL;
-        free(tab[0]);
-        free(tab[1]);
-        free(tab);
+        fill_node(buff, &res);
+        // tab = ft_split(buff, '=');
+        // res->var = ft_strdup(tab[0]);
+        // if (tab[1])
+        //     res->value = ft_strdup(tab[1]);
+        // else
+        //     res->value = NULL;
+        // res->next = NULL;
+        // free(tab[0]);
+        // free(tab[1]);
+        // free(tab);
     }
     else if (find_char(buff, '+'))
     {
@@ -180,7 +197,7 @@ int my_export(char **data, t_env *env)
     int     i;
 
     sorted = NULL;
-    sorted = lst_copy(env); //check if this is reversed
+    sorted = lst_copy(env);//check if this is reversed
     ft_sort(sorted);
     if (sizeof_array(data) == 1 || data[1][0] == '#' || data[1][0] == '$')
         env_print(sorted);
@@ -190,7 +207,7 @@ int my_export(char **data, t_env *env)
         while (data[++i])
         {
             if (check_error(data[i]))
-                return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1); /stderr
+                return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1);//stderr
             lst_tmp = env;
             while (lst_tmp)
             {
