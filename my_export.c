@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/29 21:47:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:48:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ t_env	*env_lstnew_plus(char *buff)
 		return (NULL);
     if (!find_char(buff, '='))
     {
+        printf("yo\n");
         tab = ft_split(buff, '=');
         res->var = ft_strdup(tab[0]);
         if (tab[1])
@@ -122,13 +123,58 @@ t_env	*env_lstnew_plus(char *buff)
         free(tab[1]);
         free(tab);
     }
+    else if (find_char(buff, '+'))
+    {
+        printf("bo\n");
+        res->var = ft_strldup(buff, find_char(buff, '+'));
+        res->value = ft_strdup(strchr_plus(buff, '=')); 
+    }
     else
     {
+        printf("fo\n");
         res->var = ft_strldup(buff, find_char(buff, '='));
-        res->value = ft_strdup(&buff[find_char(buff, '=') + 1]);
+        res->value = ft_strdup(strchr_plus(buff, '='));
     }
 	return (res);
 }
+
+int check_error(char *buff)
+{
+    if (!ft_isalpha(buff[0]) && buff[0] != '_')
+        return (1);
+    if (find_char(buff, '+') && !find_char(buff, '='))
+        return(1);
+    return (0);
+}
+
+int check_var(char *buff, t_env *lst)
+{
+    if (find_char(buff, '='))
+    {
+        if ((find_char(buff, '+') && !ft_strcmp(lst->var, ft_strldup(buff, find_char(buff, '+')))))
+            return (1);
+        else if (find_char(buff, '=') && !ft_strcmp(lst->var, ft_strldup(buff, find_char(buff, '='))))
+            return (1);
+        else if (!ft_strcmp(lst->var, buff))
+            return (1);
+    }
+    return (0);
+}
+
+void update_exp(char *buff, t_env **lst)
+{
+    if (buff[find_char(buff, '=') - 1] == '+') 
+    {
+        if ((*lst)->value)
+            (*lst)->value = ft_strjoin((*lst)->value, strchr_plus(buff, '='));//free old value
+        else
+            (*lst)->value = ft_strdup(strchr_plus(buff, '='));   
+    }
+    else
+        (*lst)->value = ft_strdup(strchr_plus(buff, '='));
+}
+
+//TODO: shit below is a mess, test & RE_FUCKING_FACTOR then test again and go back to main
 
 int my_export(char **data, t_env *env)
 {
@@ -146,20 +192,37 @@ int my_export(char **data, t_env *env)
         i = 0;
         while (data[++i])
         {
-            if (!ft_isalpha(data[i][0]) && data[i][0] != '_')
+            if (check_error(data[i]))
                 return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1);
             lst_tmp = env;
-            while (lst_tmp && ft_strncmp(lst_tmp->var, data[i], ft_strlen(lst_tmp->var)))
-                lst_tmp = lst_tmp->next;
-            if (lst_tmp && lst_tmp->value && !find_char(data[i], '='))
-                continue ;
-            if (lst_tmp)
+            while (lst_tmp)
             {
-                if (data[i][find_char(data[i], '=') - 1] == '+')
-                    lst_tmp->value = ft_strjoin(lst_tmp->value, data[i] + find_char(data[i], '=') + 1);//free old value
-                else
-                    lst_tmp->value = ft_strdup(&data[i][find_char(data[i], '=') + 1]);
+                // if (find_char(data[i], '='))
+                // {
+                //     if ((find_char(data[i], '+') && !ft_strcmp(lst_tmp->var, ft_strldup(data[i], find_char(data[i], '+'))))
+                //     || (find_char(data[i], '=') && !ft_strcmp(lst_tmp->var, ft_strldup(data[i], find_char(data[i], '='))))
+                //     || !ft_strcmp(lst_tmp->var, data[i]))
+                //         break;
+                // }
+                if (check_var(data[i], lst_tmp))
+                    break;
+                lst_tmp = lst_tmp->next;
             }
+            if (lst_tmp && !find_char(data[i], '='))
+                continue ;
+            else if (lst_tmp)
+                update_exp(data[i], &lst_tmp);
+            // {
+            //     if (data[i][find_char(data[i], '=') - 1] == '+') 
+            //     {
+            //         if (lst_tmp->value)
+            //             lst_tmp->value = ft_strjoin(lst_tmp->value, strchr_plus(data[i], '='));//free old value
+            //         else
+            //             lst_tmp->value = ft_strdup(strchr_plus(data[i], '='));   
+            //     }
+            //     else
+            //         lst_tmp->value = ft_strdup(strchr_plus(data[i], '='));
+            // }
             else
                 env_lstadd_back(&env, env_lstnew_plus(data[i]));
         }

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 19:33:02 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:48:43 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,25 @@ char **list_to_tab(t_env *lst_env)
 int	create_process(char *path, char **data, char **env)
 {
 	pid_t	c_pid;
+	pid_t	w_pid;
 	int		status;
 
+	(void)w_pid;
 	c_pid = fork();
 	if (c_pid == -1)
-		return (ft_putstr_fd("error\n", 2), 1);
+		return (ft_putstr_fd("error1\n", 2), 1);
 	else if (c_pid == 0)
 	{
 		if (execve(path, data, env) == -1)
-			return (ft_putstr_fd("error\n", 2), 1);
+			return (ft_putstr_fd("error2\n", 2), 1);
 		g_exit = 0;
 	}
 	else
+	{
+		w_pid = waitpid(c_pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			waitpid(c_pid, &status, WUNTRACED);
+			w_pid = waitpid(c_pid, &status, WUNTRACED);
+	}
 	return (0);
 }
 
@@ -90,7 +95,7 @@ int	ft_exec(char **data, t_env *lst_env)
 	{
 		path = get_path(data[0], lst_env);
 		if (!path)
-			return (ft_putstr_fd("error\n", 2), 127);
+			return (ft_putstr_fd("error3\n", 2), 127);
 		if (create_process(path, data, env))
 		{
 			ft_putstr_fd("minisell: ", 2);

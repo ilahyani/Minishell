@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/28 15:42:32 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/08 20:03:24 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int my_cd(t_env *lst_env, char **data)
     else if (!ft_strcmp(data[1], ".") && !getcwd(cwd, sizeof(cwd)))
     {
         free (cwd);
-        return (ft_putstr_fd("minishell: cd: error\n", 2), 1);
+        return (ft_putstr_fd("minishell: cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2), 0);
     }
     else
         path = data[1];

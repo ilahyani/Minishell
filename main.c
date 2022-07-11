@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 19:37:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:51:26 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,10 @@ int main(int ac, char **av, char **env)
     expand = NULL;
     signal(SIGINT, handler);
     signal(SIGQUIT, handler);
-    lst_env = env_init(env, lst_env); //send address instead of value here and above + manage lists in a seperate file
+    // if (!env) manually set shlvl oldpwd(empty) pwd + _ (doesn't show in export)
+    lst_env = env_init(env, lst_env);
+    //send address instead of value here and above + manage lists in a seperate file
+    //unset oldpwd & export oldpwd(empty) & export pwd=getcwd
     ft_readline(lst_env, expand);
     return (0);
 }
