@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 12:48:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:51:58 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ t_env	*env_lstnew_plus(char *buff)
 		return (NULL);
     if (!find_char(buff, '='))
     {
-        printf("yo\n");
         tab = ft_split(buff, '=');
         res->var = ft_strdup(tab[0]);
         if (tab[1])
@@ -125,13 +124,11 @@ t_env	*env_lstnew_plus(char *buff)
     }
     else if (find_char(buff, '+'))
     {
-        printf("bo\n");
         res->var = ft_strldup(buff, find_char(buff, '+'));
         res->value = ft_strdup(strchr_plus(buff, '=')); 
     }
     else
     {
-        printf("fo\n");
         res->var = ft_strldup(buff, find_char(buff, '='));
         res->value = ft_strdup(strchr_plus(buff, '='));
     }
@@ -193,17 +190,10 @@ int my_export(char **data, t_env *env)
         while (data[++i])
         {
             if (check_error(data[i]))
-                return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1);
+                return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1); /stderr
             lst_tmp = env;
             while (lst_tmp)
             {
-                // if (find_char(data[i], '='))
-                // {
-                //     if ((find_char(data[i], '+') && !ft_strcmp(lst_tmp->var, ft_strldup(data[i], find_char(data[i], '+'))))
-                //     || (find_char(data[i], '=') && !ft_strcmp(lst_tmp->var, ft_strldup(data[i], find_char(data[i], '='))))
-                //     || !ft_strcmp(lst_tmp->var, data[i]))
-                //         break;
-                // }
                 if (check_var(data[i], lst_tmp))
                     break;
                 lst_tmp = lst_tmp->next;
@@ -212,17 +202,6 @@ int my_export(char **data, t_env *env)
                 continue ;
             else if (lst_tmp)
                 update_exp(data[i], &lst_tmp);
-            // {
-            //     if (data[i][find_char(data[i], '=') - 1] == '+') 
-            //     {
-            //         if (lst_tmp->value)
-            //             lst_tmp->value = ft_strjoin(lst_tmp->value, strchr_plus(data[i], '='));//free old value
-            //         else
-            //             lst_tmp->value = ft_strdup(strchr_plus(data[i], '='));   
-            //     }
-            //     else
-            //         lst_tmp->value = ft_strdup(strchr_plus(data[i], '='));
-            // }
             else
                 env_lstadd_back(&env, env_lstnew_plus(data[i]));
         }
