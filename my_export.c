@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 13:35:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:37:17 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void    fill_node(char *buff, t_env **lst)
 t_env	*env_lstnew_plus(char *buff)
 {
 	t_env	*res;
-    // char    **tab;
 
     if (!buff)
         return (NULL);
@@ -126,19 +125,7 @@ t_env	*env_lstnew_plus(char *buff)
 	if (!res)
 		return (NULL);
     if (!find_char(buff, '='))
-    {
         fill_node(buff, &res);
-        // tab = ft_split(buff, '=');
-        // res->var = ft_strdup(tab[0]);
-        // if (tab[1])
-        //     res->value = ft_strdup(tab[1]);
-        // else
-        //     res->value = NULL;
-        // res->next = NULL;
-        // free(tab[0]);
-        // free(tab[1]);
-        // free(tab);
-    }
     else if (find_char(buff, '+'))
     {
         res->var = ft_strldup(buff, find_char(buff, '+'));
@@ -187,8 +174,6 @@ void update_exp(char *buff, t_env **lst)
     else
         (*lst)->value = ft_strdup(strchr_plus(buff, '='));
 }
-
-//TODO: shit below is a mess, test & RE_FUCKING_FACTOR then test again and go back to main
 
 int my_export(char **data, t_env *env)
 {
