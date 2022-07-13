@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 20:03:24 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/13 11:54:20 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 char    *ft_getenv(char *env, t_env *env_list)
 {
-    t_env  *tmp;
-
-    tmp = env_list;
-    while (tmp && ft_strcmp(env, tmp->var))
-        tmp = tmp->next;
-    if (tmp)
-        return (tmp->value);
+    while (env_list && ft_strcmp(env, env_list->var))
+        env_list = env_list->next;
+    if (env_list) {
+        return (env_list->value);
+    }
     return (NULL);
 }
 

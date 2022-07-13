@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/08 16:55:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/13 12:05:31 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_env
     char            *value;
 	struct s_env     *next;
 }	t_env;
-
+//group those based of their files
 int     my_echo(char **data, t_env *lst_env, t_env *expand);
 int     my_cd(t_env *lst_env, char **data);
 int     my_pwd(void);
@@ -52,12 +52,20 @@ int     find_char(char *s, char c);
 t_env	*env_lstlast(t_env *lst);
 void	env_lstadd_back(t_env **lst, t_env *new);
 t_env	*env_lstnew(char *var, char *value);
-t_env	*env_lstnew_plus(char *buff);
+void    env_init(char **env, t_env **lst_env);
+t_env	*exprt_lstnew(char *buff);
 int		ft_exec(char **data, t_env *lst_env);
 char    *ft_getenv(char *env, t_env *env_list);
 char    *ft_strldup(char *src, size_t len);
-t_env    *env_init(char **env, t_env *lst_env);
 void    check_cmd(char **cmd, t_env *lst_env, t_env *expand);
 int		check_arg(char **args);
 t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion);
+void    handler(int signum);
+t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion);
+int		check_arg(char **args);
+void    add_node(char *buff, t_env **expantion);
+void    update_node(char *buff, t_env **expantion);
+void	err_print(char *cmd, char *buff);
+char	*strjoin_plus(char *s1, char *s2, char *s3);
+
 # endif

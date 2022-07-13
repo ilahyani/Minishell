@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   sig_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:27:39 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/13 11:19:07 by ilahyani         ###   ########.fr       */
+/*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
+/*   Updated: 2022/07/11 15:58:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+void    handler(int signum)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+    if (signum == SIGINT)
+    {
+        write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+        g_exit = 1;
+    }
+    else if (signum == SIGQUIT)
+        return ;
 }

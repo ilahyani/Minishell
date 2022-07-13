@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/09 17:48:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/13 11:51:11 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,58 @@ char	*get_path(char *cmd, t_env *lst_env)
 	while (path[++i])
 	{
 		path[i] = ft_strjoin(path[i], "/");
-		path[i] = ft_strjoin(path[i], cmd); //check for leaks
+		path[i] = ft_strjoin(path[i], cmd);
 		if (!access(path[i], F_OK))
 			break ;
 	}
+	//free path
 	return (path[i]);
+}
+
+int	create_process(char *path, char **data, char **env)
+{
+	pid_t	c_pid;
+	pid_t	w_pid;
+	int		status;
+
+	(void)w_pid;
+	c_pid = fork();
+	if (c_pid == -1)
+		return (ft_putstr_fd("error\n", 2), 1);
+	else if (c_pid == 0)
+	{
+		if (execve(path, data, env) == -1)
+			return (err_print(path, "No such file or directory"), 1);
+		g_exit = 0;
+	}
+	else
+	{
+		w_pid = waitpid(c_pid, &status, WUNTRACED);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			w_pid = waitpid(c_pid, &status, WUNTRACED);
+	}
+	return (0);
+}
+
+char	*strjoin_plus(char *s1, char *s2, char *s3)
+{
+	int	i;
+	int	j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	str = (char *) malloc (ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1);
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	i = 0;
+	while (s3[i])
+		str[j++] = s3[i++];
+	str[j] = '\0';
+	return (str);
 }
 
 char **list_to_tab(t_env *lst_env)
@@ -45,65 +92,37 @@ char **list_to_tab(t_env *lst_env)
 	tab = (char **) malloc(sizeof(char *) * (i + 1));
 	if (!tab)
 		return (NULL);
-	tmp = lst_env;
 	i = 0;
-	while (tmp)
+	while (lst_env)
 	{
-		tab[i] = ft_strjoin(tmp->var, "=");
-		tab[i] = ft_strjoin(tab[i], tmp->value); //free old value
-		tmp = tmp->next;
-		i++;
+		tab[i++] = strjoin_plus(lst_env->var, "=", lst_env->value);
+		lst_env = lst_env->next;
 	}
 	tab[i] = NULL;
 	return (tab);
 }
 
-int	create_process(char *path, char **data, char **env)
-{
-	pid_t	c_pid;
-	pid_t	w_pid;
-	int		status;
-
-	(void)w_pid;
-	c_pid = fork();
-	if (c_pid == -1)
-		return (ft_putstr_fd("error1\n", 2), 1);
-	else if (c_pid == 0)
-	{
-		if (execve(path, data, env) == -1)
-			return (ft_putstr_fd("error2\n", 2), 1);
-		g_exit = 0;
-	}
-	else
-	{
-		w_pid = waitpid(c_pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			w_pid = waitpid(c_pid, &status, WUNTRACED);
-	}
-	return (0);
-}
-
 int	ft_exec(char **data, t_env *lst_env)
 {
 	char	*path;
-	char	**env;
+	char	**env = NULL;
 
 	env = list_to_tab(lst_env);
-	if (data[0][0] == '.')
+	if (data[0][0] == '.' && data[0][1] == '/')
 		create_process(data[0], data, env);
 	else
 	{
 		path = get_path(data[0], lst_env);
 		if (!path)
-			return (ft_putstr_fd("error3\n", 2), 127);
-		if (create_process(path, data, env))
+			return (err_print(data[0], "No such file or directory"), 127);
+		else if (create_process(path, data, env))
 		{
 			ft_putstr_fd("minisell: ", 2);
             ft_putstr_fd(data[0], 2);
             ft_putstr_fd(": command not found\n", 2);
-			g_exit = 127;
-			return (g_exit);
+			return (127);
 		}
 	}
+	// free env;
 	return (0);
 }

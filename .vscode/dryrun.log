@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/ilahyani/Minishell'
+Make -C ./libft
+cc -Wall -Wextra -Werror -lreadline -I/opt/homebrew/opt/readline/include -L/opt/homebrew/opt/readline/lib ./libft/libft.a *.c -o minishell
+make: Leaving directory `/Users/ilahyani/Minishell'
+ 

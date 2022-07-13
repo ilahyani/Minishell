@@ -6,11 +6,42 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 13:37:17 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:16:04 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**sort_tab(char **tab)
+{
+	char	**sorted;
+	char	*tmp;
+	int		i;
+	int		j;
+
+	sorted = (char **) malloc(sizeof(char *) * (sizeof_array(tab) + 1));
+	i = -1;
+	while (tab[++i])
+		sorted[i] = ft_strdup(tab[i]);
+	sorted[i] = NULL;
+	i = 0;
+    while (sorted[i])
+    {
+		j = i + 1;
+        while (sorted[j])
+        {
+            if (ft_strcmp(sorted[i], sorted[j]) > 0)
+            {
+				tmp = sorted[i];
+                sorted[i] = sorted[j];
+                sorted[j] = tmp;
+            }
+            j++;
+        }
+        i++;
+    }
+	return (sorted);
+}
 
 void	env_print(t_env *env)
 {
@@ -115,7 +146,7 @@ void    fill_node(char *buff, t_env **lst)
     free(tab);   
 }
 
-t_env	*env_lstnew_plus(char *buff)
+t_env	*exprt_lstnew(char *buff)
 {
 	t_env	*res;
 
@@ -181,6 +212,8 @@ int my_export(char **data, t_env *env)
     t_env   *lst_tmp;
     int     i;
 
+    if (!env)
+        return (0);
     sorted = NULL;
     sorted = lst_copy(env);//check if this is reversed
     ft_sort(sorted);
@@ -205,7 +238,7 @@ int my_export(char **data, t_env *env)
             else if (lst_tmp)
                 update_exp(data[i], &lst_tmp);
             else
-                env_lstadd_back(&env, env_lstnew_plus(data[i]));
+                env_lstadd_back(&env, exprt_lstnew(data[i]));
         }
     }
     return (0);
