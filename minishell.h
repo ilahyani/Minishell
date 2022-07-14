@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/13 12:05:31 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:47:25 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include <dirent.h>
 #include <sys/wait.h>
 #include <readline/readline.h>
@@ -67,5 +68,7 @@ void    add_node(char *buff, t_env **expantion);
 void    update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
+int		redir_io(char **data, t_env *lst_env);
+void    o_redir_ap(char *data, t_env *lst_env);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:02 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/06/30 21:32:48 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:22:32 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void    ft_print(char *str, t_env *lst_env, t_env *expand)
     {
         if (!ft_strcmp(str, "$?"))
             printf("%d", g_exit);
+        //check redir
         else
             print_arg(expand, lst_env, str + 1);
     }

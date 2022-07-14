@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/12 23:17:45 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:44:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         if (!data)
             return ;
         if (find_char(data[0], '='))
-            expand = check_expantion(data, lst_env, expand);
+            expand = check_expantion(data, lst_env, expand); //work with address
+        else if (find_char(data[0], '>') || find_char(data[0], '<'))
+            g_exit = redir_io(data, lst_env);
         else
             check_cmd(data, lst_env, expand);
         if (ft_strlen(line) > 0)
@@ -60,6 +62,8 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         //free data
     }
 }
+
+// > if put in the beginning makes the command not run and no err is displayed
 
 int main(int ac, char **av, char **env)
 {
