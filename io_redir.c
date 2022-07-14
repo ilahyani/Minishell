@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/14 01:48:44 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/15 00:40:00 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ int redir_io(char **data, t_env *lst_env)
 
 void    o_redir_ap(char *data, t_env *lst_env)
 {
-    pid_t   c_pid;
-
+    // pid_t   c_pid;
     char **data_tab;
     int redirect_fd;
 
     data_tab = ft_split(data, '>');
-    redirect_fd = open (data_tab[1], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-    c_pid = fork();
-    if (c_pid == -1)
-        ft_putstr_fd("->error\n", 2);
-    else if (c_pid == 0)
-    {
-        dup2(redirect_fd, STDOUT_FILENO);
-        check_cmd(&data_tab[0], lst_env, NULL);
-        exit(g_exit);
-    }
-    close (redirect_fd);
+    redirect_fd = open(data_tab[1], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
+    dup2(redirect_fd, STDOUT_FILENO);
+    // pid_t c_pid = fork();
+    // if (c_pid == -1)
+    //     ft_putstr_fd("->error\n", 2);
+    // else if (c_pid == 0)
+    // {
+    //     check_cmd(&data_tab[0], lst_env, NULL);
+    //     exit(g_exit);
+    // }
+    // else 
+    //     wait(NULL);
+    close(redirect_fd);
+    check_cmd(&data_tab[0], lst_env, NULL);
+    //free data_tab
 }

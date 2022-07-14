@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/14 00:44:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:21:49 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
            continue ;
         data = ft_split(line, ' ');
         if (!data)
-            return ;
+            break ;
         if (find_char(data[0], '='))
             expand = check_expantion(data, lst_env, expand); //work with address
         else if (find_char(data[0], '>') || find_char(data[0], '<'))
@@ -61,6 +61,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
 				add_history(line);
         //free data
     }
+    printf("\b   \b\bexit\n");
 }
 
 // > if put in the beginning makes the command not run and no err is displayed
@@ -75,8 +76,8 @@ int main(int ac, char **av, char **env)
     lst_env = NULL;
     expand = NULL;
     signal(SIGINT, handler);
-    signal(SIGQUIT, handler);
+    signal(SIGQUIT, SIG_IGN);
     env_init(env, &lst_env);
     ft_readline(lst_env, expand);
-    return (0);
+    return (g_exit);
 }

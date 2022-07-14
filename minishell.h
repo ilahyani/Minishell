@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/14 00:47:25 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:39:01 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,9 @@ void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 int		redir_io(char **data, t_env *lst_env);
 void    o_redir_ap(char *data, t_env *lst_env);
+char	*get_path(char *cmd, t_env *lst_env);
+int		create_process(char *path, char **data, char **env);
+char	*strjoin_plus(char *s1, char *s2, char *s3);
+char 	**list_to_tab(t_env *lst_env);
 
 # endif

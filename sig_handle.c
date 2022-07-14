@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 15:58:08 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:41:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,4 @@ void    handler(int signum)
 		rl_redisplay();
         g_exit = 1;
     }
-    else if (signum == SIGQUIT)
-        return ;
 }
