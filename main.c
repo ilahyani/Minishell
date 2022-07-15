@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/14 22:21:49 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:16:07 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         if (find_char(data[0], '='))
             expand = check_expantion(data, lst_env, expand); //work with address
         else if (find_char(data[0], '>') || find_char(data[0], '<'))
-            g_exit = redir_io(data, lst_env);
+            g_exit = redir_io(data, lst_env, expand);
         else
             check_cmd(data, lst_env, expand);
         if (ft_strlen(line) > 0)

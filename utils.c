@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 16:47:25 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:20:49 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,14 @@ void	err_print(char *cmd, char *buff)
 	ft_putstr_fd(cmd, 2);
     ft_putstr_fd(": ", 2);
 	ft_putendl_fd(buff, 2);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
 }

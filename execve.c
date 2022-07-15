@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/14 16:39:24 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:33:36 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	create_process(char *path, char **data, char **env)
 	else if (c_pid == 0)
 	{
 		if (execve(path, data, env) == -1)
-			return (err_print(path, "No such file or directory"), 1);
+			return (err_print(path, "Command not found"), 1);
 	}
 	else
 	{
