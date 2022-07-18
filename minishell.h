@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/15 11:38:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:54:19 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 int		redir_io(char **data, t_env *lst_env, t_env *expand);
 void    o_redir(char *data, t_env *lst_env, t_env *expand, int append);
+void    i_redir(char *data, t_env *lst_env, t_env *expand);
 void    exec_child(int redirect_fd, char *cmd, t_env *lst_env, t_env *expand);
 char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
