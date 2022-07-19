@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 16:16:04 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:45:57 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ int my_export(char **data, t_env *env)
     if (!env)
         return (0);
     sorted = NULL;
-    sorted = lst_copy(env);//check if this is reversed
+    sorted = lst_copy(env);//free
     ft_sort(sorted);
     if (sizeof_array(data) == 1 || data[1][0] == '#' || data[1][0] == '$')
         env_print(sorted);

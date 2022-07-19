@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/15 11:16:07 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/19 22:40:54 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
 				add_history(line);
         //free data
     }
+    free(line);
     printf("\b   \b\bexit\n");
 }
 
