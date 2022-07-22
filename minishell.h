@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/19 23:25:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:45:34 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,16 @@ void    add_node(char *buff, t_env **expantion);
 void    update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
-int		redir_io(char **data, t_env *lst_env, t_env *expand);
+int		redir_io(char *line, t_env *lst_env, t_env *expand);
 void    o_redir(char *data, t_env *lst_env, t_env *expand, int append);
 void    i_redir(char *data, t_env *lst_env, t_env *expand);
+void    ft_heredoc(char *data, t_env *lst_env, t_env *expand);
 void    exec_child(char *cmd, t_env *lst_env, t_env *expand);
 char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
+int		ft_pipe(char *line, t_env *lst_env, t_env *expand);
 
 # endif

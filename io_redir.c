@@ -6,41 +6,74 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/19 23:45:31 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 00:21:41 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    ft_heredoc(char *data, t_env *lst_env, t_env *expand);
+//TODO: heredoc expantion
 
-int redir_io(char **data, t_env *lst_env, t_env *expand)
+int redir_io(char *line, t_env *lst_env, t_env *expand)
 {
-    if (find_char(data[0], '>'))
+    if (find_char(line, '>'))
     {
-        if (data[0][find_char(data[0], '>') + 1] == '>')
-            o_redir(data[0], lst_env, expand, 1);
+        if (line[find_char(line, '>') + 1] == '>')
+            o_redir(line, lst_env, expand, 1);
         else
-            o_redir(data[0], lst_env, expand, 0);
+            o_redir(line, lst_env, expand, 0);
     }
-    else if (find_char(data[0], '<'))
+    else if (find_char(line, '<'))
     {
-        if (data[0][find_char(data[0], '<') + 1] == '<')
-            ft_heredoc(data[0], lst_env, expand);
+        if (line[find_char(line, '<') + 1] == '<')
+            ft_heredoc(line, lst_env, expand);
         else
-            i_redir(data[0], lst_env, expand);
+            i_redir(line, lst_env, expand);
     }
     return (0); // 258 in case of failure
+}
+
+void    print_fd(t_env *expand, t_env *lst_env, char *arg, int fd)
+{
+    t_env   *tmp;
+
+    if (!ft_strcmp(arg, "$?")) {
+        ft_putnbr_fd(g_exit, fd);
+        ft_putchar_fd('\n', fd);
+    }
+    else
+    {
+        tmp = expand;
+        while (tmp && ft_strcmp(tmp->var, arg + 1))
+            tmp = tmp->next;
+        if (tmp)
+            ft_putendl_fd(tmp->value, fd);
+        else
+        {
+            tmp = lst_env;
+            while (tmp && ft_strcmp(tmp->var, arg + 1))
+                tmp = tmp->next;
+            if (tmp)
+                ft_putendl_fd(tmp->value, fd);
+            else
+                ft_putstr_fd("\n", fd);
+        }
+    }
 }
 
 void    ft_heredoc(char *data, t_env *lst_env, t_env *expand)
 {
     char    **data_tab;
     char    *line;
+    pid_t   c_pid;
+    int     i;
     int     fd[2];
 
     data_tab = ft_split(data, '<');
-    pid_t c_pid = fork();
+    i = -1;
+    while (data_tab[++i])
+        data_tab[i] = ft_strtrim(data_tab[i], " "); //free
+    c_pid = fork();
     if (c_pid == -1)
         ft_putstr_fd("errorY\n", 2);
     else if (c_pid == 0)
@@ -58,7 +91,10 @@ void    ft_heredoc(char *data, t_env *lst_env, t_env *expand)
                 free(line);
                 break;
             }
-            ft_putendl_fd(line, fd[1]);
+            if (line[0] == '$')
+                print_fd(expand, lst_env, line, fd[1]);
+            else
+                ft_putendl_fd(line, fd[1]);
         }
         close(fd[1]);
         dup2(fd[0], STDIN_FILENO);
@@ -74,8 +110,12 @@ void    i_redir(char *data, t_env *lst_env, t_env *expand)
     pid_t   c_pid;
     char    **data_tab;
     int     redirect_fd;
+    int     i;
 
     data_tab = ft_split(data, '<');
+    i = -1;
+    while (data_tab[++i])
+        data_tab[i] = ft_strtrim(data_tab[i], " ");//free
     if (!data_tab)
     {
         ft_putendl_fd("errorX", 2);
@@ -101,8 +141,11 @@ void    o_redir(char *data, t_env *lst_env, t_env *expand, int append)
     pid_t   c_pid;
     char    **data_tab;
     int     redirect_fd;
+    int     i = -1;
 
     data_tab = ft_split(data, '>');
+    while (data_tab[++i])
+        data_tab[i] = ft_strtrim(data_tab[i], " ");//free
     if (!data_tab)
     {
         ft_putendl_fd("errorX", 2);
@@ -128,10 +171,9 @@ void    o_redir(char *data, t_env *lst_env, t_env *expand, int append)
 
 void    exec_child(char *cmd, t_env *lst_env, t_env *expand)
 {
-    char *cmd_tab[2];
+    char **cmd_tab;
 
-    cmd_tab[0] = cmd;
-    cmd_tab[1] = NULL;
+    cmd_tab = ft_split(cmd, ' ');
     check_cmd(cmd_tab, lst_env, expand);
     exit(g_exit);
 }

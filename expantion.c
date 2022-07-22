@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:16 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/13 23:31:41 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 01:33:49 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion)
     t_env   *tmp;
     int     i;
 
-    if (check_arg(args) == sizeof_array(args))
+    if (!check_arg(args))
+        return (expantion);
+    else if (check_arg(args) == sizeof_array(args))
     {
         i = -1;
         while (args[++i])
@@ -41,7 +43,15 @@ int check_arg(char **args)
     int i;
 
     i = -1;
-    while (find_char(args[++i], '='));
+    while (find_char(args[++i], '='))
+    {
+        if (args[i][0] >= '0' && args[i][0] <= '9')
+        {
+            err_print(args[i], "command not found");
+            g_exit = 127;
+            return (0);
+        }
+    }
     return (i);
 }
 

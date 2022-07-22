@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/19 22:40:54 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/21 23:32:11 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         line = readline("🐌🐌🐌 ~> ");
         if (!line)
         {
+            printf("\b   \b\bexit\n");
             g_exit = 0;
-            printf("exit\n");
             exit(g_exit);
         }
         if (!ft_strcmp(line, ""))
@@ -51,10 +51,12 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         data = ft_split(line, ' ');
         if (!data)
             break ;
-        if (find_char(data[0], '='))
+        if (find_char(line, '='))
             expand = check_expantion(data, lst_env, expand); //work with address
-        else if (find_char(data[0], '>') || find_char(data[0], '<'))
-            g_exit = redir_io(data, lst_env, expand);
+        else if (find_char(line, '>') || find_char(line, '<'))
+            g_exit = redir_io(line, lst_env, expand);
+        else if (find_char(line, '|'))
+            g_exit = ft_pipe(line, lst_env, expand);
         else
             check_cmd(data, lst_env, expand);
         if (ft_strlen(line) > 0)
