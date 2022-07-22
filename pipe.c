@@ -6,18 +6,13 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/21 20:46:15 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 06:35:56 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_redic(char *cmd)
-{
-    if (find_char(cmd, '<') || find_char(cmd, '>'))
-        return (1);
-    return (0);
-}
+//TODO: redir dup bug
 
 int ft_pipe(char *line, t_env *lst_env, t_env *expand)
 {
@@ -28,12 +23,20 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
     pid_t   c_pid;
     int     i;
     int     s_in;
+    int     tr_pipe = 0;
+    char    *rdline;
 
     s_in = dup(0);
     pipes = ft_split(line, '|');
     cmd_num = sizeof_array(pipes);
-    i = -1;
-    while (++i < cmd_num)
+    if (line[ft_strlen(line) - 1] == '|')
+    {
+        cmd_num++;
+        tr_pipe = 1;
+    }
+    // printf(">%d\n", cmd_num);
+    i = 0;
+    while (i < cmd_num)
     {
         if (pipe(fd) == -1)
             return (1);
@@ -42,28 +45,53 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
             return(ft_putstr_fd("error\n", 2), 1);
         else if (c_pid == 0)
         {
-            if (check_redic(pipes[i]))
-                redir_io(pipes[i], lst_env, expand);
-            cmd = ft_split(pipes[i], ' ');
-            if (i == 0)
+            if (find_char(pipes[i], '<') || find_char(pipes[i], '>'))
             {
-                dup2(fd[1], STDOUT_FILENO);
-                close(fd[1]);
                 close(fd[0]);
-            }
-            else if (i != cmd_num - 1)
-            {
-                dup2(fd[1], STDOUT_FILENO);
                 close(fd[1]);
+                dup2(s_in, STDIN_FILENO);
+                redir_io(pipes[i], lst_env, expand);
             }
-            // free cmd
-            check_cmd(cmd, lst_env, expand);
-            exit(0);
+            else
+            {
+                cmd = ft_split(pipes[i], ' ');
+                if (i == 0)
+                {
+                    dup2(fd[1], STDOUT_FILENO);
+                    close(fd[1]);
+                    close(fd[0]);
+                }
+                else if (i != cmd_num - 1)
+                {
+                    dup2(fd[1], STDOUT_FILENO);
+                    close(fd[1]);
+                }
+                check_cmd(cmd, lst_env, expand);
+                // free cmd
+                exit(0);
+            }
         }
         else
             wait(NULL);
-	    dup2(fd[0], STDIN_FILENO);
-	    close(fd[0]);
+        i++;
+        if (i == cmd_num - 1 && tr_pipe == 1)
+        {
+            dup2(s_in, STDIN_FILENO);
+            while (1)
+            {
+                rdline = readline("> ");
+                if (!rdline)
+                    return (err_print("syntax error", "unexpected end of file"), 258);
+                else if (ft_strcmp(rdline, ""))
+                {
+                    pipes[i] = rdline;
+                    free(rdline);
+                    break;
+                }
+            }
+        }
+        dup2(fd[0], STDIN_FILENO);
+        close(fd[0]);
         close(fd[1]);
     }
     dup2(s_in, STDIN_FILENO);

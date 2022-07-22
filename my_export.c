@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/18 17:45:57 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 02:21:15 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,7 @@ void    fill_node(char *buff, t_env **lst)
     else
         (*lst)->value = NULL;
     (*lst)->next = NULL;
-    free(tab[0]);
-    free(tab[1]);
-    free(tab);   
+    free_tab(tab); 
 }
 
 t_env	*exprt_lstnew(char *buff)

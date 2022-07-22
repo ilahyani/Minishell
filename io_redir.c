@@ -6,13 +6,11 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/22 00:21:41 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 06:35:25 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//TODO: heredoc expantion
 
 int redir_io(char *line, t_env *lst_env, t_env *expand)
 {
@@ -81,7 +79,7 @@ void    ft_heredoc(char *data, t_env *lst_env, t_env *expand)
         if (pipe(fd) == -1)
         {
             g_exit = 1;
-            exit(1);
+            exit(g_exit);
         }
         while(1)
         {
@@ -96,8 +94,8 @@ void    ft_heredoc(char *data, t_env *lst_env, t_env *expand)
             else
                 ft_putendl_fd(line, fd[1]);
         }
-        close(fd[1]);
         dup2(fd[0], STDIN_FILENO);
+        close(fd[1]);
         close(fd[0]); 
         exec_child(data_tab[0], lst_env, expand);
     }
@@ -175,5 +173,6 @@ void    exec_child(char *cmd, t_env *lst_env, t_env *expand)
 
     cmd_tab = ft_split(cmd, ' ');
     check_cmd(cmd_tab, lst_env, expand);
+    g_exit = 0;
     exit(g_exit);
 }
