@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 14:06:08 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 16:43:31 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
                         dup2(fd[1], STDOUT_FILENO);
                     close(fd[1]);
                     check_cmd(cmd, lst_env, expand);
+                    unlink("tmpfile");
                     free_tab(cmd);
                 }
                 else {
