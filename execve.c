@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/23 20:52:29 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 10:11:15 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	create_process(char *path, char **data, char **env)
 	}
 	waitpid(-1, &status, 0);
 	g_exit = WEXITSTATUS(status);
-	// printf("process done\n");
 	return (0);
 }
 

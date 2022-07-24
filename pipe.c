@@ -6,13 +6,48 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 10:00:27 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 12:46:54 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO: heredoc dup bug - redir priority
+//TODO: heredoc dup bug - redir priority - sleep test
+
+void    pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
+{
+    char **data_tab = ft_split(data, '<');
+    int j = -1;
+    char *rdline_2;
+    int tmpfd;
+    
+    while (data_tab[++j])
+        data_tab[j] = ft_strtrim(data_tab[j], " "); //free
+    tmpfd = open("tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
+    while(1)
+    {
+        rdline_2 = readline("> ");
+        if (!rdline_2 || !ft_strcmp(rdline_2, data_tab[1])) {
+            break ;
+        }
+        if (rdline_2[0] == '$')
+            print_fd(expand, lst_env, rdline_2, tmpfd);
+        else
+            ft_putendl_fd(rdline_2, tmpfd);
+    }
+    free(rdline_2);
+    close (tmpfd);
+    tmpfd = open("tmpfile", O_RDONLY);
+    dup2(tmpfd, STDIN_FILENO);
+    close(tmpfd);
+    char **cmd_tab = ft_split(data_tab[0], ' ');
+    check_cmd(cmd_tab, lst_env, expand);
+    free_tab(cmd_tab);
+    // unlink("tmpfile");
+    // exec_child(data_tab[0], lst_env, expand);
+    // char *cmd = ft_split(data_tab[0], ' ');
+    // execve(get_path(cmd[0], lst_env), cmd, list_to_tab(lst_env));
+}
 
 int ft_pipe(char *line, t_env *lst_env, t_env *expand)
 {
@@ -50,37 +85,20 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
             {
                 if (find_char(pipes[i], '<') && pipes[i][find_char(pipes[i], '<') + 1] == '<')
                 {
-                    char **data_tab = ft_split(pipes[i], '<');
-                    int j = -1;
-                    char *rdline_2;
-                    
                     dup2(s_in, STDIN_FILENO);
                     close(s_in);
-                    while (data_tab[++j])
-                        data_tab[j] = ft_strtrim(data_tab[j], " "); //free
-                    while(1)
-                    {
-                        rdline_2 = readline("> ");
-                        if (!rdline_2 || !ft_strcmp(rdline_2, data_tab[1])) {
-                            break ;
-                        }
-                        if (rdline_2[0] == '$')
-                            print_fd(expand, lst_env, rdline_2, fd[1]);
-                        else
-                            ft_putendl_fd(rdline_2, fd[1]);
-                    }
-                    free(rdline_2);
+                    pipe_heredoc(pipes[i], lst_env, expand);
                     if (i != cmd_num - 1)
                         dup2(fd[1], STDOUT_FILENO);
-                    dup2(fd[0], STDIN_FILENO);
-                    close(fd[0]);
                     close(fd[1]);
-                    exec_child(data_tab[0], lst_env, expand);
-                    // ft_heredoc(pipes[i], lst_env, expand);
+                    // dup2(fd[0], STDIN_FILENO);
+                    close(fd[0]);
+                    g_exit = 0;
+                    exit(0);
                 }
                 else {
-                    close(fd[0]);
                     close(fd[1]);
+                    close(fd[0]);
                     redir_io(pipes[i], lst_env, expand);
                     g_exit = 0;
                     exit(0);

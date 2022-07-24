@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:02 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/23 18:02:01 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 10:53:11 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void    ft_print(char *str, t_env *lst_env, t_env *expand)
     {
         if (!ft_strcmp(str, "$?"))
             printf("%d", g_exit);
-        else if (!ft_strcmp(str, "$$"))
-            printf("%d", getpid());//forbiden
         else
             print_arg(expand, lst_env, str + 1);
     }
