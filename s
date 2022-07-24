@@ -1,0 +1,30 @@
+total 304
+drwxr-xr-x  29 ilahyani  staff    928 Jul 24 15:00 .
+drwxr-x---+ 31 ilahyani  staff    992 Jul 24 14:43 ..
+drwxr-xr-x  15 ilahyani  staff    480 Jul 24 14:05 .git
+drwxr-xr-x   2 ilahyani  staff     64 Jul 18 02:09 .vscode
+-rw-r--r--   1 ilahyani  staff    337 Jul  8 19:25 Makefile
+-rw-r--r--   1 ilahyani  staff     86 Jun  5 17:30 README.md
+-rw-r--r--   1 ilahyani  staff   2879 Jul 24 14:54 a
+-rw-r--r--   1 ilahyani  staff      0 Jul 24 15:00 d
+-rwx------   1 ilahyani  staff    209 Jul 24 14:59 d -a
+-rw-r--r--   1 ilahyani  staff   2266 Jul 22 22:34 env_init.c
+-rw-r--r--   1 ilahyani  staff   2853 Jul 24 14:44 execve.c
+-rw-r--r--   1 ilahyani  staff   2498 Jul 22 01:33 expantion.c
+-rw-r--r--   1 ilahyani  staff   5344 Jul 24 14:59 io_redir.c
+drwxr-xr-x  92 ilahyani  staff   2944 Jul 24 14:07 libft
+-rw-r--r--   1 ilahyani  staff   2879 Jul 23 15:34 main.c
+-rwxr-xr-x   1 ilahyani  staff  54454 Jul 24 14:07 minishell
+-rw-r--r--   1 ilahyani  staff   3404 Jul 22 23:19 minishell.h
+-rw-r--r--   1 ilahyani  staff   2455 Jul 13 11:54 my_cd.c
+-rw-r--r--   1 ilahyani  staff   2298 Jul 24 13:57 my_echo.c
+-rw-r--r--   1 ilahyani  staff   1340 Jul  8 19:27 my_env.c
+-rw-r--r--   1 ilahyani  staff   1923 Jul  8 16:24 my_exit.c
+-rw-r--r--   1 ilahyani  staff   5907 Jul 22 02:21 my_export.c
+-rw-r--r--   1 ilahyani  staff   1070 Jul  8 19:58 my_pwd.c
+-rw-r--r--   1 ilahyani  staff   1657 Jul 11 17:20 my_unset.c
+-rw-r--r--   1 ilahyani  staff   4232 Jul 24 14:06 pipe.c
+-rw-r--r--   1 ilahyani  staff      0 Jul 24 15:00 s
+-rw-r--r--   1 ilahyani  staff   1096 Jul 14 13:41 sig_handle.c
+-rwxr-xr-x   1 ilahyani  staff     35 Jul 24 13:58 tmpfile
+-rw-r--r--   1 ilahyani  staff   2037 Jul 15 11:20 utils.c

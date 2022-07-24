@@ -6,13 +6,13 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 13:59:51 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 14:06:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO: heredoc dup bug - redir priority - sleep test
+//TODO: redir priority - sleep test
 
 char    **pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
 {

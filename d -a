@@ -1,0 +1,23 @@
+Makefile
+README.md
+a
+d -a
+env_init.c
+execve.c
+expantion.c
+io_redir.c
+libft
+main.c
+minishell
+minishell.h
+my_cd.c
+my_echo.c
+my_env.c
+my_exit.c
+my_export.c
+my_pwd.c
+my_unset.c
+pipe.c
+sig_handle.c
+tmpfile
+utils.c

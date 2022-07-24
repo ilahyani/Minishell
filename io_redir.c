@@ -6,11 +6,19 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/23 17:19:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 14:59:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//TODO: multiple redirct files:
+
+//ex1: grep a < file1 < file2 < file3 < file4  =>  ignores all existing files and goes to 
+//the last one unless a file before that doesnt exist (open(file) == -1)
+
+//ex2: ls > a > b > c > d  =>  ignores all existing files and goes to the last one 
+//unless a file before that doesnt exist (open(file) == -1)
 
 int redir_io(char *line, t_env *lst_env, t_env *expand)
 {
@@ -119,7 +127,13 @@ void    i_redir(char *data, t_env *lst_env, t_env *expand)
         ft_putendl_fd("errorX", 2);
         return ;
     }
-    redirect_fd = open(data_tab[1], O_CREAT | O_RDONLY, S_IRWXU);
+    redirect_fd = open(data_tab[1], O_RDONLY, S_IRWXU);
+    if (redirect_fd == -1)
+    {
+        err_print(data_tab[1], "No such file or directory");
+        g_exit = 1;
+        return ;
+    }
     c_pid = fork();
     if (c_pid == -1)
         ft_putstr_fd("errorY\n", 2);
