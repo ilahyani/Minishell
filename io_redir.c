@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/22 06:35:25 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/23 17:19:05 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void    exec_child(char *cmd, t_env *lst_env, t_env *expand)
 
     cmd_tab = ft_split(cmd, ' ');
     check_cmd(cmd_tab, lst_env, expand);
+    free_tab(cmd_tab);
     g_exit = 0;
-    exit(g_exit);
+    exit(0);
 }

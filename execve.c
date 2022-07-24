@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/20 19:58:42 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/23 20:52:29 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_exec(char **data, t_env *lst_env)
 	char	**env = NULL;
 
 	env = list_to_tab(lst_env);
-	if (data[0][0] == '.' && data[0][1] == '/')
+	if ((data[0][0] == '.' && data[0][1] == '/') || data[0][0] == '/')
 		create_process(data[0], data, env);
 	else
 	{
@@ -50,11 +50,9 @@ int	create_process(char *path, char **data, char **env)
 		if (execve(path, data, env) == -1)
 			return (err_print(path, "Command not found"), 1);
 	}
-	else
-	{
-		wait(&status);
-		g_exit = WEXITSTATUS(status);
-	}
+	waitpid(-1, &status, 0);
+	g_exit = WEXITSTATUS(status);
+	// printf("process done\n");
 	return (0);
 }
 

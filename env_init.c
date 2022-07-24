@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/11 16:24:17 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:34:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	env_init(char **env, t_env **lst_env)
         if (!buff[1])
             buff[1] = NULL;
 	    env_lstadd_back(lst_env, env_lstnew(buff[0], buff[1]));
-        free(buff[0]);
-        free(buff[1]);
-        free(buff);
+		free_tab(buff);
     }
 	//unset oldpwd & export oldpwd(empty) & export pwd=getcwd
 }

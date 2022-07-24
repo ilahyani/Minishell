@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/21 20:45:34 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:19:30 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ char	*strjoin_plus(char *s1, char *s2, char *s3);
 char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
 int		ft_pipe(char *line, t_env *lst_env, t_env *expand);
+void    print_fd(t_env *expand, t_env *lst_env, char *arg, int fd);
 
 # endif
