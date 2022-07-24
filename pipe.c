@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 12:46:54 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 13:59:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO: heredoc dup bug - redir priority - sleep test
 
-void    pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
+char    **pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
 {
     char **data_tab = ft_split(data, '<');
     int j = -1;
@@ -40,13 +40,7 @@ void    pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
     tmpfd = open("tmpfile", O_RDONLY);
     dup2(tmpfd, STDIN_FILENO);
     close(tmpfd);
-    char **cmd_tab = ft_split(data_tab[0], ' ');
-    check_cmd(cmd_tab, lst_env, expand);
-    free_tab(cmd_tab);
-    // unlink("tmpfile");
-    // exec_child(data_tab[0], lst_env, expand);
-    // char *cmd = ft_split(data_tab[0], ' ');
-    // execve(get_path(cmd[0], lst_env), cmd, list_to_tab(lst_env));
+    return (ft_split(data_tab[0], ' '));
 }
 
 int ft_pipe(char *line, t_env *lst_env, t_env *expand)
@@ -58,12 +52,10 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
     pid_t   c_pid;
     int     i;
     int     s_in;
-    // int     s_out;
     int     tr_pipe = 0;
     char    *rdline;
 
     s_in = dup(0);
-    // s_out = dup(1);
     pipes = ft_split(line, '|');
     cmd_num = sizeof_array(pipes);
     if (line[ft_strlen(line) - 1] == '|')
@@ -83,25 +75,21 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
         {
             if (find_char(pipes[i], '<') || find_char(pipes[i], '>'))
             {
+                close(fd[0]);
                 if (find_char(pipes[i], '<') && pipes[i][find_char(pipes[i], '<') + 1] == '<')
                 {
                     dup2(s_in, STDIN_FILENO);
                     close(s_in);
-                    pipe_heredoc(pipes[i], lst_env, expand);
+                    cmd = pipe_heredoc(pipes[i], lst_env, expand);
                     if (i != cmd_num - 1)
                         dup2(fd[1], STDOUT_FILENO);
                     close(fd[1]);
-                    // dup2(fd[0], STDIN_FILENO);
-                    close(fd[0]);
-                    g_exit = 0;
-                    exit(0);
+                    check_cmd(cmd, lst_env, expand);
+                    free_tab(cmd);
                 }
                 else {
                     close(fd[1]);
-                    close(fd[0]);
                     redir_io(pipes[i], lst_env, expand);
-                    g_exit = 0;
-                    exit(0);
                 }
             }
             else
@@ -115,9 +103,9 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
                 cmd = ft_split(pipes[i], ' ');
                 check_cmd(cmd, lst_env, expand);
                 free_tab(cmd);
-                g_exit = 0;
-                exit(0);
             }
+            g_exit = 0;
+            exit(0);
         }
         else
             wait(NULL);
