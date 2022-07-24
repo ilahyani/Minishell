@@ -6,11 +6,14 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/23 15:34:42 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 15:11:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// > if put in the beginning makes the command not run and no err is displayed
+//TODO: shell inception sig handling
 
 void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
 {
@@ -66,8 +69,6 @@ void    ft_readline(t_env *lst_env, t_env *expand)
     free(line);
     printf("\b   \b\bexit\n");
 }
-
-// > if put in the beginning makes the command not run and no err is displayed
 
 int main(int ac, char **av, char **env)
 {
