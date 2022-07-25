@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 21:22:08 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 23:04:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         //     expand = check_expantion(data, lst_env, expand); //work with address
         // if (find_char(cmd, PIPE))
         //     g_exit = ft_pipe(line, lst_env, expand);
-        if (find_char(line, '>') || find_char(line, '<'))
-            g_exit = redir_io(line, lst_env, expand);
+        if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR) 
+            || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
+            g_exit = redir_io(cmd, lst_env);
         else
             check_cmd(cmd->cmd, lst_env, expand);
         if (ft_strlen(line) > 0)

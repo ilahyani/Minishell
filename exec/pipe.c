@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:55:01 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 23:06:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO: redir priority - sleep test
 
-char    **pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
+char    **pipe_heredoc(char *data, t_env *lst_env)
 {
     char **data_tab = ft_split(data, '<');
     int j = -1;
@@ -31,7 +31,7 @@ char    **pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
             break ;
         }
         if (rdline_2[0] == '$')
-            print_fd(expand, lst_env, rdline_2, tmpfd);
+            print_fd(lst_env, rdline_2, tmpfd);
         else
             ft_putendl_fd(rdline_2, tmpfd);
     }
@@ -46,7 +46,7 @@ char    **pipe_heredoc(char *data, t_env *lst_env, t_env *expand)
 int ft_pipe(char *line, t_env *lst_env, t_env *expand)
 {
     char    **pipes;
-    char    **cmd;
+    char    **cmd=NULL;
     int     cmd_num;
     int     fd[2];
     pid_t   c_pid;
@@ -80,7 +80,7 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
                 {
                     dup2(s_in, STDIN_FILENO);
                     close(s_in);
-                    cmd = pipe_heredoc(pipes[i], lst_env, expand);
+                    // cmd = pipe_heredoc(pipes[i], lst_env, expand);
                     if (i != cmd_num - 1)
                         dup2(fd[1], STDOUT_FILENO);
                     close(fd[1]);
@@ -90,7 +90,7 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
                 }
                 else {
                     close(fd[1]);
-                    redir_io(pipes[i], lst_env, expand);
+                    // redir_io(pipes[i], lst_env);
                 }
             }
             else

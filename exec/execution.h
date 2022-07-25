@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 21:06:21 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 23:04:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char    **sort_tab(char **tab);
 char	*strchr_plus(const char *s, int c);
 void	env_print(t_env	*env);
 size_t	ft_strcpy(char *dst, char *src);
-// int		find_char(t_node *cmd, int type);
+int		find_char_2(t_node *cmd, int type);
 int		find_char(char *s, char c);
 t_env	*env_lstlast(t_env *lst);
 void	env_lstadd_back(t_env **lst, t_env *new);
@@ -67,17 +67,16 @@ void    add_node(char *buff, t_env **expantion);
 void    update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
-int		redir_io(char *line, t_env *lst_env, t_env *expand);
-void    o_redir(char *data, t_env *lst_env, t_env *expand, int append);
-void    i_redir(char *data, t_env *lst_env, t_env *expand);
-void    ft_heredoc(char *data, t_env *lst_env, t_env *expand);
-void    exec_child(char *cmd, t_env *lst_env, t_env *expand);
+int		redir_io(t_node *cmd, t_env *lst_env);
+void    o_redir(t_node *cmd, t_env *lst_env, int append);
+void    i_redir(t_node *cmd, t_env *lst_env);
+void    ft_heredoc(t_node *cmd, t_env *lst_env);
 char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
 int		ft_pipe(char *line, t_env *lst_env, t_env *expand);
-void    print_fd(t_env *expand, t_env *lst_env, char *arg, int fd);
+void    print_fd(t_env *lst_env, char *arg, int fd);
 
 # endif
