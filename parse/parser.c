@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 17:12:12 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:35:35 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,7 @@ t_node *join_words(t_node *list)
 	tmp = list;
 	i = 0;
 	tmp1 = NULL;
-	print_list2(list);
+	// print_list2(list);
 	while (tmp)
 	{
 		if (tmp && tmp->next && tmp->type == WORD && tmp->next->type == WORD)
