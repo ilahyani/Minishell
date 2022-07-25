@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 16:42:53 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 18:48:57 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
+# include "../exec/minishell.h"
 
 # define PIPE '|'
 # define OUT_REDIR '>'
@@ -48,13 +49,6 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-typedef struct s_env
-{
-	char			*var;
-    char            *value;
-	struct s_env     *next;
-}	t_env;
-
 t_node	*parser(char *line, t_env *lst_env);
 void	add_lst(t_token **head, t_token *node);
 t_token	*lst_new(char	*arg, int type);
@@ -62,6 +56,5 @@ t_token	*lexer(char *line);
 int		pipeline(t_token **tokens);
 void	add_node(t_node **head, t_node *node);
 t_node	*new_node(int type, char **arg);
-void	free_tab(char **tab);
 
 #endif
