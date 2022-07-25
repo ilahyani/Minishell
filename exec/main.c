@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 18:40:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 21:22:08 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
 // > if put in the beginning makes the command not run and no err is displayed
 //TODO: shell inception sig handling -> sigaction? let's go
@@ -33,12 +33,14 @@ void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
         my_exit(cmd);
     else
         g_exit = ft_exec(cmd, lst_env);
+        // cmd = cmd->next;
 }
 
 void    ft_readline(t_env *lst_env, t_env *expand)
 {
-    char    **data;
+    // char    **data;
     char    *line;
+    t_node  *cmd;
 
     while (1)
     {
@@ -51,17 +53,18 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         }
         if (!ft_strcmp(line, ""))
            continue ;
-        data = ft_split(line, ' ');
-        if (!data)
-            break ;
-        if (find_char(data[0], '='))
-            expand = check_expantion(data, lst_env, expand); //work with address
-        else if (find_char(line, '|'))
-            g_exit = ft_pipe(line, lst_env, expand);
-        else if (find_char(line, '>') || find_char(line, '<'))
+        // data = ft_split(line, ' ');
+        cmd = parser(line, lst_env);
+        if (!cmd)
+            continue; //error in line
+        // if (find_char(data[0], '='))
+        //     expand = check_expantion(data, lst_env, expand); //work with address
+        // if (find_char(cmd, PIPE))
+        //     g_exit = ft_pipe(line, lst_env, expand);
+        if (find_char(line, '>') || find_char(line, '<'))
             g_exit = redir_io(line, lst_env, expand);
         else
-            check_cmd(data, lst_env, expand);
+            check_cmd(cmd->cmd, lst_env, expand);
         if (ft_strlen(line) > 0)
 				add_history(line);
         //free data

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 18:40:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 21:30:14 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
 //TODO: multiple redirct files:
 
@@ -22,6 +22,15 @@
 
 int redir_io(char *line, t_env *lst_env, t_env *expand)
 {
+    /*
+    if (node->type == WORD)
+    {
+        data = node->cmd;
+        node = node->next;
+    }
+    else
+        check redir_in or redir_out or redir_add or here_doc;
+    */
     if (find_char(line, '>'))
     {
         if (line[find_char(line, '>') + 1] == '>')

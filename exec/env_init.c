@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 18:45:18 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:53:28 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
 //TODO: unset oldpwd & export oldpwd(empty) & export pwd=getcwd
 

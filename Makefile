@@ -8,8 +8,7 @@ CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
 
 CFLAGS = -Wall -Wextra -Werror 
 
-SRC = ./parse/minishell.c ./parse/parser.c ./parse/lexer.c ./parse/lists.c ./parse/grammar.c \
-		./exec/env_init.c ./exec/execve.c ./exec/expantion.c ./exec/io_redir.c ./exec/main.c ./exec/my_cd.c ./exec/my_echo.c ./exec/my_env.c ./exec/my_exit.c ./exec/my_export.c ./exec/my_pwd.c ./exec/my_unset.c ./exec/pipe.c ./exec/sig_handle.c ./exec/utils.c
+SRC = ./parse/minishell.c ./parse/parser.c ./parse/lexer.c ./parse/lists.c ./parse/grammar.c ./exec/env_init.c ./exec/execve.c ./exec/expantion.c ./exec/io_redir.c ./exec/main.c ./exec/my_cd.c ./exec/my_echo.c ./exec/my_env.c ./exec/my_exit.c ./exec/my_export.c ./exec/my_pwd.c ./exec/my_unset.c ./exec/pipe.c ./exec/sig_handle.c ./exec/utils.c
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -30,7 +29,8 @@ fclean_lib:
 	@make fclean -C libft
 
 clean: clean_lib
-	@-rm *.o 
+	@-rm ./parse/*.o
+	@-rm ./exec/*.o
 
 fclean: clean fclean_lib
 	@-rm $(NAME)

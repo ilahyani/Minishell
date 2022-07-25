@@ -6,11 +6,11 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 17:12:12 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:20:32 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../minishell.h"
 
 void	print_list(t_token *tokens)
 {
@@ -24,15 +24,15 @@ void	print_list(t_token *tokens)
 	}
 }
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
+// int	ft_strcmp(char *s1, char *s2)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
+// 	i = 0;
+// 	while (s1[i] && s2[i] && s1[i] == s2[i])
+// 		i++;
+// 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+// }
 
 void	print_list2(t_node *tokens)
 {
@@ -155,12 +155,12 @@ void	word(t_token **tokens, t_node **line)
 		}
 	}
 	tmp_2d = add_to_table(tmp_2d, tmp);
-	add_node(line, new_node(WORD, tmp_2d));
+	add_node_parse(line, new_node(WORD, tmp_2d));
 } 
 
 void	parse_pipe(t_token **tokens, t_node **line)
 {
-	add_node(line, new_node(PIPE, add_to_table(NULL, NULL)));
+	add_node_parse(line, new_node(PIPE, add_to_table(NULL, NULL)));
 	(*tokens) = (*tokens)->next;
 }
 
@@ -190,7 +190,7 @@ void	parse_re(t_node **line, t_token **tokens)
 			// }
 		}
 		tmp2 = add_to_table(tmp2, tmp);
-		add_node(line, new_node(type, tmp2));
+		add_node_parse(line, new_node(type, tmp2));
 	}
 }
 
@@ -214,7 +214,7 @@ void	parse_heredoc(t_node **line, t_token **tokens)
 			(*tokens) = (*tokens)->next;
 		}
 		tmp2 = add_to_table(tmp2, tmp);
-		add_node(line, new_node(type, tmp2));
+		add_node_parse(line, new_node(type, tmp2));
 	}
 }
 
@@ -299,7 +299,7 @@ t_node *join_words(t_node *list)
 	tmp = list;
 	i = 0;
 	tmp1 = NULL;
-	print_list2(list);
+	// print_list2(list);
 	while (tmp)
 	{
 		if (tmp && tmp->next && tmp->type == WORD && tmp->next->type == WORD)
@@ -344,7 +344,7 @@ t_node	*adjuste_list(t_node *list)
 			}
 			tmp = tmp->next;
 		}
-		if(!tmp)
+		if(!tmp)  
 			break ;
 		tmp = tmp->next;
 		tmp2 = tmp;
@@ -374,9 +374,9 @@ t_node	*parser(char *line, t_env *lst_env)
 		list = parse(&tokens);
 		// print_list2(list);
 		list = adjuste_list(list);
-		printf("------------------------\n");
-		print_list2(list);
-		printf("------------------------\n");
+		// printf("------------------------\n");
+		// print_list2(list);
+		// printf("------------------------\n");
 	}
 	return (list);
 }

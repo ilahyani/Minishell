@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:06:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 21:15:25 by mjlem            ###   ########.fr       */
+/*   Created: 2022/07/25 19:49:12 by mjlem             #+#    #+#             */
+/*   Updated: 2022/07/25 19:58:43 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-char	*ft_strdup(const char *s)
-{
-	char	*dup;
-	int		i;
+# include "./libft/libft.h"
+# include "./parse/parse.h"
+# include "./exec/execution.h"
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i])
-		i++;
-	dup = (char *) malloc(i + 1);
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+t_node	*parser(char *line, t_env *lst_env);
+# endif

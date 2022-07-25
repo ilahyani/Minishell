@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 18:40:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 21:05:30 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -44,15 +44,15 @@ int	is_int(char *c)
 	return (1);
 }
 
-char	**parser(char *line)
-{
-	char **data;
+// char	**parser(char *line)
+// {
+// 	char **data;
 
-	if (!line)
-		return (0);
-	data = ft_split(line, ' ');
-	return (data);
-}
+// 	if (!line)
+// 		return (0);
+// 	data = ft_split(line, ' ');
+// 	return (data);
+// }
 
 char	*strchr_plus(const char *s, int c)
 {
@@ -83,6 +83,19 @@ int	find_char(char *s, char c)
 	}
 	return (0);
 }
+
+// int	find_char(t_node *cmd, int type)
+// {
+// 	if (!cmd)
+// 		return (0);
+// 	while (cmd)
+// 	{
+// 		if (cmd->type == type)
+// 			return (1);
+// 		cmd = cmd->next;
+// 	}
+// 	return (0);
+// }
 
 void	err_print(char *cmd, char *buff)
 {

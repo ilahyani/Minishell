@@ -6,11 +6,11 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:14:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 16:43:18 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 19:52:27 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../minishell.h"
 
 int	redirction(t_token **tokens)
 {

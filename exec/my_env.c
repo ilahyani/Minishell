@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:52 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 18:40:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:54:16 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
 int my_env(t_env *env, char **data)
 {

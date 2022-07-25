@@ -6,11 +6,11 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 16:43:29 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 19:52:23 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../minishell.h"
 
 int	my_pipe(t_token **tokens, int i)
 {
