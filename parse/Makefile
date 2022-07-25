@@ -20,7 +20,7 @@ $(LIB):
 	@make -C libft
 
 $(NAME): $(OBJ) $(LIB)
-	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME)
+	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME) && clear
 
 clean_lib:
 	@make clean -C libft

@@ -6,11 +6,11 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/19 19:23:18 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 16:43:29 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
 int	my_pipe(t_token **tokens, int i)
 {
@@ -41,7 +41,7 @@ int	reserved_char(char c)
 {
 	if (c == '`' || c == '$' || c == '&' || c == '(' || c == ')' || c == ';'
 		|| c == '!' || c == '\'' || c == '\"' || c == '>' || c == '<'
-		|| c == ' ' || c == '\t')
+		|| c == ' ' || c == '\t'|| c == '|')
 		return (0);
 	return (1);
 }
@@ -62,9 +62,9 @@ int	single_quote(t_token **tokens, char *line, int i)
 	while (line[i] && line[i] != '\'')
 		i++;
 	if (!line[i])
-		exit(1);
+		return (-1);
 	else
-		add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
+		add_lst(tokens, lst_new(ft_substr(line, s, i - s), SQ_STR));
 	return (i + 1);
 }
 
@@ -76,7 +76,7 @@ int	dollar_sign(t_token **tokens, char *line, int i)
 	i++;
 	while (line[i] && var_delimiter(line[i]))
 		i++;
-	add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
+	add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
 	return (i);
 }
 
@@ -91,17 +91,17 @@ int	double_quote(t_token **tokens, char *line, int i)
 		{
 			if (i > s)
 			{
-				add_lst(tokens, lst_new(ft_substr(line, s, i - s + 1), WORD));
+				add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
 				s = i;
 			}
 			i++;
 			while (line[i] && var_delimiter(line[i]))
 				i++;
 			if (!line[i])
-				exit(1);
+				return (-1);
 			else
 			{
-				add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
+				add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
 				if (line[i] == '\"')
 					return (i + 1);
 				s = i;
@@ -110,7 +110,7 @@ int	double_quote(t_token **tokens, char *line, int i)
 		i++;
 	}
 	if (!line[i])
-		exit(1);
+		return (-1);
 	else
 		add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
 	return (i + 1);
@@ -155,7 +155,7 @@ t_token	*lexer(char *line)
 
 	i = 0;
 	tokens = NULL;
-	while (line[i])
+	while (line[i] && i > -1)
 	{
 		if (line[i] == '\'')
 			i = single_quote(&tokens, line, i + 1);
@@ -174,5 +174,7 @@ t_token	*lexer(char *line)
 		else
 			i = get_word(&tokens, line, i);
 	}
+	if (i == -1)
+		return (NULL);
 	return (tokens);
 }

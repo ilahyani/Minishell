@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:04:51 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/19 17:04:08 by mjlem            ###   ########.fr       */
+/*   Created: 2021/11/13 23:06:53 by mjlem             #+#    #+#             */
+/*   Updated: 2022/07/24 00:04:51 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strdup(const char *s1)
 {
-	char	*line;
+	char	*p;
+	int		l;
+	int		i;
 
-	(void)av;
-	(void)env;
-	if (ac == 1)
+	i = 0;
+	if (!s1)
+		return (NULL);
+	l = ft_strlen(s1) + 1;
+	p = (char *) malloc (l);
+	if (!p)
+		return (0);
+	while (s1[i])
 	{
-		while (1)
-		{
-			line = readline("🐌");
-			if (line && line[0])
-				parser(line);
-		}
+		p[i] = s1[i];
+		i++;
 	}
+	p[i] = '\0';
+	return (p);
 }
-/*  export LDFLAGS="-L/Users/mjlem/.brew/opt/readline/lib"
-	export CPPFLAGS="-I/Users/mjlem/.brew/opt/readline/include"*/

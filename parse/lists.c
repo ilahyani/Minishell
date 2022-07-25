@@ -6,11 +6,11 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 20:28:16 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/19 22:07:53 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 16:43:40 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
 t_token	*lst_new(char	*arg, int type)
 {
@@ -38,7 +38,7 @@ void	add_lst(t_token **head, t_token *node)
 	}
 }
 
-t_node	*new_node(int type, char *arg)
+t_node	*new_node(int type, char **arg)
 {
 	t_node	*node;
 
