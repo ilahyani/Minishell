@@ -6,14 +6,15 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 18:42:01 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:47:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
+#include "../parse/parse.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
