@@ -6,11 +6,11 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 14:44:38 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:40:53 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 int	ft_exec(char **data, t_env *lst_env)
 {

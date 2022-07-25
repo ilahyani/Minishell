@@ -6,11 +6,11 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:16 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/22 01:33:49 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:40:53 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion)
 {

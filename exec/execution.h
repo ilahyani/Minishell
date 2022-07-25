@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 10:59:51 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/22 23:19:30 by ilahyani         ###   ########.fr       */
+/*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
+/*   Updated: 2022/07/25 18:42:01 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
 #include "libft/libft.h"
 #include <unistd.h>
