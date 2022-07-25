@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 14:59:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 16:59:50 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,16 +153,17 @@ void    o_redir(char *data, t_env *lst_env, t_env *expand, int append)
     pid_t   c_pid;
     char    **data_tab;
     int     redirect_fd;
-    int     i = -1;
+    int     i;
 
     data_tab = ft_split(data, '>');
-    while (data_tab[++i])
-        data_tab[i] = ft_strtrim(data_tab[i], " ");//free
     if (!data_tab)
     {
         ft_putendl_fd("errorX", 2);
         return ;
     }
+    i = -1;
+    while (data_tab[++i])
+        data_tab[i] = ft_strtrim(data_tab[i], " ");//free
     if (append)
         redirect_fd = open(data_tab[1], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
     else

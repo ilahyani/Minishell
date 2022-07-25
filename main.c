@@ -6,14 +6,14 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/24 15:11:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 23:59:33 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // > if put in the beginning makes the command not run and no err is displayed
-//TODO: shell inception sig handling
+//TODO: shell inception sig handling -> sigaction? let's go
 
 void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
 {
@@ -54,7 +54,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         data = ft_split(line, ' ');
         if (!data)
             break ;
-        if (find_char(line, '='))
+        if (find_char(data[0], '='))
             expand = check_expantion(data, lst_env, expand); //work with address
         else if (find_char(line, '|'))
             g_exit = ft_pipe(line, lst_env, expand);

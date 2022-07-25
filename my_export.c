@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/22 02:21:15 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 23:19:29 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ int my_export(char **data, t_env *env)
     if (!env)
         return (0);
     sorted = NULL;
-    sorted = lst_copy(env);//free
+    sorted = lst_copy(env);
     ft_sort(sorted);
     if (sizeof_array(data) == 1 || data[1][0] == '#' || data[1][0] == '$')
         env_print(sorted);
@@ -223,7 +223,7 @@ int my_export(char **data, t_env *env)
         while (data[++i])
         {
             if (check_error(data[i]))
-                return (printf("minishell: export: `%s': not a valid identifier\n", data[i]), 1);//stderr
+                return (err_print(data[i], "not a valid identifier"), 1); //stderr
             lst_tmp = env;
             while (lst_tmp)
             {
@@ -239,5 +239,6 @@ int my_export(char **data, t_env *env)
                 env_lstadd_back(&env, exprt_lstnew(data[i]));
         }
     }
+    // free(sorted);
     return (0);
 }

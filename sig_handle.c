@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/14 13:41:08 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/24 23:56:52 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void    handler(int signum)
 {
     if (signum == SIGINT)
     {
+        // rl_on_new_line();
+		// rl_redisplay();
+        // write(1, "  \n", 3);
         write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
