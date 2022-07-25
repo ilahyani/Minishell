@@ -1,22 +1,5 @@
 make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/mjlem/Desktop/test'
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/env_init.o exec/env_init.c
- 
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/execve.o exec/execve.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/expantion.o exec/expantion.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/io_redir.o exec/io_redir.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/main.o exec/main.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_cd.o exec/my_cd.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_echo.o exec/my_echo.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_env.o exec/my_env.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_exit.o exec/my_exit.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_export.o exec/my_export.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_pwd.o exec/my_pwd.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/my_unset.o exec/my_unset.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/pipe.o exec/pipe.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/sig_handle.o exec/sig_handle.c
-cc  -Wall -Wextra -Werror  "-I/Users/mjlem/.brew/opt/readline/include"  -c -o exec/utils.o exec/utils.c
-make -C libft
-cc -Wall -Wextra -Werror  "-L/Users/mjlem/.brew/opt/readline/lib" ./libft/libft.a -lreadline ./parse/minishell.o ./parse/parser.o ./parse/lexer.o ./parse/lists.o ./parse/grammar.o ./exec/env_init.o ./exec/execve.o ./exec/expantion.o ./exec/io_redir.o ./exec/main.o ./exec/my_cd.o ./exec/my_echo.o ./exec/my_env.o ./exec/my_exit.o ./exec/my_export.o ./exec/my_pwd.o ./exec/my_unset.o ./exec/pipe.o ./exec/sig_handle.o ./exec/utils.o -o minishell && clear
-make: Leaving directory `/Users/mjlem/Desktop/test'
+make: Entering directory `/Users/ilahyani/Minishell'
+make: Nothing to be done for `all'.
+make: Leaving directory `/Users/ilahyani/Minishell'
  

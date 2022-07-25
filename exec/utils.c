@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 21:05:30 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:57:47 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,13 @@ void	free_tab(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
+}
+
+char    *ft_getenv(char *env, t_env *env_list)
+{
+    while (env_list && ft_strcmp(env, env_list->var))
+        env_list = env_list->next;
+    if (env_list)
+        return (env_list->value);
+    return (NULL);
 }

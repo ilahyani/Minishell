@@ -8,90 +8,81 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Mon Jul 25 19:47:50 2022
+# Make data base, printed on Mon Jul 25 21:45:40 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
+ 
 # automatic
 ?F = $(notdir $?)
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
-# makefile (from `Makefile', line 13)
+# makefile (from `Makefile', line 15)
 OBJ = $(SRC:%.c=%.o)
-# makefile (from `Makefile', line 11)
+# makefile (from `Makefile', line 13)
 SRC = ./parse/minishell.c ./parse/parser.c ./parse/lexer.c ./parse/lists.c ./parse/grammar.c ./exec/env_init.c ./exec/execve.c ./exec/expantion.c ./exec/io_redir.c ./exec/main.c ./exec/my_cd.c ./exec/my_echo.c ./exec/my_env.c ./exec/my_exit.c ./exec/my_export.c ./exec/my_pwd.c ./exec/my_unset.c ./exec/pipe.c ./exec/sig_handle.c ./exec/utils.c
-# environment
-VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from `Makefile', line 7)
-CPPFLAGS = "-I/Users/$(USER)/.brew/opt/readline/include"
+# makefile (from `Makefile', line 9)
+CPPFLAGS = "-I/opt/homebrew/opt/readline/include"
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/mjlem/Desktop/test
+CURDIR := /Users/ilahyani/Minishell
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 9)
+# makefile (from `Makefile', line 11)
 CFLAGS = -Wall -Wextra -Werror 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
-VSCODE_VERBOSE_LOGGING = true
+__CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd7m00339x/T/vscode-ipc-5efb5c94-e3fb-44df-904d-dd6907842de8.sock
+VSCODE_CWD = /Users/ilahyani/Minishell
 # environment
-VSCODE_CWD = /Users/mjlem/Desktop/test
-# environment
-PATH = /Users/mjlem/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+PATH = /opt/homebrew/opt/llvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/opt/homebrew/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = 81114C06-F2BB-44CA-8402-CC248EDE2D42
-# environment
-VSCODE_LOG_STACK = false
-# environment
 ELECTRON_RUN_AS_NODE = 1
-# makefile (from `Makefile', line 5)
-LDFLAGS = "-L/Users/$(USER)/.brew/opt/readline/lib"
-# makefile (from `Makefile', line 15)
+# makefile (from `Makefile', line 6)
+LDFLAGS = "-L/opt/homebrew/opt/readline/lib"
+# makefile (from `Makefile', line 17)
 LIB = ./libft/libft.a
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.XDK9CpX0st/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.XtnRKQO9zr/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_PIPE_LOGGING = true
-# environment
-PWD = /Users/mjlem/Desktop/test
+PWD = /Users/ilahyani/Minishell
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /Users/mjlem
+HOME = /Users/ilahyani
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/mjlem/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+VSCODE_CODE_CACHE_PATH = /Users/ilahyani/Library/Application Support/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
-LOGNAME = mjlem
+LOGNAME = ilahyani
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
-ZSH = /Users/mjlem/.oh-my-zsh
+ZSH = /Users/ilahyani/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -105,19 +96,20 @@ MAKE = $(MAKE_COMMAND)
 # environment
 LC_TERMINAL = iTerm2
 # environment
-SHLVL = 3
+SHLVL = 4
 # makefile (from `Makefile', line 3)
 CC = cc 
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = mjlem
+USER = ilahyani
 # makefile
 .DEFAULT_GOAL := all
 # default
+ 
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:E710D369-EBBD-4C11-BB71-A378B0E0EC1F
+TERM_SESSION_ID = w0t0p1:567B2FA9-856F-4C2E-BC92-74E5AFC2B340
 # makefile (from `Makefile', line 1)
 NAME = minishell
 # environment
@@ -131,11 +123,13 @@ TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cd7m00339x/T/
+TMPDIR = /var/folders/f7/ctq1tb6n54b84x14xl4_h1j80000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/mjlem/Library/Application Support/Code/1.67.0-main.sock
+VSCODE_IPC_HOOK = /Users/ilahyani/Library/Application Support/Code/1.69.1-main.sock
+# environment
+MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -143,21 +137,23 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.13
+TERM_PROGRAM_VERSION = 3.4.16
 # environment
-XPC_SERVICE_NAME = 0
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.3988736.3988742.44E42BA0-D363-4CF9-A7CC-2619C3C6E6AB
 # environment
-LC_TERMINAL_VERSION = 3.4.13
+LC_TERMINAL_VERSION = 3.4.16
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:E710D369-EBBD-4C11-BB71-A378B0E0EC1F
+ITERM_SESSION_ID = w0t0p1:567B2FA9-856F-4C2E-BC92-74E5AFC2B340
 # environment
-COLORFGBG = 15;0
+COLORFGBG = 7;0
 # environment
-__CF_USER_TEXT_ENCODING = 0x18D3D:0x0:0x0
+__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
@@ -168,14 +164,10 @@ ITERM_PROFILE = Default
 PAGER = less
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186a7
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# default
-.INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
 # environment
@@ -183,9 +175,9 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 858
+VSCODE_PID = 62466
 # variable set hash-table stats:
-# Load=86/1024=8%, Rehash=0, Collisions=6/116=5%
+# Load=81/1024=8%, Rehash=0, Collisions=6/110=5%
 
 # Pattern-specific Variable Values
 
@@ -193,9 +185,9 @@ VSCODE_PID = 858
 
 # Directories
 
-# . (device 16777225, inode 803531): 9 files, no impossibilities.
+# . (device 16777229, inode 1646162): 11 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -205,21 +197,28 @@ VSCODE_PID = 858
 
 # Not a target:
 exec/execve.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+ 
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 clean_lib:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 26):
+#  commands to execute (from `Makefile', line 28):
 	@make clean -C libft
 	
 
@@ -227,21 +226,28 @@ all: minishell
 #  Command-line target.
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/my_env.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/my_exit.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -252,7 +258,7 @@ exec/my_exit.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-25 19:47:21
+#  Last modified 2022-07-25 21:43:31
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -261,7 +267,7 @@ Makefile:
 # Not a target:
 parse/grammar.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-25 19:47:38
+#  Last modified 2022-07-25 21:43:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -269,45 +275,57 @@ parse/grammar.o:
 
 # Not a target:
 exec/io_redir.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/my_pwd.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/env_init.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/my_unset.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 minishell: parse/minishell.o parse/parser.o parse/lexer.o parse/lists.o parse/grammar.o exec/env_init.o exec/execve.o exec/expantion.o exec/io_redir.o exec/main.o exec/my_cd.o exec/my_echo.o exec/my_env.o exec/my_exit.o exec/my_export.o exec/my_pwd.o exec/my_unset.o exec/pipe.o exec/sig_handle.o exec/utils.o libft/libft.a
 #  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-07-25 21:43:34
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 23):
+#  commands to execute (from `Makefile', line 25):
 	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME) && clear
 	
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 20):
+#  Last modified 2022-07-25 21:43:34
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 22):
 	@make -C libft
 	
 
@@ -315,17 +333,14 @@ fclean: clean fclean_lib
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
-make: *** No rule to make target `exec/env_init.o', needed by `minishell'.  Stop.
-
-#  commands to execute (from `Makefile', line 36):
+#  commands to execute (from `Makefile', line 38):
 	@-rm $(NAME)
 	
 
 # Not a target:
 parse/minishell.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-25 19:47:37
+#  Last modified 2022-07-25 21:43:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -333,9 +348,12 @@ parse/minishell.o:
 
 # Not a target:
 exec/pipe.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -345,9 +363,12 @@ exec/pipe.o:
 
 # Not a target:
 exec/main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 re: fclean all
 #  Implicit rule search has not been done.
@@ -356,29 +377,35 @@ re: fclean all
 
 # Not a target:
 exec/expantion.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 clean: clean_lib
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 32):
+#  commands to execute (from `Makefile', line 34):
 	@-rm ./parse/*.o
 	@-rm ./exec/*.o
 	
 
 # Not a target:
 exec/my_cd.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 parse/parser.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-25 19:47:37
+#  Last modified 2022-07-25 21:43:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -387,7 +414,7 @@ parse/parser.o:
 # Not a target:
 parse/lists.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-25 19:47:37
+#  Last modified 2022-07-25 21:43:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -397,32 +424,41 @@ fclean_lib:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 29):
+#  commands to execute (from `Makefile', line 31):
 	@make fclean -C libft
 	
 
 # Not a target:
 exec/my_echo.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/sig_handle.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 exec/my_export.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-07-25 21:43:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 parse/lexer.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-25 19:47:37
+#  Last modified 2022-07-25 21:43:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -441,6 +477,6 @@ parse/lexer.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Jul 25 19:47:50 2022
+# Finished Make data base on Mon Jul 25 21:45:40 2022
 
  

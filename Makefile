@@ -2,9 +2,11 @@ NAME = minishell
 
 CC = cc 
 
-LDFLAGS="-L/Users/$(USER)/.brew/opt/readline/lib"
+# LDFLAGS="-L/Users/$(USER)/.brew/opt/readline/lib"
+LDFLAGS="-L/opt/homebrew/opt/readline/lib"
 
-CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
+# CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
+CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
 CFLAGS = -Wall -Wextra -Werror 
 

@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:54:06 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:53:47 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char    *ft_getenv(char *env, t_env *env_list)
-{
-    while (env_list && ft_strcmp(env, env_list->var))
-        env_list = env_list->next;
-    if (env_list) {
-        return (env_list->value);
-    }
-    return (NULL);
-}
 
 void    update_env(t_env *env_list, char *env, char *val)
 {

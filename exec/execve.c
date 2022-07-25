@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:53:40 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:57:00 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*get_path(char *cmd, t_env *lst_env)
 	int		i;
 
 	path = ft_split(ft_getenv("PATH", lst_env), ':');
+	if (!path)
+		return (NULL);
 	i = -1;
 	while (path[++i])
 	{
