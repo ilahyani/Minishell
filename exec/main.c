@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 23:04:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/26 05:59:06 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         }
         if (!ft_strcmp(line, ""))
            continue ;
-        // data = ft_split(line, ' ');
         cmd = parser(line, lst_env);
         if (!cmd)
             continue; //error in line
@@ -67,8 +66,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         else
             check_cmd(cmd->cmd, lst_env, expand);
         if (ft_strlen(line) > 0)
-				add_history(line);
-        //free data
+			add_history(line);
     }
     free(line);
     printf("\b   \b\bexit\n");

@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:53:28 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/26 01:57:12 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//TODO: unset oldpwd & export oldpwd(empty) & export pwd=getcwd
+//TODO: unset oldpwd & export oldpwd(empty) & export pwd=getcwd & increment shlvl
 
 void	env_init(char **env, t_env **lst_env)
 {
     int		i;
     char	**buff;
-	// char	cwd[PATH_MAX];
 
-	if (!env) //set_env()
+	if (!env)
 		return ;
     i = -1;
     while (env[++i])
@@ -75,12 +74,3 @@ t_env	*env_lstnew(char *var, char *value)
 	res->next = NULL;
 	return (res);
 }
-
-// void	set_env(t_env **lst_env)
-// {
-// 	char    cwd[PATH_MAX];
-// // if (!env) manually set shlvl oldpwd(empty) pwd + _ (doesn't show in export)
-// 	env_lstadd_back(lst_env, env_lstnew("PWD", getcwd(cwd, sizeof(cwd))));
-// 	env_lstadd_back(lst_env, env_lstnew("SHLVL", "1"));
-// 	env_lstadd_back(lst_env, env_lstnew("OLDPWD", NULL));
-// }

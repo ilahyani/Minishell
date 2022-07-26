@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 23:04:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/26 07:06:26 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ typedef struct s_env
     char            *value;
 	struct s_env     *next;
 }	t_env;
+
+typedef struct s_redir
+{
+	char	**cmd;
+	int		in_red;
+	int		out_red;
+	int		append;
+	char	*her_doc;
+}	t_redir;
+
+// typedef struct s_redir
+// {
+// 	t_node	cmd = NULL;
+// 	t_node	in_red = NULL;
+// 	t_node	out_red = NULL;
+// 	t_node	append = NULL;
+// 	t_node	her_doc = NULL;
+// }	t_redir;
+
 //group those based of their files
 int     my_echo(char **data, t_env *lst_env, t_env *expand);
 int     my_cd(t_env *lst_env, char **data);
@@ -78,5 +97,9 @@ char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
 int		ft_pipe(char *line, t_env *lst_env, t_env *expand);
 void    print_fd(t_env *lst_env, char *arg, int fd);
+int 	multi_redic_check(t_node *cmd);
+void    get_data(t_node *cmd, t_redir *data);
+void    fd_reset(int fd[2]);
+int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
 
 # endif
