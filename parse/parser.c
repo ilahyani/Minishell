@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 21:20:32 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/26 22:20:28 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,7 +375,7 @@ t_node	*parser(char *line, t_env *lst_env)
 		// print_list2(list);
 		list = adjuste_list(list);
 		// printf("------------------------\n");
-		// print_list2(list);
+		//  print_list2(list);
 		// printf("------------------------\n");
 	}
 	return (list);

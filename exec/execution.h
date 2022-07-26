@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/26 07:06:26 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:13:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <limits.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 int g_exit;
 
@@ -101,5 +103,6 @@ int 	multi_redic_check(t_node *cmd);
 void    get_data(t_node *cmd, t_redir *data);
 void    fd_reset(int fd[2]);
 int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
+void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);
 
 # endif
