@@ -6,13 +6,12 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 14:45:00 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:53:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-// > if put in the beginning makes the command not run and no err is displayed
 //TODO: shell inception sig handling -> sigaction? let's go
 
 void    check_cmd(char **cmd, t_env *lst_env)
@@ -33,12 +32,10 @@ void    check_cmd(char **cmd, t_env *lst_env)
         my_exit(cmd);
     else
         g_exit = ft_exec(cmd, lst_env);
-        // cmd = cmd->next;
 }
 
 void    ft_readline(t_env *lst_env)
 {
-    // char    **data;
     char    *line;
     t_node  *cmd;
 
@@ -55,10 +52,8 @@ void    ft_readline(t_env *lst_env)
            continue ;
         cmd = parser(line, lst_env);
         if (cmd){
-        // if (find_char(data[0], '='))
-        //     expand = check_expantion(data, lst_env, expand); //work with address
         // if (find_char(cmd, PIPE))
-        //     g_exit = ft_pipe(line, lst_env, expand);
+        //     g_exit = ft_pipe(line, lst_env);
         if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR) 
             || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
             g_exit = redir_io(cmd, lst_env);
