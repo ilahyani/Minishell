@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 14:42:04 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:56:52 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,8 @@ typedef struct s_redir
 	char	**cmd;
 	int		in_red;
 	int		out_red;
-	int		append;
 	char	*her_doc;
 }	t_redir;
-
-// typedef struct s_redir
-// {
-// 	t_node	cmd = NULL;
-// 	t_node	in_red = NULL;
-// 	t_node	out_red = NULL;
-// 	t_node	append = NULL;
-// 	t_node	her_doc = NULL;
-// }	t_redir;
 
 //group those based of their files
 int     my_echo(char **data, t_env *lst_env);

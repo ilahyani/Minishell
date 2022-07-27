@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 14:44:35 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:56:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void    data_init(t_redir *data)
     data->cmd = NULL;
     data->in_red = -1;
     data->out_red = -1;
-    data->append = -1;
     data->her_doc = NULL;
 }
 

@@ -2,23 +2,42 @@ make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/ilahyani/minishell'
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c main.c -o main.o
  
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c parse/minishell.c -o parse/minishell.o
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c parse/parser.c -o parse/parser.o
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c parse/lexer.c -o parse/lexer.o
+ 
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c parse/lists.c -o parse/lists.o
+ 
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c parse/grammar.c -o parse/grammar.o
+ 
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/env_init.c -o exec/env_init.o
+ 
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/execve.c -o exec/execve.o
+ 
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/expantion.c -o exec/expantion.o
+cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/io_redir.c -o exec/io_redir.o
+ 
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_cd.c -o exec/my_cd.o
  
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_echo.c -o exec/my_echo.o
+ 
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_env.c -o exec/my_env.o
  
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_exit.c -o exec/my_exit.o
  
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_export.c -o exec/my_export.o
+ 
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_pwd.c -o exec/my_pwd.o
  
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/my_unset.c -o exec/my_unset.o
  
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/pipe.c -o exec/pipe.o
+ 
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/sig_handle.c -o exec/sig_handle.o
  
 cc  -Wall -Wextra -Werror  "-I/opt/homebrew/opt/readline/include" -c exec/utils.c -o exec/utils.o
 make -C libft
+ 
 cc -Wall -Wextra -Werror  "-L/opt/homebrew/opt/readline/lib" ./libft/libft.a -lreadline ./main.o ./parse/minishell.o ./parse/parser.o ./parse/lexer.o ./parse/lists.o ./parse/grammar.o ./exec/env_init.o ./exec/execve.o ./exec/expantion.o ./exec/io_redir.o ./exec/my_cd.o ./exec/my_echo.o ./exec/my_env.o ./exec/my_exit.o ./exec/my_export.o ./exec/my_pwd.o ./exec/my_unset.o ./exec/pipe.o ./exec/sig_handle.o ./exec/utils.o -o minishell && clear
 echo "Done"
 make: Leaving directory `/Users/ilahyani/minishell'

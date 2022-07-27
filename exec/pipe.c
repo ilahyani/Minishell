@@ -6,13 +6,14 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 14:43:56 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:04:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //TODO: redir priority - sleep test
+//TODO: re-parse and re-factor
 
 char    **pipe_heredoc(char *data, t_env *lst_env)
 {
