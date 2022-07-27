@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/26 22:14:46 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/27 16:29:55 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	double_quote(t_token **tokens, char *line, int i)
 	s = i;
 	while (line[i] && line[i] != '\"')
 	{
-		if (line[i] == '$')
+		if (line[i] == '$' && line[i+1] && line[i+1] != '\"')
 		{
 			if (i > s)
 			{
