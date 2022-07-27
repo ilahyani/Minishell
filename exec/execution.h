@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 15:54:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 00:09:48 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ char	*strjoin_plus(char *s1, char *s2, char *s3);
 int		redir_io(t_node *cmd, t_env *lst_env);
 void    o_redir(t_node *cmd, t_env *lst_env, int append);
 void    i_redir(t_node *cmd, t_env *lst_env);
-void    ft_heredoc(t_node *cmd, t_env *lst_env);
+void    ft_heredoc(t_node *node, t_env *lst_env);
 char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
-int		ft_pipe(char *line, t_env *lst_env);
+int		ft_pipe(t_node *node, t_env *lst_env);
 void    print_fd(t_env *lst_env, char *arg, int fd);
 int 	multi_redic_check(t_node *cmd);
 void    fd_reset(int fd[2]);

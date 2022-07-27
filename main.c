@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 15:54:28 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:57:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,31 @@ void    ft_readline(t_env *lst_env)
     char    *line;
     t_node  *cmd;
 
-    while (1)
+    rl_catch_signals = 0;
+    while (42)
     {
-        line = readline("🐌🐌🐌 ~> ");
+        line = readline("🐌🐌🐌 ~ ");
         if (!line)
-        {
-            printf("\b   \b\bexit\n");
-            g_exit = 0;
-            exit(g_exit);
-        }
+            break;
         if (!ft_strcmp(line, ""))
            continue ;
         cmd = parser(line, lst_env);
-        if (cmd){
-        // if (find_char(cmd, PIPE))
-        //     g_exit = ft_pipe(line, lst_env);
-        if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR) 
-            || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
-            g_exit = redir_io(cmd, lst_env);
-        else
-            check_cmd(cmd->cmd, lst_env);    
+        if (cmd)
+        {
+            if (find_char_2(cmd, PIPE))
+                g_exit = ft_pipe(cmd, lst_env);
+            else if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR) || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
+                g_exit = redir_io(cmd, lst_env);
+            else
+                check_cmd(cmd->cmd, lst_env);    
         }
         if (ft_strlen(line) > 0)
 			add_history(line);
     }
     free(line);
+    g_exit = 0;
     printf("\b   \b\bexit\n");
+    exit(g_exit);
 }
 
 int main(int ac, char **av, char **env)

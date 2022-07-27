@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 14:56:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 00:09:43 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int multi_redic_check(t_node *cmd)
     if (!cmd)
         return (-1);
     i = 0;
-    while (cmd)
+    while (cmd && cmd->type != PIPE)
     {
         if (cmd->type == OUT_REDIR || cmd->type == IN_REDIR 
         || cmd->type == RE_ADD || cmd->type == HERE_DOC)
@@ -73,7 +73,7 @@ void    get_data(t_node *cmd, t_redir *data, t_env *lst_env)
         data->cmd[i] = NULL;
         cmd = cmd->next;
     }
-    while (cmd)
+    while (cmd && cmd->type != PIPE)
     {
         if (cmd->type == OUT_REDIR)
         {
@@ -201,51 +201,73 @@ char    *check_file(t_node *node)
     else
         return (node->cmd[0]);
 }
-
-void    ft_heredoc(t_node *cmd, t_env *lst_env)
+//use tmpfile instead;
+void    ft_heredoc(t_node *node, t_env *lst_env)
 {
     char    *line;
-    char    *delmtr;
-    pid_t   c_pid;
-    int     fd[2];
+    int     tmpfd;
+    int     s_in;
+    // char    *delmtr;
+    // pid_t   c_pid;
+    // int     fd[2];
 
-    delmtr = check_file(cmd);
-    c_pid = fork();
-    if (c_pid == -1)
+    s_in = dup(0);
+    tmpfd = open("tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
+    while(1)
     {
-        ft_putstr_fd("fork error\n", 2);
-        g_exit = 1;
-        return ;
+        line = readline("> ");
+        if (!line || !ft_strcmp(line, check_file(node)))
+            break ;
+        if (line[0] == '$')
+            print_fd(lst_env, line, tmpfd);
+        else
+            ft_putendl_fd(line, tmpfd);
     }
-    else if (c_pid == 0)
-    {
-        if (pipe(fd) == -1)
-        {
-            g_exit = 1;
-            exit(g_exit);
-        }
-        while(1)
-        {
-            line = readline("> ");
-            if (!line || !ft_strcmp(line, delmtr))
-            {
-                free(line);
-                break;
-            }
-            if (line[0] == '$')
-                print_fd(lst_env, line, fd[1]);
-            else
-                ft_putendl_fd(line, fd[1]);
-        }
-        dup2(fd[0], STDIN_FILENO);
-        close(fd[1]);
-        close(fd[0]);
-        if (cmd->type == WORD)
-            check_cmd(cmd->cmd, lst_env);
-        g_exit = 0;
-        exit(0);
-    }
-    wait(NULL); 
+    free(line);
+    close(tmpfd);
+    tmpfd = open("tmpfile", O_RDONLY);
+    dup2(tmpfd, STDIN_FILENO);
+    close(tmpfd);
+    check_cmd(node->cmd, lst_env);
+    unlink("tmpfile");
+    dup2(s_in, STDIN_FILENO);
+    close(s_in);
+    // delmtr = check_file(cmd);
+    // c_pid = fork();
+    // if (c_pid == -1)
+    // {
+    //     ft_putstr_fd("fork error\n", 2);
+    //     g_exit = 1;
+    //     return ;
+    // }
+    // else if (c_pid == 0)
+    // {
+    //     if (pipe(fd) == -1)
+    //     {
+    //         g_exit = 1;
+    //         exit(g_exit);
+    //     }
+    //     while(1)
+    //     {
+    //         line = readline("> ");
+    //         if (!line || !ft_strcmp(line, delmtr))
+    //         {
+    //             free(line);
+    //             break;
+    //         }
+    //         if (line[0] == '$')
+    //             print_fd(lst_env, line, fd[1]);
+    //         else
+    //             ft_putendl_fd(line, fd[1]);
+    //     }
+    //     dup2(fd[0], STDIN_FILENO);
+    //     close(fd[1]);
+    //     close(fd[0]);
+    //     if (cmd->type == WORD)
+    //         check_cmd(cmd->cmd, lst_env);
+    //     exit(0);
+    // }
+    // wait(NULL);
 }
 
 void    i_redir(t_node *cmd, t_env *lst_env)
@@ -275,7 +297,6 @@ void    i_redir(t_node *cmd, t_env *lst_env)
         close(redirect_fd);
         if (cmd->type == WORD)
             check_cmd(cmd->cmd, lst_env);
-        g_exit = 0;
         exit(0);
     }
     close(redirect_fd);
@@ -306,9 +327,8 @@ void    o_redir(t_node *cmd, t_env *lst_env, int append)
         close(redirect_fd);
         if (cmd->type == WORD)
             check_cmd(cmd->cmd, lst_env);
-        g_exit = 0;
         exit(0);
     }
-    close(redirect_fd);
     wait(NULL);
+    close(redirect_fd);
 }
