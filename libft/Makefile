@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+         #
+#    By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/18 19:14:43 by ilahyani          #+#    #+#              #
-#    Updated: 2022/06/26 12:34:44 by ilahyani         ###   ########.fr        #
+#    Updated: 2022/07/26 22:24:29 by mjlem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,25 +60,25 @@ OBJS		= 	$(SRCS:.c=.o)
 
 NAME		= 	libft.a
 
-CC 			=	/usr/bin/gcc
+CC 			=	cc
 
 CFLAGS		= 	-Wall -Wextra -Werror
 
 RM			= 	/bin/rm -f
 
 $(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 
 all:		$(NAME)
 
 %.o: %.c $(HDR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-			$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean:		clean
-			$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:			fclean all

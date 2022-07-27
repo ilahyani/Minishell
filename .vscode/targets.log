@@ -1,0 +1,717 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Tue Jul 26 23:10:43 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# makefile (from `Makefile', line 15)
+OBJ = $(SRC:%.c=%.o)
+# makefile (from `Makefile', line 13)
+SRC = ./parse/minishell.c ./parse/parser.c ./parse/lexer.c ./parse/lists.c ./parse/grammar.c ./exec/env_init.c ./exec/execve.c ./exec/expantion.c ./exec/io_redir.c ./exec/main.c ./exec/my_cd.c ./exec/my_echo.c ./exec/my_env.c ./exec/my_exit.c ./exec/my_export.c ./exec/my_pwd.c ./exec/my_unset.c ./exec/pipe.c ./exec/sig_handle.c ./exec/utils.c
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from `Makefile', line 8)
+CPPFLAGS = "-I/Users/$(USER)/.brew/opt/readline/include"
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/mjlem/Desktop/test
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 11)
+CFLAGS = -Wall -Wextra -Werror 
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd7m00339x/T/vscode-ipc-92140dd6-b33a-4523-82e1-d860164bb58f.sock
+# environment
+VSCODE_CWD = /
+# environment
+PATH = /Users/mjlem/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
+LaunchInstanceID = 001E06D4-31A2-410F-8B7E-366BAC1056BE
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# makefile (from `Makefile', line 5)
+LDFLAGS = "-L/Users/$(USER)/.brew/opt/readline/lib"
+# makefile (from `Makefile', line 17)
+LIB = ./libft/libft.a
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.4Z5qTmjb0Q/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/mjlem/Desktop/test
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/mjlem
+# default
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/mjlem/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+# environment
+LOGNAME = mjlem
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/mjlem/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 3)
+CC = cc 
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = mjlem
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 1)
+NAME = minishell
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cd7m00339x/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/mjlem/Library/Application Support/Code/1.67.0-main.sock
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x18D3D:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a8
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+VSCODE_PID = 2726
+# variable set hash-table stats:
+# Load=75/1024=7%, Rehash=0, Collisions=3/106=3%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777225, inode 803531): 11 files, no impossibilities.
+# exec (device 16777225, inode 818920): 32 files, no impossibilities so far.
+# parse (device 16777225, inode 803595): 12 files, no impossibilities so far.
+
+# 55 files, no impossibilities in 3 directories.
+
+# Implicit Rules
+
+%.o: %.c
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+exec/expantion.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/execve.o: exec/execve.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/execve'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/my_cd.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/utils.o: exec/utils.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/utils'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+parse/parser.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 22:22:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parse/lists.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+clean_lib:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 32):
+	@make clean -C libft
+	
+
+all: minishell
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/my_env.o: exec/my_env.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_env'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/my_echo.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/my_exit.o: exec/my_exit.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_exit'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 22:26:29
+ 
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parse/grammar.o: parse/grammar.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse/grammar'
+#  Last modified 2022-07-26 22:26:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/sig_handle.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+exec/my_export.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parse/lexer.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 22:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/io_redir.o: exec/io_redir.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/io_redir'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+exec/my_pwd.o: exec/my_pwd.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_pwd'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/execve.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/env_init.o: exec/env_init.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/env_init'
+#  Last modified 2022-07-26 22:26:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/my_unset.o: exec/my_unset.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_unset'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+minishell: parse/minishell.o parse/parser.o parse/lexer.o parse/lists.o parse/grammar.o exec/env_init.o exec/execve.o exec/expantion.o exec/io_redir.o exec/main.o exec/my_cd.o exec/my_echo.o exec/my_env.o exec/my_exit.o exec/my_export.o exec/my_pwd.o exec/my_unset.o exec/pipe.o exec/sig_handle.o exec/utils.o libft/libft.a
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-26 22:26:34
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 25):
+	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME) && clear
+	@echo "Done"
+	
+
+libft/libft.a:
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-26 22:26:33
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 22):
+	@make -C libft
+	
+
+fclean: clean fclean_lib
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 42):
+	@-rm $(NAME)
+	
+
+parse/minishell.o: parse/minishell.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse/minishell'
+#  Last modified 2022-07-26 22:26:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+exec/pipe.o: exec/pipe.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/pipe'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/my_env.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+exec/my_exit.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/main.o: exec/main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/main'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+parse/grammar.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+re: fclean all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+exec/io_redir.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/expantion.o: exec/expantion.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/expantion'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+clean: clean_lib
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 38):
+	@-rm ./parse/*.o
+	@-rm ./exec/*.o
+	
+
+exec/my_cd.o: exec/my_cd.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_cd'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/my_pwd.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parse/parser.o: parse/parser.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse/parser'
+#  Last modified 2022-07-26 22:26:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+ 
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+parse/lists.o: parse/lists.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse/lists'
+#  Last modified 2022-07-26 22:26:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/env_init.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+exec/my_unset.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parse/minishell.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+fclean_lib:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 35):
+	@make fclean -C libft
+	
+
+# Not a target:
+exec/pipe.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 16:14:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+exec/my_echo.o: exec/my_echo.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_echo'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+exec/sig_handle.o: exec/sig_handle.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/sig_handle'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+exec/my_export.o: exec/my_export.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `exec/my_export'
+#  Last modified 2022-07-26 22:26:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# Not a target:
+exec/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 22:13:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parse/lexer.o: parse/lexer.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse/lexer'
+#  Last modified 2022-07-26 22:26:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 29):
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	
+
+# files hash-table stats:
+# Load=51/1024=5%, Rehash=0, Collisions=0/151=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Tue Jul 26 23:10:43 2022
+
+ 

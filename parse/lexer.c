@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 19:52:23 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/26 22:14:46 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ int	reserved_char(char c)
 {
 	if (c == '`' || c == '$' || c == '&' || c == '(' || c == ')' || c == ';'
 		|| c == '!' || c == '\'' || c == '\"' || c == '>' || c == '<'
-		|| c == ' ' || c == '\t'|| c == '|')
+		|| c == ' ' || c == '\t'|| c == '|'|| c == '\\')
 		return (0);
 	return (1);
 }
 
+int	special_char(char c)
+{
+	if (c == '`' || c == '#' || c == '&' || c == '('
+		|| c == ')' || c == ';' || c == '!' || c == '\\')
+		return (1);
+	return (0);
+}
 int	var_delimiter(char c)
 {
 	if (!(c >= '0' && c <= '9') && !(c >= 'A' && c <= 'Z')
@@ -140,13 +147,6 @@ int	space(t_token **tokens, char *line, int i)
 	return (i);
 }
 
-int	special_char(char c)
-{
-	if (c == '`' || c == '#' || c == '&' || c == '('
-		|| c == ')' || c == ';' || c == '!' || c == '\\')
-		return (1);
-	return (0);
-}
 
 t_token	*lexer(char *line)
 {

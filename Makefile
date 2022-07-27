@@ -2,11 +2,11 @@ NAME = minishell
 
 CC = cc 
 
-# LDFLAGS="-L/Users/$(USER)/.brew/opt/readline/lib"
-LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+LDFLAGS="-L/Users/$(USER)/.brew/opt/readline/lib"
+# LDFLAGS="-L/opt/homebrew/opt/readline/lib"
 
-# CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
-CPPFLAGS="-I/opt/homebrew/opt/readline/include"
+CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
+# CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
 CFLAGS = -Wall -Wextra -Werror 
 
@@ -23,6 +23,10 @@ $(LIB):
 
 $(NAME): $(OBJ) $(LIB)
 	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME) && clear
+	@echo "Done"
+
+%.o: %.c $(HDR)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean_lib:
 	@make clean -C libft

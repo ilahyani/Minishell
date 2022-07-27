@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/26 05:59:06 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:13:10 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
         if (!ft_strcmp(line, ""))
            continue ;
         cmd = parser(line, lst_env);
-        if (!cmd)
-            continue; //error in line
+        if (cmd){
         // if (find_char(data[0], '='))
         //     expand = check_expantion(data, lst_env, expand); //work with address
         // if (find_char(cmd, PIPE))
@@ -64,7 +63,8 @@ void    ft_readline(t_env *lst_env, t_env *expand)
             || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
             g_exit = redir_io(cmd, lst_env);
         else
-            check_cmd(cmd->cmd, lst_env, expand);
+            check_cmd(cmd->cmd, lst_env, expand);    
+        }
         if (ft_strlen(line) > 0)
 			add_history(line);
     }

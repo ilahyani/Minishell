@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 21:20:32 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/27 14:15:53 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,40 @@ int	heredoc_here(int type)
 		return (1);
 }
 
+char	*expand_exit_code(char *arg)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	char	*tmp2;
+	int		l;
+
+	i = 0;
+	j = 1;
+	l = 0;
+	tmp = malloc(ft_strlen(arg));
+	while (arg[j])
+	{
+		if (j == 1)
+		{
+			tmp2 = ft_itoa(g_exit);
+			while (tmp2[i])
+			{
+				tmp[i] = tmp2[l];
+				i++;
+				l++;
+			}
+			j++;
+		}
+		tmp[i] = arg[j];
+		j++;
+		i++;
+	}
+	tmp[i] = '\0';
+	free(arg);
+	return (tmp);
+}
+
 t_token *expand_var(t_token *tokens, t_env *list_env)
 {
 
@@ -78,20 +112,25 @@ t_token *expand_var(t_token *tokens, t_env *list_env)
 	{
 		if (heredoc_here(mv->type) && mv->type == EXPAND)
 		{
-			while (tmp)
-			{
-				if (!ft_strcmp(mv->arg+1, tmp->var))
+			if (mv->arg[1] == '?')
+				mv->arg = expand_exit_code(mv->arg);
+			else
+			{	
+				while (tmp)
+				{
+					if (!ft_strcmp(mv->arg+1, tmp->var))
+					{
+						free(mv->arg);
+						mv->arg = ft_strdup(tmp->value);
+						break ;
+					}
+					tmp = tmp->next;
+				}
+				if (!tmp)
 				{
 					free(mv->arg);
-					mv->arg = ft_strdup(tmp->value);
-					break ;
+					mv->arg = ft_strdup("");
 				}
-				tmp = tmp->next;
-			}
-			if (!tmp)
-			{
-				free(mv->arg);
-				mv->arg = ft_strdup("");
 			}
 			tmp = list_env;
 		}
@@ -240,22 +279,40 @@ t_node	*parse(t_token **tokens)
 	return (line);
 }
 
-t_node	*move_node(t_node *node, t_node *head)
+t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 {
 	t_node	*tmp;
 	t_node	*tmp2;
+	t_node	*tmp3;
 
 	tmp = head;
-	if (node != head)
+	tmp3 = (*origin);
+	if ((*origin)->type != WORD)
+	{
+		(*origin)->next = node->next;
+		node->next = (*origin);
+		(*origin) = node;
+		return (head);
+	}
+	else if (node != head && head->type == WORD)
 	{
 		while (tmp && tmp->next && tmp->next->type == WORD)
 			tmp = tmp->next;
 		tmp2 = tmp;
-		while (tmp2->next != node)
+		while (tmp2 && tmp2->next != node)
 			tmp2 = tmp2->next;
 		tmp2->next = node->next;
 		node->next = tmp->next;
 		tmp->next = node;	
+	}
+	else if (head->type != WORD)
+	{
+		while (tmp3->next != head)
+			tmp3 = tmp3->next;
+		tmp3->next = node;
+		head->next = node->next;
+		node->next = head;
+		return (node);
 	}
 	return (head);
 }
@@ -340,7 +397,7 @@ t_node	*adjuste_list(t_node *list)
 		{
 			if (tmp->type == WORD)
 			{
-				tmp2 = move_node(tmp, tmp2);
+				tmp2 = move_node(tmp, tmp2, &list);
 			}
 			tmp = tmp->next;
 		}
@@ -375,10 +432,8 @@ t_node	*parser(char *line, t_env *lst_env)
 		// print_list2(list);
 		list = adjuste_list(list);
 		// printf("------------------------\n");
-		// print_list2(list);
+		print_list2(list);
 		// printf("------------------------\n");
 	}
 	return (list);
 }
-
-/*$? && $??*/
