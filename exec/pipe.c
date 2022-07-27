@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 23:06:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:43:56 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char    **pipe_heredoc(char *data, t_env *lst_env)
     return (ft_split(data_tab[0], ' '));
 }
 
-int ft_pipe(char *line, t_env *lst_env, t_env *expand)
+int ft_pipe(char *line, t_env *lst_env)
 {
     char    **pipes;
     char    **cmd=NULL;
@@ -80,11 +80,11 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
                 {
                     dup2(s_in, STDIN_FILENO);
                     close(s_in);
-                    // cmd = pipe_heredoc(pipes[i], lst_env, expand);
+                    // cmd = pipe_heredoc(pipes[i], lst_env,);
                     if (i != cmd_num - 1)
                         dup2(fd[1], STDOUT_FILENO);
                     close(fd[1]);
-                    check_cmd(cmd, lst_env, expand);
+                    check_cmd(cmd, lst_env);
                     unlink("tmpfile");
                     free_tab(cmd);
                 }
@@ -102,7 +102,7 @@ int ft_pipe(char *line, t_env *lst_env, t_env *expand)
                     close(fd[0]);
                 }
                 cmd = ft_split(pipes[i], ' ');
-                check_cmd(cmd, lst_env, expand);
+                check_cmd(cmd, lst_env);
                 free_tab(cmd);
             }
             g_exit = 0;

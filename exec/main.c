@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/26 22:13:10 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/27 14:45:00 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 // > if put in the beginning makes the command not run and no err is displayed
 //TODO: shell inception sig handling -> sigaction? let's go
 
-void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
+void    check_cmd(char **cmd, t_env *lst_env)
 {
     if (!ft_strcmp(cmd[0], "pwd"))
         g_exit = my_pwd();
     else if (!ft_strcmp(cmd[0], "cd"))
         g_exit = my_cd(lst_env, cmd);
     else if (!ft_strcmp(cmd[0], "echo"))
-        g_exit = my_echo(cmd, lst_env, expand);
+        g_exit = my_echo(cmd, lst_env);
     else if (!ft_strcmp(cmd[0], "export"))
         g_exit = my_export(cmd, lst_env);
     else if (!ft_strcmp(cmd[0], "env"))
@@ -36,7 +36,7 @@ void    check_cmd(char **cmd, t_env *lst_env, t_env *expand)
         // cmd = cmd->next;
 }
 
-void    ft_readline(t_env *lst_env, t_env *expand)
+void    ft_readline(t_env *lst_env)
 {
     // char    **data;
     char    *line;
@@ -63,7 +63,7 @@ void    ft_readline(t_env *lst_env, t_env *expand)
             || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
             g_exit = redir_io(cmd, lst_env);
         else
-            check_cmd(cmd->cmd, lst_env, expand);    
+            check_cmd(cmd->cmd, lst_env);    
         }
         if (ft_strlen(line) > 0)
 			add_history(line);
@@ -75,15 +75,13 @@ void    ft_readline(t_env *lst_env, t_env *expand)
 int main(int ac, char **av, char **env)
 {
     t_env   *lst_env;
-    t_env   *expand;
 
     (void)ac;
     (void)av;
     lst_env = NULL;
-    expand = NULL;
     signal(SIGINT, handler);
     signal(SIGQUIT, SIG_IGN);
     env_init(env, &lst_env);
-    ft_readline(lst_env, expand);
+    ft_readline(lst_env);
     return (g_exit);
 }

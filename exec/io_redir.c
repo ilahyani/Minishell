@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/26 23:13:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:44:35 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
         close(data.out_red);
     }
     if (data.cmd)
-        check_cmd(data.cmd, lst_env, NULL);
+        check_cmd(data.cmd, lst_env);
     //free data.cmd
     return (fd_reset(s_fd), 0);
 }
@@ -242,7 +242,7 @@ void    ft_heredoc(t_node *cmd, t_env *lst_env)
         close(fd[1]);
         close(fd[0]);
         if (cmd->type == WORD)
-            check_cmd(cmd->cmd, lst_env, NULL);
+            check_cmd(cmd->cmd, lst_env);
         g_exit = 0;
         exit(0);
     }
@@ -275,7 +275,7 @@ void    i_redir(t_node *cmd, t_env *lst_env)
         dup2(redirect_fd, STDIN_FILENO);
         close(redirect_fd);
         if (cmd->type == WORD)
-            check_cmd(cmd->cmd, lst_env, NULL);
+            check_cmd(cmd->cmd, lst_env);
         g_exit = 0;
         exit(0);
     }
@@ -306,7 +306,7 @@ void    o_redir(t_node *cmd, t_env *lst_env, int append)
         dup2(redirect_fd, STDOUT_FILENO);
         close(redirect_fd);
         if (cmd->type == WORD)
-            check_cmd(cmd->cmd, lst_env, NULL);
+            check_cmd(cmd->cmd, lst_env);
         g_exit = 0;
         exit(0);
     }

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/26 23:13:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:42:04 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_redir
 // }	t_redir;
 
 //group those based of their files
-int     my_echo(char **data, t_env *lst_env, t_env *expand);
+int     my_echo(char **data, t_env *lst_env);
 int     my_cd(t_env *lst_env, char **data);
 int     my_pwd(void);
 int     my_export(char **data, t_env *env);
@@ -78,7 +78,7 @@ t_env	*exprt_lstnew(char *buff);
 int		ft_exec(char **data, t_env *lst_env);
 char    *ft_getenv(char *env, t_env *env_list);
 char    *ft_strldup(char *src, size_t len);
-void    check_cmd(char **cmd, t_env *lst_env, t_env *expand);
+void    check_cmd(char **cmd, t_env *lst_env);
 int		check_arg(char **args);
 t_env   *check_expantion(char **args, t_env *lst_env, t_env *expantion);
 void    handler(int signum);
@@ -97,10 +97,9 @@ int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
-int		ft_pipe(char *line, t_env *lst_env, t_env *expand);
+int		ft_pipe(char *line, t_env *lst_env);
 void    print_fd(t_env *lst_env, char *arg, int fd);
 int 	multi_redic_check(t_node *cmd);
-void    get_data(t_node *cmd, t_redir *data);
 void    fd_reset(int fd[2]);
 int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
 void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);

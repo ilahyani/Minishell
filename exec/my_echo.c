@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:02 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:54:11 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/27 14:43:15 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,39 +27,31 @@ int flag_check(char *arg)
     return (0);
 }
 
-void    print_arg(t_env *expand, t_env *lst_env, char *arg)
+void    print_arg(t_env *lst_env, char *arg)
 {
     t_env   *tmp;
 
-    tmp = expand;
+    tmp = lst_env;
     while (tmp && ft_strcmp(tmp->var, arg))
         tmp = tmp->next;
     if (tmp)
         printf("%s", tmp->value);
-    else
-    {
-        tmp = lst_env;
-        while (tmp && ft_strcmp(tmp->var, arg))
-            tmp = tmp->next;
-        if (tmp)
-            printf("%s", tmp->value);
-    }
 }
 
-void    ft_print(char *str, t_env *lst_env, t_env *expand)
+void    ft_print(char *str, t_env *lst_env)
 {
     if (str[0] == '$')
     {
         if (!ft_strcmp(str, "$?"))
             printf("%d", g_exit);
         else
-            print_arg(expand, lst_env, str + 1);
+            print_arg(lst_env, str + 1);
     }
     else
         printf("%s", str);
 }
 
-int my_echo(char **data, t_env *lst_env, t_env *expand)
+int my_echo(char **data, t_env *lst_env)
 {
     int i;
     int args;
@@ -75,7 +67,7 @@ int my_echo(char **data, t_env *lst_env, t_env *expand)
         new_line = 1;
     while (data[i])
     {
-        ft_print(data[i], lst_env, expand);
+        ft_print(data[i], lst_env);
         if (i++ != args - 1)
             printf(" ");
     }
