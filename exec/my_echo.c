@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:02 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 15:15:40 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:54:24 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int flag_check(char *arg)
     return (0);
 }
 
-int my_echo(char **data, t_env *lst_env)
+int my_echo(char **data)
 {
     int i;
     int args;
@@ -43,8 +43,7 @@ int my_echo(char **data, t_env *lst_env)
         new_line = 1;
     while (data[i])
     {
-        printf("%s", str);
-        ft_print(data[i], lst_env);
+        printf("%s", data[i]);
         if (i++ != args - 1)
             printf(" ");
     }

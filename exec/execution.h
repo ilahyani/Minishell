@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 14:56:52 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:54:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_redir
 }	t_redir;
 
 //group those based of their files
-int     my_echo(char **data, t_env *lst_env);
+int     my_echo(char **data);
 int     my_cd(t_env *lst_env, char **data);
 int     my_pwd(void);
 int     my_export(char **data, t_env *env);
