@@ -93,6 +93,12 @@ char	*strjoin_plus(char *s1, char *s2, char *s3)
 
 	i = 0;
 	j = 0;
+	if (!s1)
+		s1 = ft_strdup("");
+	if (!s2)
+		s2 = ft_strdup("");
+	if (!s3)
+		s3 = ft_strdup("");
 	str = (char *) malloc (ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1);
 	while (s1[i])
 		str[j++] = s1[i++];
