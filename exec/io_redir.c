@@ -51,6 +51,8 @@ int multi_redic_check(t_node *cmd)
 void    data_init(t_redir *data)
 {
     data->cmd = NULL;
+    data->in_red = -11;
+    data->out_red = -11;
     data->her_doc = NULL;
 }
 
@@ -163,12 +165,12 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
     get_data(cmd, &data, lst_env);
     if (data.in_red == -1 || data.out_red == -1)
         return (fd_reset(s_fd), 1);
-    if (data.in_red != -1)
+    if (data.in_red != -11)
     {
         dup2(data.in_red, STDIN_FILENO);
         close(data.in_red);
     }
-    if (data.out_red != -1)
+    if (data.out_red != -11)
     {
         dup2(data.out_red, STDOUT_FILENO);
         close(data.out_red);
