@@ -6,36 +6,11 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 02:00:24 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 02:06:14 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-//TODO: re-factor
-
-// void    pipe_heredoc(char *delmtr, t_env *lst_env)
-// {
-//     char    *rdline;
-//     int     tmpfd;
-    
-//     tmpfd = open("tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
-//     while(1)
-//     {
-//         rdline = readline("> ");
-//         if (!rdline || !ft_strcmp(rdline, delmtr))
-//             break ;
-//         if (rdline[0] == '$')
-//             print_fd(lst_env, rdline, tmpfd);
-//         else
-//             ft_putendl_fd(rdline, tmpfd);
-//     }
-//     free(rdline);
-//     close(tmpfd);
-//     tmpfd = open("tmpfile", O_RDONLY);
-//     dup2(tmpfd, STDIN_FILENO);
-//     close(tmpfd);
-// }
 
 int multi_pipe_check(t_node *cmd)
 {
@@ -52,23 +27,6 @@ int multi_pipe_check(t_node *cmd)
     }
     return (i);
 }
-
-// void	print_list3(t_node *tokens)
-// {
-// 	t_node	*tmp;
-// 	int		i;
-
-// 	tmp = tokens;
-// 	i = 0;
-// 	while (tmp)
-// 	{
-// 		i = 0;
-// 		while (tmp->cmd[i])
-// 			printf("|%s|", tmp->cmd[i++]);
-// 		printf("--%c\n", tmp->type);
-// 		tmp = tmp->next;
-// 	}
-// }
 
 int check_redir(t_node *node)
 {
