@@ -30,12 +30,21 @@ int multi_pipe_check(t_node *cmd)
 
 int check_redir(t_node *node)
 {
-    if (node && (node->type == HERE_DOC || node->type == IN_REDIR 
-        || node->type == OUT_REDIR || node->type == RE_ADD))
+    if (node->type == WORD)
+        node = node->next;
+    if (node && (node->type == HERE_DOC || node->type == IN_REDIR || node->type == OUT_REDIR || node->type == RE_ADD))
         return (1);
-    if (node->next && (node->next->type == HERE_DOC || node->next->type == IN_REDIR 
-        || node->next->type == OUT_REDIR || node->next->type == RE_ADD))
-        return (1);
+    return (0);
+}
+
+int check_heredoc(t_node *node)
+{
+    while (node && node->type != PIPE)
+    {
+        if (node->type == HERE_DOC)
+            return (1);
+        node = node->next;
+    }
     return (0);
 }
 
@@ -56,7 +65,7 @@ void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
     {
         close(fd[0]);
         close(fd[1]);
-        if ((node && node->type == HERE_DOC) || (node->next && node->next->type == HERE_DOC))
+        if (check_heredoc(node))
             dup2(s_in, STDIN_FILENO);
         redir_io(node, lst_env);
     }
@@ -73,14 +82,9 @@ void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 
 void    next_cmd(t_node **node)
 {
-    if (!(* node)->next)
-    {
-        *node = (* node)->next;
-        return ;
-    }
-    while (check_redir(* node))
-        *node = (* node)->next;
     (* node) = (* node)->next;
+    while (*node && check_redir(* node))
+        *node = (* node)->next;
     if (*node && (* node)->type == PIPE)
         *node = (* node)->next;
 }
@@ -93,13 +97,11 @@ void    s_in_reset(int s_in)
 
 int ft_pipe(t_node *node, t_env *lst_env)
 {
-    int     cmd_num;
     int     fd[2];
     pid_t   c_pid;
     int     s_in;
     
     s_in = dup(0);
-    cmd_num = multi_pipe_check(node) + 1;
     while (node)
     {
         if (pipe(fd) == -1)
@@ -109,12 +111,11 @@ int ft_pipe(t_node *node, t_env *lst_env)
             return(ft_putstr_fd("fork error\n", 2), 1);
         else if (c_pid == 0)
             exec_child(node, lst_env, fd, s_in);
-        wait(NULL);
+        wait(NULL); // wait only for the last cmd?
         dup2(fd[0], STDIN_FILENO);
         close(fd[0]);
         close(fd[1]);
         next_cmd(&node);
-        cmd_num--;
     }
     return (s_in_reset(s_in), 0);
 }
