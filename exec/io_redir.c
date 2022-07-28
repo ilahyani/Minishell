@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 02:03:01 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:32:55 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,11 @@ void    o_redir(t_node *cmd, t_env *lst_env, int append)
         redirect_fd = open(file, O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
     else
         redirect_fd = open(file, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
+    if (redirect_fd == -1)
+    {
+        err_print(file, "Is a directory");
+        return ;
+    }
     c_pid = fork();
     if (c_pid == -1)
     {

@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/27 16:33:21 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/28 17:30:11 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -438,3 +438,19 @@ t_node	*parser(char *line, t_env *lst_env)
 	return (list);
 }
 
+/*
+ls > $HOME/Desktop
+ls << t << t 
+cat<<t<Makefile 
+cat<<t<Makefile<<t
+
+
+ export 
+ export a=achraf
+ export
+ export a
+ export
+
+ env -i ./minishell 
+
+*/
