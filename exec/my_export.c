@@ -185,9 +185,9 @@ int check_var(char *buff, t_env *lst)
             return (1);
         else if (find_char(buff, '=') && !ft_strcmp(lst->var, ft_strldup(buff, find_char(buff, '='))))
             return (1);
-        else if (!ft_strcmp(lst->var, buff))
-            return (1);
     }
+    else if (!ft_strcmp(lst->var, buff))
+        return (1);
     return (0);
 }
 
@@ -224,6 +224,9 @@ int my_export(char **data, t_env *env)
         {
             if (check_error(data[i]))
                 return (err_print(data[i], "not a valid identifier"), 1); //stderr
+            if (data[i + 1])
+                while (data[i + 1] && !ft_strcmp(data[i], data[i + 1]))
+                    i++;
             lst_tmp = env;
             while (lst_tmp)
             {
