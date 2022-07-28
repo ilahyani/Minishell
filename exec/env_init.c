@@ -56,7 +56,7 @@ void	env_init(char **env, t_env **lst_env)
     int		i;
     char	**buff;
 
-	if (!env)
+	if (!*env)
 		return ;
     i = -1;
     while (env[++i])
