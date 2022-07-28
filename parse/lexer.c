@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/28 17:26:28 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/28 19:05:28 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,14 @@ int	dollar_sign(t_token **tokens, char *line, int i)
 
 	s = i;
 	i++;
-	while (line[i] && var_delimiter(line[i]))
-		i++;
-	add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
+	if (line[i])
+	{
+		while (line[i] && var_delimiter(line[i]))
+			i++;
+		add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));		
+	}
+	else
+		add_lst(tokens, lst_new(ft_substr(line,s, i - s), WORD));
 	return (i);
 }
 
@@ -94,7 +99,7 @@ int	double_quote(t_token **tokens, char *line, int i)
 	s = i;
 	while (line[i] && line[i] != '\"')
 	{
-		if (line[i] == '$' && line[i+1] && line[i+1] != '\"')
+		if (line[i] == '$')
 		{
 			if (i > s)
 			{
@@ -102,6 +107,8 @@ int	double_quote(t_token **tokens, char *line, int i)
 				s = i;
 			}
 			i++;
+			if (line[i] && line[i] == '\"')
+				break;
 			while (line[i] && var_delimiter(line[i]))
 				i++;
 			if (!line[i])
@@ -179,3 +186,10 @@ t_token	*lexer(char *line)
 		return (NULL);
 	return (tokens);
 }
+
+/* echo $
+echo $""
+echo "$"
+echo "$"""
+echo ""$""
+echo ""$ */
