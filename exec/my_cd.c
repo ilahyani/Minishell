@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 21:53:47 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:31:32 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int my_cd(t_env *lst_env, char **data)
     else
         path = data[1];
     update_env(lst_env, "OLDPWD", getcwd(cwd, sizeof(cwd)));
+    if (!getcwd(cwd, sizeof(cwd)))
+        update_env(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
     if (chdir(path) != 0)
         return (ft_putstr_fd("minishell: cd: No such file or directory\n", 2), 1);
     update_env(lst_env, "PWD", getcwd(cwd, sizeof(cwd)));

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 21:57:00 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:35:36 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	print_env(t_env *lst_env)
+{
+	while (lst_env)
+	{
+		printf("%s = %s\n", lst_env->var, lst_env->value);
+		lst_env = lst_env->next;
+	}
+	
+}
 
 int	ft_exec(char **data, t_env *lst_env)
 {

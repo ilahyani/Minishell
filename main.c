@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/27 19:57:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:36:01 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void    ft_readline(t_env *lst_env)
                 g_exit = ft_pipe(cmd, lst_env);
             else if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR) || find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
                 g_exit = redir_io(cmd, lst_env);
-            else
-                check_cmd(cmd->cmd, lst_env);    
+            else 
+                check_cmd(cmd->cmd, lst_env);
         }
         if (ft_strlen(line) > 0)
 			add_history(line);
