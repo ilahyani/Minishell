@@ -18,13 +18,13 @@ int	ft_exec(char **data, t_env *lst_env)
 	char	**env = NULL;
 
 	env = list_to_tab(lst_env);
-	if ((data[0][0] == '.' && data[0][1] == '/') || data[0][0] == '/')
+	if (data[0][0] == '.' || data[0][0] == '/')
 		create_process(data[0], data, env);
 	else
 	{
 		path = get_path(data[0], lst_env);
 		if (!path)
-			return (err_print(data[0], "No such file or directory"), 127);
+			return (err_print(data[0], "command not found"), 127);
 		else if (create_process(path, data, env))
 		{
 			ft_putstr_fd("minisell: ", 2);

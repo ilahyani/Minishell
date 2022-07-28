@@ -223,20 +223,26 @@ int my_export(char **data, t_env *env)
         while (data[++i])
         {
             if (check_error(data[i]))
-                return (err_print(data[i], "not a valid identifier"), 1); //stderr
-            lst_tmp = env;
-            while (lst_tmp)
+                return (err_print(data[i], "not a valid identifier"), 1);
+            if (data[i + 1])
+                while (data[i + 1] && !ft_strcmp(data[i], data[i + 1]))
+                    i++;
+            if (data[i])
             {
-                if (check_var(data[i], lst_tmp))
-                    break;
-                lst_tmp = lst_tmp->next;
+                lst_tmp = env;
+                while (lst_tmp)
+                {
+                    if (check_var(data[i], lst_tmp))
+                        break;
+                    lst_tmp = lst_tmp->next;
+                }
+                if (lst_tmp && !find_char(data[i], '='))
+                    continue ;
+                else if (lst_tmp)
+                    update_exp(data[i], &lst_tmp);
+                else
+                    env_lstadd_back(&env, exprt_lstnew(data[i]));
             }
-            if (lst_tmp && !find_char(data[i], '='))
-                continue ;
-            else if (lst_tmp)
-                update_exp(data[i], &lst_tmp);
-            else
-                env_lstadd_back(&env, exprt_lstnew(data[i]));
         }
     }
     // free(sorted);
