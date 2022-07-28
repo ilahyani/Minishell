@@ -232,7 +232,8 @@ void    ft_heredoc(t_node *node, t_env *lst_env)
     tmpfd = open("tmpfile", O_RDONLY);
     dup2(tmpfd, STDIN_FILENO);
     close(tmpfd);
-    check_cmd(node->cmd, lst_env);
+    if (node->type == WORD)
+        check_cmd(node->cmd, lst_env);
     unlink("tmpfile");
     dup2(s_in, STDIN_FILENO);
     close(s_in);
