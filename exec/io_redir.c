@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 00:09:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/28 02:03:01 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int multi_redic_check(t_node *cmd)
 void    data_init(t_redir *data)
 {
     data->cmd = NULL;
-    data->in_red = -1;
-    data->out_red = -1;
     data->her_doc = NULL;
 }
 
@@ -82,6 +80,8 @@ void    get_data(t_node *cmd, t_redir *data, t_env *lst_env)
             data->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
             if (data->out_red == -1)
             {
+                if (fstat(data->in_red, &buf) == -1)
+                    close(data->in_red);
                 err_print(cmd->cmd[0], "Error openning file");
                 g_exit = 1;
                 return ;
@@ -94,6 +94,8 @@ void    get_data(t_node *cmd, t_redir *data, t_env *lst_env)
             data->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
             if (data->out_red == -1)
             {
+                if (fstat(data->in_red, &buf) == -1)
+                    close(data->in_red);
                 err_print(cmd->cmd[0], "Error openning file");
                 g_exit = 1;
                 return ;
@@ -106,7 +108,10 @@ void    get_data(t_node *cmd, t_redir *data, t_env *lst_env)
             data->in_red = open(cmd->cmd[0], O_RDONLY, S_IRWXU);
             if (data->in_red == -1)
             {
+                if (fstat(data->out_red, &buf) == -1)
+                    close(data->out_red);
                 err_print(cmd->cmd[0], "No such file or directory");
+                g_exit = 1;
                 return ;
             }
         }
@@ -156,6 +161,8 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
     if (!cmd)
         return (fd_reset(s_fd), 1);
     get_data(cmd, &data, lst_env);
+    if (data.in_red == -1 || data.out_red == -1)
+        return (fd_reset(s_fd), 1);
     if (data.in_red != -1)
     {
         dup2(data.in_red, STDIN_FILENO);
@@ -201,15 +208,12 @@ char    *check_file(t_node *node)
     else
         return (node->cmd[0]);
 }
-//use tmpfile instead;
+
 void    ft_heredoc(t_node *node, t_env *lst_env)
 {
     char    *line;
     int     tmpfd;
     int     s_in;
-    // char    *delmtr;
-    // pid_t   c_pid;
-    // int     fd[2];
 
     s_in = dup(0);
     tmpfd = open("tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
@@ -232,42 +236,6 @@ void    ft_heredoc(t_node *node, t_env *lst_env)
     unlink("tmpfile");
     dup2(s_in, STDIN_FILENO);
     close(s_in);
-    // delmtr = check_file(cmd);
-    // c_pid = fork();
-    // if (c_pid == -1)
-    // {
-    //     ft_putstr_fd("fork error\n", 2);
-    //     g_exit = 1;
-    //     return ;
-    // }
-    // else if (c_pid == 0)
-    // {
-    //     if (pipe(fd) == -1)
-    //     {
-    //         g_exit = 1;
-    //         exit(g_exit);
-    //     }
-    //     while(1)
-    //     {
-    //         line = readline("> ");
-    //         if (!line || !ft_strcmp(line, delmtr))
-    //         {
-    //             free(line);
-    //             break;
-    //         }
-    //         if (line[0] == '$')
-    //             print_fd(lst_env, line, fd[1]);
-    //         else
-    //             ft_putendl_fd(line, fd[1]);
-    //     }
-    //     dup2(fd[0], STDIN_FILENO);
-    //     close(fd[1]);
-    //     close(fd[0]);
-    //     if (cmd->type == WORD)
-    //         check_cmd(cmd->cmd, lst_env);
-    //     exit(0);
-    // }
-    // wait(NULL);
 }
 
 void    i_redir(t_node *cmd, t_env *lst_env)
