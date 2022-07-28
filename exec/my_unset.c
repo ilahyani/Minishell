@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:20:18 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:54:54 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/28 04:47:15 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int my_unset(t_env *env, char **data)
             ft_putstr_fd("minishell: unset: ", 2);
             ft_putstr_fd(data[i], 2);
             ft_putstr_fd(": not a valid identifier\n", 2);
-            //err_print()
             return (1);
         }
         tmp = env;
