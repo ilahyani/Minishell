@@ -34,12 +34,14 @@ int my_cd(t_env *lst_env, char **data)
     cwd = NULL;
     if(sizeof_array(data) == 1 || !ft_strcmp(data[1], "~"))
     {
-        if (!(path = ft_getenv("HOME", lst_env)))
+        path = ft_getenv("HOME", lst_env);
+        if(!path)
             return (ft_putstr_fd("HOME not set\n", 2), 1);
     }
     else if (!ft_strcmp(data[1], "-"))
     {
-        if(!(path = ft_getenv("OLDPWD", lst_env)))
+        path = ft_getenv("OLDPWD", lst_env);
+        if(!path)
             return (ft_putstr_fd("OLDPWD not set\n", 2), 1);
         printf("%s\n", ft_getenv("OLDPWD", lst_env));
     }
