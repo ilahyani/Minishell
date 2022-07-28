@@ -30,6 +30,9 @@ int multi_pipe_check(t_node *cmd)
 
 int check_redir(t_node *node)
 {
+    if (node && (node->type == HERE_DOC || node->type == IN_REDIR 
+        || node->type == OUT_REDIR || node->type == RE_ADD))
+        return (1);
     if (node->next && (node->next->type == HERE_DOC || node->next->type == IN_REDIR 
         || node->next->type == OUT_REDIR || node->next->type == RE_ADD))
         return (1);
@@ -53,7 +56,7 @@ void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
     {
         close(fd[0]);
         close(fd[1]);
-        if (node->next->type == HERE_DOC)
+        if ((node && node->type == HERE_DOC) || (node->next && node->next->type == HERE_DOC))
             dup2(s_in, STDIN_FILENO);
         redir_io(node, lst_env);
     }
@@ -70,11 +73,16 @@ void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 
 void    next_cmd(t_node **node)
 {
-    while (check_redir(*node))
-        *node = (*node)->next;
-    (*node) = (*node)->next;
-    if (*node && (*node)->type == PIPE)
-        *node = (*node)->next;
+    if (!(* node)->next)
+    {
+        *node = (* node)->next;
+        return ;
+    }
+    while (check_redir(* node))
+        *node = (* node)->next;
+    (* node) = (* node)->next;
+    if (*node && (* node)->type == PIPE)
+        *node = (* node)->next;
 }
 
 void    s_in_reset(int s_in)
