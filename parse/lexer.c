@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/27 16:29:55 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/28 17:26:28 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int	double_quote(t_token **tokens, char *line, int i)
 				s = i;
 			}
 		}
-		i++;
+		if (line[i] != '$')
+			i++;
 	}
 	if (!line[i])
 		return (-1);
