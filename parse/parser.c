@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/28 19:08:42 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/30 18:34:11 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,7 @@ void	word(t_token **tokens, t_node **line)
 	{
 		tmp = ft_strjoin(tmp, (*tokens)->arg);
 		(*tokens) = (*tokens)->next;
-		if (!(*tokens) || (*tokens)->type == W_SPACE
-			|| (*tokens)->type == EXPAND)
+		if (!(*tokens) || (*tokens)->type == W_SPACE)
 		{
 			if ((*tokens) && (*tokens)->type == W_SPACE)
 				(*tokens) = (*tokens)->next;
@@ -439,17 +438,6 @@ t_node	*parser(char *line, t_env *lst_env)
 }
 
 /*
-ls << t << t 
-cat<<t<Makefile 
-cat<<t<Makefile<<t
 
-
- export 
- export a=achraf
- export
- export a
- export
-
- env -i ./minishell 
-
+export x=$HOME$HOME
 */

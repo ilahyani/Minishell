@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 13:35:36 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/30 18:33:30 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	create_process(char *path, char **data, char **env)
 	else if (c_pid == 0)
 	{
 		if (execve(path, data, env) == -1)
-			return (err_print(path, "Command not found"), 1);
+			return (1);
 	}
 	waitpid(-1, &status, 0);
 	g_exit = WEXITSTATUS(status);
