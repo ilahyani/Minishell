@@ -80,42 +80,18 @@ void    get_data(t_node *cmd, t_redir *data, t_env *lst_env)
             if (fstat(data->out_red, &buf) == -1)
                 close(data->out_red);
             data->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
-            if (data->out_red == -1)
-            {
-                if (fstat(data->in_red, &buf) == -1)
-                    close(data->in_red);
-                err_print(cmd->cmd[0], "Error openning file");
-                g_exit = 1;
-                return ;
-            }
         }
         else if (cmd->type == RE_ADD)
         {
             if (fstat(data->out_red, &buf) == -1)
                 close(data->out_red);
             data->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-            if (data->out_red == -1)
-            {
-                if (fstat(data->in_red, &buf) == -1)
-                    close(data->in_red);
-                err_print(cmd->cmd[0], "Error openning file");
-                g_exit = 1;
-                return ;
-            }
         }
         else if (cmd->type == IN_REDIR)
         {
             if (fstat(data->in_red, &buf) == -1)
                 close(data->in_red);
             data->in_red = open(cmd->cmd[0], O_RDONLY, S_IRWXU);
-            if (data->in_red == -1)
-            {
-                if (fstat(data->out_red, &buf) == -1)
-                    close(data->out_red);
-                err_print(cmd->cmd[0], "No such file or directory");
-                g_exit = 1;
-                return ;
-            }
         }
         else if (cmd->type == HERE_DOC)
         {
@@ -138,7 +114,8 @@ void    get_data(t_node *cmd, t_redir *data, t_env *lst_env)
             free(line);
             if (fstat(data->in_red, &buf) == -1)
                 close(data->in_red);
-            data->in_red = p_fd[0];
+            if (data->in_red != -1)
+                data->in_red = p_fd[0];
             close(p_fd[1]);
         }
         cmd = cmd->next;
@@ -157,6 +134,7 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
 {
     t_redir data;
     int     s_fd[2];
+    struct  stat buf;
 
     s_fd[1] = dup(1);
     s_fd[0] = dup(0);
@@ -164,7 +142,21 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
         return (fd_reset(s_fd), 1);
     get_data(cmd, &data, lst_env);
     if (data.in_red == -1 || data.out_red == -1)
+    {
+        if (data.in_red == -1)
+        {
+            if (fstat(data.out_red, &buf) == -1)
+                close(data.out_red);
+            err_print(cmd->cmd[0], "No such file or directory");
+        }
+        else if (data.out_red == -1)
+        {
+            if (fstat(data.in_red, &buf) == -1)
+                close(data.in_red);
+            err_print(cmd->cmd[0], "Error openning file");
+        }
         return (fd_reset(s_fd), 1);
+    }
     if (data.in_red != -11)
     {
         dup2(data.in_red, STDIN_FILENO);
@@ -177,7 +169,7 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
     }
     if (data.cmd)
         check_cmd(data.cmd, &lst_env);
-    //free data.cmd
+    free_tab(data.cmd);
     return (fd_reset(s_fd), 0);
 }
 
