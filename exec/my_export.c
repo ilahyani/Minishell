@@ -163,17 +163,16 @@ t_env	*exprt_lstnew(char *buff)
 
 int check_error(char *buff)
 {
-    char **tab = ft_split(buff, '=');
-
-    if (!ft_isalpha(tab[0][0]) && tab[0][0] != '_')
+    char **tab; 
+    
+    if (!ft_isalpha(buff[0]) && buff[0] != '_')
         return (1);
+    tab = ft_split(buff, '=');
+    if (!tab)
+        return (ft_putendl_fd("Unexpected error occured\n", 2), 0);
     if (find_char(tab[0], '+'))
         if (tab[0][ft_strlen(tab[0]) - 1] != '+')
             return (1);
-    // if (find_char(tab[0], '+') && !find_char(tab[0], '='))
-    //     return(1);
-    // if (find_char(tab[0], '+') && find_char(tab[0], '=') && tab[0][find_char(tab[0], '+') + 1] != '=')
-    //     return(1);
     free_tab(tab);
     return (0);
 }
@@ -216,13 +215,15 @@ int my_export(char **data, t_env *env)
     sorted = NULL;
     sorted = lst_copy(env);
     ft_sort(sorted);
-    if (sizeof_array(data) == 1 || data[1][0] == '#' || data[1][0] == '$')
+    if (sizeof_array(data) == 1)
         env_print(sorted);
     else
     {
         i = 0;
         while (data[++i])
         {
+            if (data[i][0] == '_' && (data[i][1] == '=' || data[i][1] == '+'))
+                return (0);
             if (check_error(data[i]))
                 return (err_print(data[i], "not a valid identifier"), 1); //stderr
             if (data[i + 1])
