@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 17:32:55 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/30 18:41:00 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int redir_io_pro_max(t_node *cmd, t_env *lst_env)
         close(data.out_red);
     }
     if (data.cmd)
-        check_cmd(data.cmd, lst_env);
+        check_cmd(data.cmd, &lst_env);
     //free data.cmd
     return (fd_reset(s_fd), 0);
 }
@@ -235,7 +235,7 @@ void    ft_heredoc(t_node *node, t_env *lst_env)
     dup2(tmpfd, STDIN_FILENO);
     close(tmpfd);
     if (node->type == WORD)
-        check_cmd(node->cmd, lst_env);
+        check_cmd(node->cmd, &lst_env);
     unlink("tmpfile");
     dup2(s_in, STDIN_FILENO);
     close(s_in);
@@ -267,7 +267,7 @@ void    i_redir(t_node *cmd, t_env *lst_env)
         dup2(redirect_fd, STDIN_FILENO);
         close(redirect_fd);
         if (cmd->type == WORD)
-            check_cmd(cmd->cmd, lst_env);
+            check_cmd(cmd->cmd, &lst_env);
         exit(0);
     }
     close(redirect_fd);
@@ -302,7 +302,7 @@ void    o_redir(t_node *cmd, t_env *lst_env, int append)
         dup2(redirect_fd, STDOUT_FILENO);
         close(redirect_fd);
         if (cmd->type == WORD)
-            check_cmd(cmd->cmd, lst_env);
+            check_cmd(cmd->cmd, &lst_env);
         exit(0);
     }
     wait(NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 02:06:14 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/30 18:47:42 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
             dup2(fd[1], STDOUT_FILENO);
         close(fd[1]);
         close(fd[0]);
-        check_cmd(node->cmd, lst_env);
+        check_cmd(node->cmd, &lst_env);
 
     }
     exit(g_exit);
