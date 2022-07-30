@@ -61,7 +61,6 @@ void    ft_readline(t_env **lst_env)
 			add_history(line);
     }
     free(line);
-    // g_exit = 0;
     printf("\b   \b\bexit\n");
     exit(g_exit);
 }
