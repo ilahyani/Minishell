@@ -108,13 +108,6 @@ void	ft_sort(t_env *env)
     }
 }
 
-int error_check(char *str)
-{
-    if ((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A' && str[0] <= 'Z') || str[0] == '_')
-        return (0);
-    return (1);
-}
-
 char    *ft_strldup(char *src, size_t len)
 {
     int     i;
@@ -155,10 +148,10 @@ t_env	*exprt_lstnew(char *buff)
 		return (NULL);
     if (!find_char(buff, '='))
         fill_node(buff, &res);
-    else if (find_char(buff, '+'))
+    else if (find_char(buff, '+') && find_char(buff, '+') < find_char(buff, '='))
     {
         res->var = ft_strldup(buff, find_char(buff, '+'));
-        res->value = ft_strdup(strchr_plus(buff, '=')); 
+        res->value = ft_strdup(strchr_plus(buff, '='));
     }
     else
     {
@@ -170,10 +163,19 @@ t_env	*exprt_lstnew(char *buff)
 
 int check_error(char *buff)
 {
-    if (!ft_isalpha(buff[0]) && buff[0] != '_')
+    char **tab = ft_split(buff, '=');
+
+    printf("%s\n", tab[0]);
+    if (!ft_isalpha(tab[0][0]) && tab[0][0] != '_')
         return (1);
-    if (find_char(buff, '+') && !find_char(buff, '='))
-        return(1);
+    if (find_char(tab[0], '+'))
+        if (tab[0][ft_strlen(tab[0]) - 1] != '+')
+            return (1);
+    // if (find_char(tab[0], '+') && !find_char(tab[0], '='))
+    //     return(1);
+    // if (find_char(tab[0], '+') && find_char(tab[0], '=') && tab[0][find_char(tab[0], '+') + 1] != '=')
+    //     return(1);
+    free_tab(tab);
     return (0);
 }
 
