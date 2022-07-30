@@ -101,10 +101,7 @@ void    set_status(int j)
     int status;
 
     while (j--)
-    {
         wait(&status);
-        printf("->%d\n", WEXITSTATUS(status));
-    }
     g_exit = WEXITSTATUS(status);
 }
 
