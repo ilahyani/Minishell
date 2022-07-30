@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int my_unset(t_env *env, char **data)
+int my_unset(t_env **env, char **data)
 {
     t_env  *tmp;
     t_env  *tmp2;
@@ -30,14 +30,23 @@ int my_unset(t_env *env, char **data)
             ft_putstr_fd(": not a valid identifier\n", 2);
             return (1);
         }
-        tmp = env;
-        while (tmp->next && ft_strcmp(tmp->next->var, data[i]))
-            tmp = tmp->next;
-        if (tmp->next)
+        if ((*env)->var && !ft_strcmp((*env)->var, data[i]))
         {
-            tmp2 = tmp->next;
-            tmp->next = tmp->next->next;
-            free(tmp2);
+            tmp2 = (*env)->next;
+            free(*env);
+            (*env) = tmp2;
+        }
+        else
+        {
+            tmp = *env;
+            while (tmp->next && ft_strcmp(tmp->next->var, data[i]))
+                tmp = tmp->next;
+            if (tmp->next)
+            {
+                tmp2 = tmp->next;
+                tmp->next = tmp->next->next;
+                free(tmp2);
+            }
         }
     }
     return (0);
