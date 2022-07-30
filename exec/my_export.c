@@ -165,7 +165,6 @@ int check_error(char *buff)
 {
     char **tab = ft_split(buff, '=');
 
-    printf("%s\n", tab[0]);
     if (!ft_isalpha(tab[0][0]) && tab[0][0] != '_')
         return (1);
     if (find_char(tab[0], '+'))
