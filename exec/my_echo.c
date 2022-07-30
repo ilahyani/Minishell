@@ -36,9 +36,10 @@ int my_echo(char **data)
     args = sizeof_array(data);
     if (args == 1)
         return (printf("\n"), 0);
-    i = 0;
     new_line = 0;
-    while (flag_check(data[++i]) == 1);
+    i = 1;
+    while (data[i] && flag_check(data[i]) == 1)
+        i++;
     if (i > 1)
         new_line = 1;
     while (data[i])
