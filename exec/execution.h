@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:21:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:01:44 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,19 @@ int		my_env(t_env *env, char **data);
 void	my_exit(char **data);
 int		get_status(int arg);
 
-int		my_pwd(void);
 int		my_export(char **data, t_env *env);
+t_env	*lst_copy(t_env *env);
+void	export_data(char *data, t_env *env);
+int		check_error(char *buff);
+int		check_var(char *buff, t_env *lst);
+void	update_exp(char *buff, t_env **lst);
+void	fill_node(char *buff, t_env **lst);
+void	ft_sort(t_env *env);
+t_env	*exprt_lstnew(char *buff);
+void	env_print(t_env	*env);
+char	*ft_strldup(char *src, size_t len);
+
+int		my_pwd(void);
 int		my_unset(t_env **env, char **data);
 
 int		ft_exec(char **data, t_env *lst_env);
@@ -95,31 +106,19 @@ void	put_error(t_redir data, t_node *cmd, int s_fd[2]);
 int		ft_strcmp(char *s1, char *s2);
 int		sizeof_array(char **arr);
 int		is_int(char *c);
-void	ft_sort(t_env *env);
-char	**sort_tab(char **tab);
 char	*strchr_plus(const char *s, int c);
-void	env_print(t_env	*env);
 size_t	ft_strcpy(char *dst, char *src);
 int		find_char_2(t_node *cmd, int type);
 int		find_char(char *s, char c);
-t_env	*exprt_lstnew(char *buff);
 char	*ft_getenv(char *env, t_env *env_list);
-char	*ft_strldup(char *src, size_t len);
 void	check_cmd(char **cmd, t_env **lst_env);
 int		check_arg(char **args);
 void	handler(int signum);
-int		check_arg(char **args);
-void	add_node(char *buff, t_env **expantion);
-void	update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 void	free_tab(char **tab);
 int		ft_pipe(t_node *node, t_env *lst_env);
 void	print_fd(t_env *lst_env, char *arg, int fd);
-t_env	*lst_copy(t_env *env);
-int		check_error(char *buff);
-int		check_var(char *buff, t_env *lst);
-void	update_exp(char *buff, t_env **lst);
 int		check_redir(t_node *node);
 int		check_heredoc(t_node *node);
 int		is_last(t_node *node);
