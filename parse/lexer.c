@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/31 16:11:24 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/01 00:15:50 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	my_pipe(t_token **tokens, int i)
 	return (i + 1);
 }
 
-int	redirection(t_token **tokens, char *line, int i)
+int	my_redirection(t_token **tokens, char *line, int i)
 {
 	if (line[i] == '>' && line[i + 1] == '>')
 	{
@@ -37,31 +37,6 @@ int	redirection(t_token **tokens, char *line, int i)
 	return (i + 1);
 }
 
-int	reserved_char(char c)
-{
-	if (c == '`' || c == '$' || c == '&' || c == '(' || c == ')' || c == ';'
-		|| c == '!' || c == '\'' || c == '\"' || c == '>' || c == '<'
-		|| c == ' ' || c == '\t' || c == '|' || c == '\\')
-		return (0);
-	return (1);
-}
-
-int	special_char(char c)
-{
-	if (c == '`' || c == '#' || c == '&' || c == '('
-		|| c == ')' || c == ';' || c == '!' || c == '\\')
-		return (1);
-	return (0);
-}
-
-int	var_delimiter(char c)
-{
-	if (!(c >= '0' && c <= '9') && !(c >= 'A' && c <= 'Z')
-		&& !(c >= 'a' && c <= 'z') && c != '_' && c != '?')
-		return (0);
-	return (1);
-}
-
 int	single_quote(t_token **tokens, char *line, int i)
 {
 	int	s;
@@ -74,86 +49,6 @@ int	single_quote(t_token **tokens, char *line, int i)
 	else
 		add_lst(tokens, lst_new(ft_substr(line, s, i - s), SQ_STR));
 	return (i + 1);
-}
-
-int	dollar_sign(t_token **tokens, char *line, int i)
-{
-	int	s;
-
-	s = i;
-	i++;
-	if (line[i])
-	{
-		while (line[i] && var_delimiter(line[i]))
-			i++;
-		add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
-	}
-	else
-		add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
-	return (i);
-}
-
-int	double_quote(t_token **tokens, char *line, int i)
-{
-	int	s;
-
-	s = i;
-	while (line[i] && line[i] != '\"')
-	{
-		if (line[i] == '$')
-		{
-			if (i > s)
-			{
-				add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
-				s = i;
-			}
-			i++;
-			if (line[i] && line[i] == '\"')
-				break ;
-			while (line[i] && var_delimiter(line[i]))
-				i++;
-			if (!line[i])
-				return (-1);
-			else
-			{
-				add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
-				if (line[i] == '\"')
-					return (i + 1);
-				s = i;
-			}
-		}
-		if (line[i] != '$')
-			i++;
-	}
-	if (!line[i])
-		return (-1);
-	else
-		add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
-	return (i + 1);
-}
-
-int	get_word(t_token **tokens, char *line, int i)
-{
-	int	s;
-
-	s = i;
-	while (line[i] && reserved_char(line[i]))
-		i++;
-	add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
-	return (i);
-}
-
-int	space(t_token **tokens, char *line, int i)
-{
-	int	s;
-
-	s = i;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	if (s == 0)
-		return (i);
-	add_lst(tokens, lst_new(" ", W_SPACE));
-	return (i);
 }
 
 t_token	*lexer(char *line)
@@ -174,7 +69,7 @@ t_token	*lexer(char *line)
 		else if (line[i] == ' ' || line[i] == '\t')
 			i = space(&tokens, line, i);
 		else if (line[i] == '<' || line[i] == '>')
-			i = redirection(&tokens, line, i);
+			i = my_redirection(&tokens, line, i);
 		else if (line[i] == '|')
 			i = my_pipe(&tokens, i);
 		else if (special_char(line[i]))
@@ -186,10 +81,3 @@ t_token	*lexer(char *line)
 		return (NULL);
 	return (tokens);
 }
-
-/* echo $
-echo $""
-echo "$"
-echo "$"""
-echo ""$""
-echo ""$ */

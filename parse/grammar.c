@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:14:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/31 16:12:19 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/01 00:03:10 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,20 +108,6 @@ int	command(t_token **tokens)
 	return (1);
 }
 
-int	pipeline(t_token **tokens)
-{
-	int	node;
-
-	node = command(tokens);
-	if (node == -1)
-		return (-1);
-	if (!(*tokens))
-		return (1);
-	node = check_pipe(tokens);
-	if (!node)
-		return (1);
-	return (node);
-}
 /*end of line || error*/	
 
 /*skip space token */
