@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   my_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/25 19:54:36 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 23:03:27 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int my_pwd(void)
+int	my_pwd(void)
 {
-    char    cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 
-    getcwd(cwd, sizeof(cwd));
-    printf("%s\n", cwd);
-    return (0);
+	getcwd(cwd, sizeof(cwd));
+	printf("%s\n", cwd);
+	return (0);
 }
