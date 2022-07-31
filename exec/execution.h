@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 16:49:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:46:05 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,21 @@ void	env_lstadd_back(t_env **lst, t_env *new);
 t_env	*env_lstnew(char *var, char *value);
 t_env	*env_lstlast(t_env *lst);
 
+int		redir_io(t_node *cmd, t_env *lst_env);
+int		multi_redic_check(t_node *cmd);
+int		o_redir(t_node *cmd, t_env *lst_env, int append);
+int		i_redir(t_node *cmd, t_env *lst_env);
+int		ft_heredoc(t_node *node, t_env *lst_env);
+int		tmpfile_redir(int tmpfd, t_node *node, t_env *lst_env);
+int		redir_io_pro_max(t_node *cmd, t_env *lst_env);
+int		set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd);
+int		set_fd(t_redir *data, t_node *cmd);
+void	get_data(t_node *cmd, t_redir *data, t_env *lst_env);
+void	fd_reset(int fd[2]);
+char	*check_file(t_node *node);
+void	data_init(t_redir *data);
+void	put_error(t_redir data, t_node *cmd, int s_fd[2]);
+
 int		ft_strcmp(char *s1, char *s2);
 int		sizeof_array(char **arr);
 int		is_int(char *c);
@@ -90,17 +105,6 @@ void	add_node(char *buff, t_env **expantion);
 void	update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
-int		redir_io(t_node *cmd, t_env *lst_env);
-int		redir_io_pro_max(t_node *cmd, t_env *lst_env);
-void	get_data(t_node *cmd, t_redir *data, t_env *lst_env);
-int		o_redir(t_node *cmd, t_env *lst_env, int append);
-int		i_redir(t_node *cmd, t_env *lst_env);
-int		ft_heredoc(t_node *node, t_env *lst_env);
-int		multi_redic_check(t_node *cmd);
-void	fd_reset(int fd[2]);
-char	*check_file(t_node *node);
-void	fd_reset(int fd[2]);
-void	data_init(t_redir *data);
 void	free_tab(char **tab);
 int		ft_pipe(t_node *node, t_env *lst_env);
 void	print_fd(t_env *lst_env, char *arg, int fd);
