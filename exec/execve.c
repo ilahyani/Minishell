@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 06:28:20 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:27:09 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,17 @@ int	ft_exec(char **data, t_env *lst_env)
 
 	env = list_to_tab(lst_env);
 	if ((data[0][0] == '.' && data[0][1] == '/') || data[0][0] == '/')
-		create_process(data[0], data, env);
+	{
+		if (create_process(data[0], data, env))
+			return (err_print(data[0], "command not found"), 127);
+	}
 	else
 	{
 		path = get_path(data[0], lst_env);
 		if (!path)
 			return (err_print(data[0], "No such file or directory"), 127);
 		else if (create_process(path, data, env))
-		{
-			ft_putstr_fd("minisell: ", 2);
-            ft_putstr_fd(data[0], 2);
-            ft_putstr_fd(": command not found\n", 2);
-			return (127);
-		}
+			return (err_print(data[0], "command not found"), 127);
 	}
 	// free env;
 	return (g_glob.status);
