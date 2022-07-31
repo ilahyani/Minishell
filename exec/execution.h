@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 19:46:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:04:21 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ typedef struct s_redir
 }	t_redir;
 
 int		my_echo(char **data);
+
 int		my_cd(t_env *lst_env, char **data);
+int		exec_cd(t_env *lst_env, char **data, char *path);
+void	update_env_cd(t_env *env_list, char *env, char *val);
+
 int		my_pwd(void);
 int		my_export(char **data, t_env *env);
 void	my_exit(char **data);
