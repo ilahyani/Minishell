@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:12 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/31 01:33:45 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 23:31:30 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,9 @@
 # include "./exec/execution.h"
 
 t_node	*parser(char *line, t_env *lst_env);
+
+void	ft_readline(t_env **lst_env);
+void	interpret_cmd(t_node *cmd, t_env **lst_env);
+void	check_cmd(char **cmd, t_env **lst_env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:23:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:30:25 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
 void	next_cmd(t_node **node);
 
 void	handler(int signum);
-
-void	check_cmd(char **cmd, t_env **lst_env);
 
 int		ft_strcmp(char *s1, char *s2);
 int		sizeof_array(char **arr);
