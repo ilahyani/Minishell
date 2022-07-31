@@ -10,7 +10,7 @@ CPPFLAGS="-I/Users/$(USER)/.brew/opt/readline/include"
 
 CFLAGS = -Wall -Wextra -Werror 
 
-SRC = ./main.c ./parse/minishell.c ./parse/parser.c ./parse/lexer.c ./parse/lists.c ./parse/grammar.c ./exec/env_init.c ./exec/env_init_utils.c ./exec/execve.c ./exec/io_redir.c ./exec/io_redir_utils.c ./exec/io_redir_pro_max.c ./exec/my_cd.c ./exec/my_echo.c ./exec/my_env.c ./exec/my_exit.c ./exec/my_export.c ./exec/my_export_list_update.c ./exec/my_export_list_utils.c ./exec/my_export_utils.c ./exec/my_pwd.c ./exec/my_unset.c ./exec/pipe.c ./exec/sig_handle.c ./exec/utils.c
+SRC = ./main.c ./parse/minishell.c ./parse/parser.c ./parse/lexer.c ./parse/lists.c ./parse/grammar.c ./exec/env_init.c ./exec/env_init_utils.c ./exec/execve.c ./exec/io_redir.c ./exec/io_redir_utils.c ./exec/io_redir_pro_max.c ./exec/my_cd.c ./exec/my_echo.c ./exec/my_env.c ./exec/my_exit.c ./exec/my_export.c ./exec/my_export_list_update.c ./exec/my_export_list_utils.c ./exec/my_export_utils.c ./exec/my_pwd.c ./exec/my_unset.c ./exec/pipe.c ./exec/pipe_utils.c ./exec/sig_handle.c ./exec/utils.c
 
 OBJ = $(SRC:%.c=%.o)
 

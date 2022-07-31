@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 06:51:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:57:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,12 @@ t_env	*lst_copy(t_env *env);
 int		check_error(char *buff);
 int		check_var(char *buff, t_env *lst);
 void	update_exp(char *buff, t_env **lst);
+int		check_redir(t_node *node);
+int		check_heredoc(t_node *node);
+int		is_last(t_node *node);
+void    s_in_reset(int s_in);
+void    set_status(int j);
+void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
+void    next_cmd(t_node **node);
 
 # endif
