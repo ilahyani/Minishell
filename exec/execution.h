@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 06:22:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:39:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,16 @@ void    update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 int		redir_io(t_node *cmd, t_env *lst_env);
+int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
+void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);
 int		o_redir(t_node *cmd, t_env *lst_env, int append);
 int		i_redir(t_node *cmd, t_env *lst_env);
 int		ft_heredoc(t_node *node, t_env *lst_env);
+int 	multi_redic_check(t_node *cmd);
+void    fd_reset(int fd[2]);
+char    *check_file(t_node *node);
+void    fd_reset(int fd[2]);
+void    data_init(t_redir *data);
 char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
@@ -97,10 +104,6 @@ char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
 int		ft_pipe(t_node *node, t_env *lst_env);
 void    print_fd(t_env *lst_env, char *arg, int fd);
-int 	multi_redic_check(t_node *cmd);
-void    fd_reset(int fd[2]);
-int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
-void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);
 void	unset_oldpwd(t_env *lst_env);
 void	update_env_var(t_env **lst_env);
 
