@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:14:18 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:19:32 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,15 @@ char	*check_file(t_node *node);
 void	data_init(t_redir *data);
 void	put_error(t_redir data, t_node *cmd, int s_fd[2]);
 
+int		ft_pipe(t_node *node, t_env *lst_env);
+int		check_redir(t_node *node);
+int		check_heredoc(t_node *node);
+int		is_last(t_node *node);
+void	s_in_reset(int s_in);
+void	set_status(int j);
+void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
+void	next_cmd(t_node **node);
+
 int		ft_strcmp(char *s1, char *s2);
 int		sizeof_array(char **arr);
 int		is_int(char *c);
@@ -120,14 +129,6 @@ void	handler(int signum);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 void	free_tab(char **tab);
-int		ft_pipe(t_node *node, t_env *lst_env);
 void	print_fd(t_env *lst_env, char *arg, int fd);
-int		check_redir(t_node *node);
-int		check_heredoc(t_node *node);
-int		is_last(t_node *node);
-void	s_in_reset(int s_in);
-void	set_status(int j);
-void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
-void	next_cmd(t_node **node);
 
 #	endif
