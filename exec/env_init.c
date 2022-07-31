@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 16:34:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:57:25 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,17 @@ void	update_env_var(t_env **lst_env)
 {
 	t_env	*tmp;
 	char	*lvl;
+	int		new_lvl;
 
 	tmp = env_lstlast(*lst_env);
 	if (!ft_strcmp(tmp->var, "SHLVL"))
 	{
 		lvl = ft_strdup(tmp->value);
 		free(tmp->value);
-		tmp->value = ft_itoa(ft_atoi(lvl) + 1);
+		new_lvl = ft_atoi(lvl) + 1;
+		if (new_lvl < 0)
+			new_lvl = 0;
+		tmp->value = ft_itoa(new_lvl);
 		free(lvl);
 	}
 	else if (!ft_strcmp(tmp->var, "PWD"))
