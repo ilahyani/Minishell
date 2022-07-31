@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 20:03:50 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:06:36 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 {
 	char	*cwd;
 
+	cwd = NULL;
 	update_env_cd(lst_env, "OLDPWD", getcwd(cwd, sizeof(cwd)));
 	if (!getcwd(cwd, sizeof(cwd)))
 		update_env_cd(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
