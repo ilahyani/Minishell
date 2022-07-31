@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 04:13:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:57:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int g_exit;
+// int g_global.status;
+
+typedef	struct s_data
+{
+	int	status;
+	int	sig;
+}	t_global;
+
+t_global g_glob;
 
 typedef struct s_env
 {
@@ -79,9 +87,16 @@ void    update_node(char *buff, t_env **expantion);
 void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 int		redir_io(t_node *cmd, t_env *lst_env);
-void    o_redir(t_node *cmd, t_env *lst_env, int append);
-void    i_redir(t_node *cmd, t_env *lst_env);
-void    ft_heredoc(t_node *node, t_env *lst_env);
+int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
+void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);
+int		o_redir(t_node *cmd, t_env *lst_env, int append);
+int		i_redir(t_node *cmd, t_env *lst_env);
+int		ft_heredoc(t_node *node, t_env *lst_env);
+int 	multi_redic_check(t_node *cmd);
+void    fd_reset(int fd[2]);
+char    *check_file(t_node *node);
+void    fd_reset(int fd[2]);
+void    data_init(t_redir *data);
 char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
@@ -89,9 +104,18 @@ char 	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
 int		ft_pipe(t_node *node, t_env *lst_env);
 void    print_fd(t_env *lst_env, char *arg, int fd);
-int 	multi_redic_check(t_node *cmd);
-void    fd_reset(int fd[2]);
-int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
-void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);
+void	unset_oldpwd(t_env *lst_env);
+void	update_env_var(t_env **lst_env);
+t_env	*lst_copy(t_env *env);
+int		check_error(char *buff);
+int		check_var(char *buff, t_env *lst);
+void	update_exp(char *buff, t_env **lst);
+int		check_redir(t_node *node);
+int		check_heredoc(t_node *node);
+int		is_last(t_node *node);
+void    s_in_reset(int s_in);
+void    set_status(int j);
+void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
+void    next_cmd(t_node **node);
 
 # endif

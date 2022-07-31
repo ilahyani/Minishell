@@ -16,8 +16,7 @@ int my_pwd(void)
 {
     char    cwd[PATH_MAX];
 
-    if (!getcwd(cwd, sizeof(cwd)))
-        g_exit = 1; //verify
+    getcwd(cwd, sizeof(cwd));
     printf("%s\n", cwd);
     return (0);
 }

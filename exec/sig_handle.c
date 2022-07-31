@@ -23,6 +23,6 @@ void    handler(int signum)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-        g_exit = 1;
+        g_glob.status = 1;
     }
 }
