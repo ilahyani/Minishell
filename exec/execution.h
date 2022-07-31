@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 06:39:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:51:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,9 @@ int		ft_pipe(t_node *node, t_env *lst_env);
 void    print_fd(t_env *lst_env, char *arg, int fd);
 void	unset_oldpwd(t_env *lst_env);
 void	update_env_var(t_env **lst_env);
+t_env	*lst_copy(t_env *env);
+int		check_error(char *buff);
+int		check_var(char *buff, t_env *lst);
+void	update_exp(char *buff, t_env **lst);
 
 # endif
