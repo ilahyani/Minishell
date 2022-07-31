@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:35 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:22:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:31:27 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	my_exit(char **data)
 int	get_status(int arg)
 {
 	if (arg == 2147483647)
-		g_glob.status = 255;
+		return (255);
 	else if (arg >= 0 && arg <= 255)
-		g_glob.status = arg;
+		return (arg);
 	else
-		g_glob.status = arg % 256;
+		return (arg % 256);
 }
