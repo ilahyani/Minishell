@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:58:54 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 06:59:49 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:21:23 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	sizeof_array(char **arr)
 	int	i;
 
 	i = -1;
-	while (arr[++i]);
+	while (arr[++i])
+		;
 	return (i);
 }
 
@@ -44,11 +45,11 @@ int	is_int(char *c)
 	return (1);
 }
 
-char    *ft_getenv(char *env, t_env *env_list)
+char	*ft_getenv(char *env, t_env *env_list)
 {
-    while (env_list && ft_strcmp(env, env_list->var))
-        env_list = env_list->next;
-    if (env_list)
-        return (env_list->value);
-    return (NULL);
+	while (env_list && ft_strcmp(env, env_list->var))
+		env_list = env_list->next;
+	if (env_list)
+		return (env_list->value);
+	return (NULL);
 }
