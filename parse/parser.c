@@ -6,13 +6,13 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/30 18:34:11 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 01:40:43 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_list(t_token *tokens)
+/* void	print_list(t_token *tokens)
 {
 	t_token	*tmp;
 
@@ -22,19 +22,9 @@ void	print_list(t_token *tokens)
 		printf("%s--%c\n", tmp->arg, tmp->type);
 		tmp = tmp->next;
 	}
-}
+} */
 
-// int	ft_strcmp(char *s1, char *s2)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s1[i] && s2[i] && s1[i] == s2[i])
-// 		i++;
-// 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-// }
-
-void	print_list2(t_node *tokens)
+/* void	print_list2(t_node *tokens)
 {
 	t_node	*tmp;
 	int		i;
@@ -50,7 +40,7 @@ void	print_list2(t_node *tokens)
 		tmp = tmp->next;
 	}
 }
-
+ */
 int	heredoc_here(int type)
 {
 	static int	flag = 0;
@@ -100,13 +90,12 @@ char	*expand_exit_code(char *arg)
 	return (tmp);
 }
 
-t_token *expand_var(t_token *tokens, t_env *list_env)
+t_token	*expand_var(t_token *tokens, t_env *list_env)
 {
-
-    t_env   *tmp;
+	t_env	*tmp;
 	t_token	*mv;
 
-    tmp = list_env;
+	tmp = list_env;
 	mv = tokens;
 	while (mv)
 	{
@@ -118,7 +107,7 @@ t_token *expand_var(t_token *tokens, t_env *list_env)
 			{	
 				while (tmp)
 				{
-					if (!ft_strcmp(mv->arg+1, tmp->var))
+					if (!ft_strcmp(mv->arg + 1, tmp->var))
 					{
 						free(mv->arg);
 						mv->arg = ft_strdup(tmp->value);
@@ -194,7 +183,7 @@ void	word(t_token **tokens, t_node **line)
 	}
 	tmp_2d = add_to_table(tmp_2d, tmp);
 	add_node_parse(line, new_node(WORD, tmp_2d));
-} 
+}
 
 void	parse_pipe(t_token **tokens, t_node **line)
 {
@@ -214,23 +203,25 @@ void	parse_re(t_node **line, t_token **tokens)
 	(*tokens) = (*tokens)->next;
 	if ((*tokens)->type == W_SPACE)
 		(*tokens) = (*tokens)->next;
-	if ((*tokens) && ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
+	if ((*tokens) && ((*tokens)->type == WORD
+			|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
 	{
-		while ((*tokens) && ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
+		while ((*tokens) && ((*tokens)->type == WORD
+				|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
 		{
 			tmp = ft_strjoin(tmp, (*tokens)->arg);
 			(*tokens) = (*tokens)->next;
-			// if (!(*tokens) || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR)
-			// {
-			// 	tmp2 = add_to_table(tmp2, tmp);
-			// 	free(tmp);
-			// 	tmp = NULL;
-			// }
 		}
 		tmp2 = add_to_table(tmp2, tmp);
 		add_node_parse(line, new_node(type, tmp2));
 	}
 }
+/* 			if (!(*tokens) || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR)
+			{
+				tmp2 = add_to_table(tmp2, tmp);
+				free(tmp);
+				tmp = NULL;
+			} */
 
 void	parse_heredoc(t_node **line, t_token **tokens)
 {
@@ -244,9 +235,11 @@ void	parse_heredoc(t_node **line, t_token **tokens)
 	(*tokens) = (*tokens)->next;
 	if ((*tokens)->type == W_SPACE)
 		(*tokens) = (*tokens)->next;
-	if ((*tokens) && ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
+	if ((*tokens) && ((*tokens)->type == WORD
+			|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
 	{
-		while ((*tokens) && ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
+		while ((*tokens) && ((*tokens)->type == WORD
+				|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
 		{
 			tmp = ft_strjoin(tmp, (*tokens)->arg);
 			(*tokens) = (*tokens)->next;
@@ -263,7 +256,8 @@ t_node	*parse(t_token **tokens)
 	line = NULL;
 	while ((*tokens))
 	{
-		if ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR)
+		if ((*tokens)->type == WORD || (*tokens)->type == EXPAND
+			|| (*tokens)->type == SQ_STR)
 			word(tokens, &line);
 		else if ((*tokens)->type == PIPE)
 			parse_pipe(tokens, &line);
@@ -302,7 +296,7 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 			tmp2 = tmp2->next;
 		tmp2->next = node->next;
 		node->next = tmp->next;
-		tmp->next = node;	
+		tmp->next = node;
 	}
 	else if (head->type != WORD)
 	{
@@ -321,7 +315,7 @@ char	**join_2d(char **arg1, char **arg2)
 	int		i;
 	int		j;
 	char	**tmp;
-	
+
 	i = 0;
 	j = 0;
 	while (arg1[i])
@@ -339,13 +333,13 @@ char	**join_2d(char **arg1, char **arg2)
 		i++;
 	}
 	tmp[i] = NULL;
-	// free_tab(arg1);
-	// free_tab(arg2);
-	/*free arg1 and arg2*/
 	return (tmp);
 }
+/* 	free_tab(arg1);
+	free_tab(arg2);
+	free arg1 and arg2 */
 
-t_node *join_words(t_node *list)
+t_node	*join_words(t_node *list)
 {
 	t_node	*tmp;
 	t_node	*tof;
@@ -355,7 +349,6 @@ t_node *join_words(t_node *list)
 	tmp = list;
 	i = 0;
 	tmp1 = NULL;
-	// print_list2(list);
 	while (tmp)
 	{
 		if (tmp && tmp->next && tmp->type == WORD && tmp->next->type == WORD)
@@ -365,7 +358,8 @@ t_node *join_words(t_node *list)
 			tmp->next = tmp->next->next;
 			free(tof);
 		}
-		else if (tmp && (tmp->type == OUT_REDIR || tmp->type == RE_ADD || tmp->type == IN_REDIR))
+		else if (tmp && (tmp->type == OUT_REDIR || tmp->type == RE_ADD
+				|| tmp->type == IN_REDIR))
 		{
 			if (tmp->cmd[0] && tmp->cmd[1])
 			{
@@ -386,7 +380,7 @@ t_node *join_words(t_node *list)
 t_node	*adjuste_list(t_node *list)
 {
 	t_node	*tmp;
-	t_node *tmp2;
+	t_node	*tmp2;
 
 	tmp = list;
 	tmp2 = list;
@@ -400,7 +394,7 @@ t_node	*adjuste_list(t_node *list)
 			}
 			tmp = tmp->next;
 		}
-		if(!tmp)  
+		if (!tmp)  
 			break ;
 		tmp = tmp->next;
 		tmp2 = tmp;
@@ -426,16 +420,16 @@ t_node	*parser(char *line, t_env *lst_env)
 	if (pipeline(&tmp) == 1)
 	{
 		tokens = expand_var(tokens, lst_env);
-		// print_list(tokens);
 		list = parse(&tokens);
-		// print_list2(list);
 		list = adjuste_list(list);
-		// printf("------------------------\n");
-		//  print_list2(list);
-		// printf("------------------------\n");
 	}
 	return (list);
 }
+		/* print_list(tokens); */
+/* 		print_list2(list); */
+/* 		printf("------------------------\n");
+		 print_list2(list);
+		printf("------------------------\n"); */
 
 /*
 
