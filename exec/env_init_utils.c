@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:21:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 06:21:44 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:37:47 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ t_env	*env_lstnew(char *var, char *value)
 	if (!res)
 		return (0);
 	res->var = ft_strdup(var);
-    if (value)
-        res->value = ft_strdup(value);
-    else
-        res->value = NULL;
+	if (value)
+		res->value = ft_strdup(value);
+	else
+		res->value = NULL;
 	res->next = NULL;
 	return (res);
 }
