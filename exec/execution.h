@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 16:37:25 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:49:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	my_exit(char **data);
 int		my_env(t_env *env, char **data);
 int		my_unset(t_env **env, char **data);
 
+int		ft_exec(char **data, t_env *lst_env);
+char	*get_path(char *cmd, t_env *lst_env);
+int		create_process(char *path, char **data, char **env);
+char	*strjoin_plus(char *s1, char *s2, char *s3);
+char	**list_to_tab(t_env *lst_env);
+
 void	env_init(char **env, t_env **lst_env);
 void	unset_oldpwd(t_env *lst_env);
 void	update_env_var(t_env **lst_env);
@@ -74,7 +80,6 @@ size_t	ft_strcpy(char *dst, char *src);
 int		find_char_2(t_node *cmd, int type);
 int		find_char(char *s, char c);
 t_env	*exprt_lstnew(char *buff);
-int		ft_exec(char **data, t_env *lst_env);
 char	*ft_getenv(char *env, t_env *env_list);
 char	*ft_strldup(char *src, size_t len);
 void	check_cmd(char **cmd, t_env **lst_env);
@@ -96,10 +101,6 @@ void	fd_reset(int fd[2]);
 char	*check_file(t_node *node);
 void	fd_reset(int fd[2]);
 void	data_init(t_redir *data);
-char	*get_path(char *cmd, t_env *lst_env);
-int		create_process(char *path, char **data, char **env);
-char	*strjoin_plus(char *s1, char *s2, char *s3);
-char	**list_to_tab(t_env *lst_env);
 void	free_tab(char **tab);
 int		ft_pipe(t_node *node, t_env *lst_env);
 void	print_fd(t_env *lst_env, char *arg, int fd);

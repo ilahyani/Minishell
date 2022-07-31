@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 16:27:09 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:47:47 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	ft_exec(char **data, t_env *lst_env)
 {
 	char	*path;
-	char	**env = NULL;
+	char	**env;
 
+	env = NULL;
 	env = list_to_tab(lst_env);
 	if ((data[0][0] == '.' && data[0][1] == '/') || data[0][0] == '/')
 	{
@@ -31,7 +32,7 @@ int	ft_exec(char **data, t_env *lst_env)
 		else if (create_process(path, data, env))
 			return (err_print(data[0], "command not found"), 127);
 	}
-	// free env;
+	free_tab(env);
 	return (g_glob.status);
 }
 
@@ -57,6 +58,7 @@ char	*get_path(char *cmd, t_env *lst_env)
 {
 	char	**path;
 	int		i;
+	int		j;
 
 	path = ft_split(ft_getenv("PATH", lst_env), ':');
 	if (!path)
@@ -64,19 +66,24 @@ char	*get_path(char *cmd, t_env *lst_env)
 	i = -1;
 	while (path[++i])
 	{
-		path[i] = ft_strjoin(path[i], "/");
-		path[i] = ft_strjoin(path[i], cmd);
+		path[i] = strjoin_plus(path[i], "/", cmd);
 		if (!access(path[i], F_OK))
 			break ;
 	}
-	//free path
+	j = -1;
+	while (path[++j])
+	{
+		if (path[j] == path[i])
+			j++;
+		free(path[j]);
+	}
 	return (path[i]);
 }
 
 char	*strjoin_plus(char *s1, char *s2, char *s3)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*str;
 
 	i = 0;
@@ -100,7 +107,7 @@ char	*strjoin_plus(char *s1, char *s2, char *s3)
 	return (str);
 }
 
-char **list_to_tab(t_env *lst_env)
+char	**list_to_tab(t_env *lst_env)
 {
 	char	**tab;
 	t_env	*tmp;
