@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/31 16:07:54 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 18:35:27 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,9 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 	tmp3 = (*origin);
 	if ((*origin)->type != WORD)
 	{
-		(*origin)->next = node->next;
+		while (tmp3->next != node)
+			tmp3 = tmp3->next;
+		tmp3->next = node->next;
 		node->next = (*origin);
 		(*origin) = node;
 		return (head);
