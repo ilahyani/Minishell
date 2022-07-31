@@ -72,7 +72,7 @@ char	*expand_exit_code(char *arg)
 	{
 		if (j == 1)
 		{
-			tmp2 = ft_itoa(g_exit);
+			tmp2 = ft_itoa(g_glob.status);
 			while (tmp2[i])
 			{
 				tmp[i] = tmp2[l];

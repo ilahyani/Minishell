@@ -20,32 +20,32 @@ void    my_exit(char **data)
     printf("exit\n");
     size = sizeof_array(data);
     if (size == 1)
-        g_exit = 0;
+        g_glob.status = 0;
     else if (size == 2)
     {
         arg = ft_atoi(data[1]);
         if (is_int(data[1]))
         {
             if (arg == 2147483647)
-                g_exit = 255;
+                g_glob.status = 255;
             else if (arg >= 0 && arg <= 255)
-                g_exit = arg;
+                g_glob.status = arg;
             else
-                g_exit = arg % 256;
+                g_glob.status = arg % 256;
         }
         else
         {
             ft_putstr_fd("minishell: exit: ", 2);
             ft_putstr_fd(data[1], 2);
             ft_putstr_fd(": numeric argument required\n", 2);
-            g_exit = 255;
+            g_glob.status = 255;
         }
-        printf("%d\n", g_exit);
+        printf("%d\n", g_glob.status);
     }
     else
     {
         ft_putstr_fd("minisehll: exit: too many arguments\n", 2);
-        g_exit = 0;
+        g_glob.status = 0;
     }
-    exit(g_exit);
+    exit(g_glob.status);
 }

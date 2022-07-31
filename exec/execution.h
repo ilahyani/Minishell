@@ -25,7 +25,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int g_exit;
+// int g_global.status;
+
+typedef	struct s_data
+{
+	int	status;
+	int	sig;
+}	t_global;
+
+t_global g_glob;
 
 typedef struct s_env
 {

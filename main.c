@@ -17,21 +17,21 @@
 void	check_cmd(char **cmd, t_env **lst_env)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
-		g_exit = my_pwd();
+		g_glob.status = my_pwd();
 	else if (!ft_strcmp(cmd[0], "cd"))
-		g_exit = my_cd(*lst_env, cmd);
+		g_glob.status = my_cd(*lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
-		g_exit = my_echo(cmd);
+		g_glob.status = my_echo(cmd);
 	else if (!ft_strcmp(cmd[0], "export"))
-		g_exit = my_export(cmd, *lst_env);
+		g_glob.status = my_export(cmd, *lst_env);
 	else if (!ft_strcmp(cmd[0], "env"))
-		g_exit = my_env(*lst_env, cmd);
+		g_glob.status = my_env(*lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "unset"))
-		g_exit = my_unset(lst_env, cmd);
+		g_glob.status = my_unset(lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "exit"))
 		my_exit(cmd);
 	else
-		g_exit = ft_exec(cmd, *lst_env);
+		g_glob.status = ft_exec(cmd, *lst_env);
 }
 
 void	ft_readline(t_env **lst_env)
@@ -51,10 +51,10 @@ void	ft_readline(t_env **lst_env)
 		if (cmd)
 		{
 			if (find_char_2(cmd, PIPE))
-				g_exit = ft_pipe(cmd, *lst_env);
+				g_glob.status = ft_pipe(cmd, *lst_env);
 			else if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR)
 				|| find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
-				g_exit = redir_io(cmd, *lst_env);
+				g_glob.status = redir_io(cmd, *lst_env);
 			else
 				check_cmd(cmd->cmd, lst_env);
 		}
@@ -63,7 +63,7 @@ void	ft_readline(t_env **lst_env)
 	}
 	free(line);
 	printf("\b   \b\bexit\n");
-	exit(g_exit);
+	exit(g_glob.status);
 }
 
 int	main(int ac, char **av, char **env)
@@ -77,5 +77,5 @@ int	main(int ac, char **av, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	env_init(env, &lst_env);
 	ft_readline(&lst_env);
-	return (g_exit);
+	return (g_glob.status);
 }

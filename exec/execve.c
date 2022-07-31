@@ -44,7 +44,7 @@ int	ft_exec(char **data, t_env *lst_env)
 		}
 	}
 	// free env;
-	return (g_exit);
+	return (g_glob.status);
 }
 
 int	create_process(char *path, char **data, char **env)
@@ -61,7 +61,7 @@ int	create_process(char *path, char **data, char **env)
 			return (1);
 	}
 	waitpid(-1, &status, 0);
-	g_exit = WEXITSTATUS(status);
+	g_glob.status = WEXITSTATUS(status);
 	return (0);
 }
 

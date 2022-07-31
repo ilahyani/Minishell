@@ -179,7 +179,7 @@ void    print_fd(t_env *lst_env, char *arg, int fd)
     t_env   *tmp;
 
     if (!ft_strcmp(arg, "$?")) {
-        ft_putnbr_fd(g_exit, fd);
+        ft_putnbr_fd(g_glob.status, fd);
         ft_putchar_fd('\n', fd);
     }
     else
@@ -257,8 +257,8 @@ int    i_redir(t_node *cmd, t_env *lst_env)
         close(redirect_fd);
         if (cmd->type == WORD)
             check_cmd(cmd->cmd, &lst_env);
-        g_exit = 0;
-        exit(g_exit);
+        g_glob.status = 0;
+        exit(g_glob.status);
     }
     close(redirect_fd);
     wait(NULL);
@@ -287,7 +287,7 @@ int    o_redir(t_node *cmd, t_env *lst_env, int append)
         close(redirect_fd);
         if (cmd->type == WORD)
             check_cmd(cmd->cmd, &lst_env);
-        exit(g_exit);
+        exit(g_glob.status);
     }
     wait(NULL);
     close(redirect_fd);

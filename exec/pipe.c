@@ -78,7 +78,7 @@ void    exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
         check_cmd(node->cmd, &lst_env);
 
     }
-    exit(g_exit);
+    exit(g_glob.status);
 }
 
 void    next_cmd(t_node **node)
@@ -102,7 +102,7 @@ void    set_status(int j)
 
     while (j--)
         wait(&status);
-    g_exit = WEXITSTATUS(status);
+    g_glob.status = WEXITSTATUS(status);
 }
 
 int ft_pipe(t_node *node, t_env *lst_env)
@@ -130,5 +130,5 @@ int ft_pipe(t_node *node, t_env *lst_env)
         next_cmd(&node);
     }
     set_status(j);
-    return (s_in_reset(s_in), g_exit);
+    return (s_in_reset(s_in), g_glob.status);
 }
