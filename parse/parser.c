@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/31 18:35:27 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 18:38:16 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,10 +414,7 @@ t_node	*parser(char *line, t_env *lst_env)
 	list = NULL;
 	tokens = lexer(line);
 	if (!tokens)
-	{
-		printf("Error\n");
 		return (list);
-	}
 	tmp = tokens;
 	if (pipeline(&tmp) == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 01:33:20 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 18:39:56 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_readline(t_env **lst_env)
 			else
 				check_cmd(cmd->cmd, lst_env);
 		}
+		else
+			printf("syntax error\n");
 		if (ft_strlen(line) > 0)
 			add_history(line);
 	}
