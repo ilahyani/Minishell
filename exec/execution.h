@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 20:04:21 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:09:31 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_redir
 }	t_redir;
 
 int		my_echo(char **data);
+int		flag_check(char *arg);
 
 int		my_cd(t_env *lst_env, char **data);
 int		exec_cd(t_env *lst_env, char **data, char *path);
