@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/28 04:13:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:22:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ int 	multi_redic_check(t_node *cmd);
 void    fd_reset(int fd[2]);
 int 	redir_io_pro_max(t_node *cmd, t_env *lst_env);
 void    get_data(t_node *cmd, t_redir *data, t_env *lst_env);
+void	unset_oldpwd(t_env *lst_env);
+void	update_env_var(t_env **lst_env);
 
 # endif
