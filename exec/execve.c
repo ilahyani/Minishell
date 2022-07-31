@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 16:47:47 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:37:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,10 @@ char	**list_to_tab(t_env *lst_env)
 	i = 0;
 	while (lst_env)
 	{
-		tab[i++] = strjoin_plus(lst_env->var, "=", lst_env->value);
+		if (lst_env->value)
+			tab[i++] = strjoin_plus(lst_env->var, "=", lst_env->value);
+		else
+			tab[i++] = strjoin_plus(lst_env->var, NULL, NULL);
 		lst_env = lst_env->next;
 	}
 	tab[i] = NULL;
