@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:12:40 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:21:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ void	update_env_cd(t_env *env_list, char *env, char *val);
 
 int		my_env(t_env *env, char **data);
 
+void	my_exit(char **data);
+int		get_status(int arg);
+
 int		my_pwd(void);
 int		my_export(char **data, t_env *env);
-void	my_exit(char **data);
 int		my_unset(t_env **env, char **data);
 
 int		ft_exec(char **data, t_env *lst_env);
