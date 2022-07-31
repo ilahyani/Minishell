@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/31 01:40:43 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 16:07:54 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,7 +394,7 @@ t_node	*adjuste_list(t_node *list)
 			}
 			tmp = tmp->next;
 		}
-		if (!tmp)  
+		if (!tmp)
 			break ;
 		tmp = tmp->next;
 		tmp2 = tmp;
@@ -430,8 +430,3 @@ t_node	*parser(char *line, t_env *lst_env)
 /* 		printf("------------------------\n");
 		 print_list2(list);
 		printf("------------------------\n"); */
-
-/*
-
-export x=$HOME$HOME
-*/

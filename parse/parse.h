@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 19:58:40 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 16:08:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_node
 	char			**cmd;
 	struct s_node	*next;
 }	t_node;
-
 
 void	add_lst(t_token **head, t_token *node);
 t_token	*lst_new(char	*arg, int type);

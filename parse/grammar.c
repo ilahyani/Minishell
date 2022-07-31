@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:14:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 19:52:27 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/07/31 16:12:19 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int	redirction(t_token **tokens)
 			return (-1);
 		if ((*tokens)->type == W_SPACE)
 			(*tokens) = (*tokens)->next;
-		if ((*tokens) && ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
+		if ((*tokens) && ((*tokens)->type == WORD
+				|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
 		{
-			while ((*tokens) && ((*tokens)->type == WORD || (*tokens)->type == EXPAND|| (*tokens)->type == SQ_STR))
+			while ((*tokens) && ((*tokens)->type == WORD
+					|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
 				(*tokens) = (*tokens)->next;
 			return (1);
 		}
@@ -46,7 +48,8 @@ int	simple_cmd_elm(t_token **tokens)
 			(*tokens) = (*tokens)->next;
 	if (!(*tokens))
 		return (0);
-	if ((*tokens)->type == WORD || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR)
+	if ((*tokens)->type == WORD || (*tokens)->type == EXPAND
+		|| (*tokens)->type == SQ_STR)
 	{
 		while ((*tokens) && ((*tokens)->type == WORD
 				|| (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR))
