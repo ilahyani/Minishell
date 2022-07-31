@@ -223,7 +223,7 @@ int my_export(char **data, t_env *env)
         while (data[++i])
         {
             if (data[i][0] == '_' && (data[i][1] == '=' || data[i][1] == '+'))
-                return (0);
+                return (1);
             if (check_error(data[i]))
                 return (err_print(data[i], "not a valid identifier"), 1); //stderr
             if (data[i + 1])

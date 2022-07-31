@@ -28,18 +28,10 @@ void    my_exit(char **data)
         {
             if (arg == 2147483647)
                 g_exit = 255;
-            else if (arg >= 0)
+            else if (arg >= 0 && arg <= 255)
                 g_exit = arg;
             else
-            {
-                if ((arg * -1) % 256 == 0)
-                {
-                    printf("->0\n");
-                    g_exit = 0;
-                }
-                else
-                    g_exit = 256 * (1 + (-1 * arg)/256) + arg;
-            }
+                g_exit = arg % 256;
         }
         else
         {
@@ -48,6 +40,7 @@ void    my_exit(char **data)
             ft_putstr_fd(": numeric argument required\n", 2);
             g_exit = 255;
         }
+        printf("%d\n", g_exit);
     }
     else
     {

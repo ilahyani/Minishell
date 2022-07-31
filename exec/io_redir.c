@@ -17,14 +17,13 @@ int redir_io(t_node *cmd, t_env *lst_env)
     if (multi_redic_check(cmd) == 1)
     {
         if (find_char_2(cmd, OUT_REDIR))
-            o_redir(cmd, lst_env, 0);
+            return (o_redir(cmd, lst_env, 0));
         else if (find_char_2(cmd, RE_ADD))
-            o_redir(cmd, lst_env, 1);
+            return (o_redir(cmd, lst_env, 1));
         else if (find_char_2(cmd, IN_REDIR)) 
-            i_redir(cmd, lst_env);
+            return (i_redir(cmd, lst_env));
         else if (find_char_2(cmd, HERE_DOC))
-            ft_heredoc(cmd, lst_env);
-        return (0);
+            return (ft_heredoc(cmd, lst_env));
     }
     return (redir_io_pro_max(cmd, lst_env));
 }
@@ -203,7 +202,7 @@ char    *check_file(t_node *node)
         return (node->cmd[0]);
 }
 
-void    ft_heredoc(t_node *node, t_env *lst_env)
+int    ft_heredoc(t_node *node, t_env *lst_env)
 {
     char    *line;
     int     tmpfd;
@@ -211,6 +210,8 @@ void    ft_heredoc(t_node *node, t_env *lst_env)
 
     s_in = dup(0);
     tmpfd = open("tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
+    if (tmpfd == -1)
+        return (ft_putstr_fd("unexpected error\n", 2), 1);
     while(1)
     {
         line = readline("> ");
@@ -224,16 +225,20 @@ void    ft_heredoc(t_node *node, t_env *lst_env)
     free(line);
     close(tmpfd);
     tmpfd = open("tmpfile", O_RDONLY);
+    if (tmpfd == -1)
+        return (ft_putstr_fd("unexpected error\n", 2), 1);
     dup2(tmpfd, STDIN_FILENO);
-    close(tmpfd);
+    if (close(tmpfd) == -1)
+        return (ft_putstr_fd("unexpected error\n", 2), 1);;
     if (node->type == WORD)
         check_cmd(node->cmd, &lst_env);
     unlink("tmpfile");
     dup2(s_in, STDIN_FILENO);
     close(s_in);
+    return (0);
 }
 
-void    i_redir(t_node *cmd, t_env *lst_env)
+int    i_redir(t_node *cmd, t_env *lst_env)
 {
     pid_t   c_pid;
     int     redirect_fd;
@@ -242,31 +247,25 @@ void    i_redir(t_node *cmd, t_env *lst_env)
     file = check_file(cmd);
     redirect_fd = open(file, O_RDONLY, S_IRWXU);
     if (redirect_fd == -1)
-    {
-        err_print(file, "No such file or directory");
-        g_exit = 1;
-        return ;
-    }
+        return (err_print(file, "No such file or directory"), 1);
     c_pid = fork();
     if (c_pid == -1)
-    {
-        ft_putstr_fd("fork error\n", 2);
-        g_exit = 1;
-        return ;
-    }
+        return(ft_putstr_fd("fork error\n", 2), 1);
     else if (c_pid == 0)
     {
         dup2(redirect_fd, STDIN_FILENO);
         close(redirect_fd);
         if (cmd->type == WORD)
             check_cmd(cmd->cmd, &lst_env);
-        exit(0);
+        g_exit = 0;
+        exit(g_exit);
     }
     close(redirect_fd);
     wait(NULL);
+    return (0);
 }
 
-void    o_redir(t_node *cmd, t_env *lst_env, int append)
+int    o_redir(t_node *cmd, t_env *lst_env, int append)
 {
     pid_t   c_pid;
     int     redirect_fd;
@@ -278,25 +277,19 @@ void    o_redir(t_node *cmd, t_env *lst_env, int append)
     else
         redirect_fd = open(file, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
     if (redirect_fd == -1)
-    {
-        err_print(file, "Is a directory");
-        return ;
-    }
+        return (err_print(file, "Is a directory"), 1);
     c_pid = fork();
     if (c_pid == -1)
-    {
-        ft_putstr_fd("fork error\n", 2);
-        g_exit = 1;
-        return ;
-    }
+        return (ft_putstr_fd("fork error\n", 2), 1);
     else if (c_pid == 0)
     {
         dup2(redirect_fd, STDOUT_FILENO);
         close(redirect_fd);
         if (cmd->type == WORD)
             check_cmd(cmd->cmd, &lst_env);
-        exit(0);
+        exit(g_exit);
     }
     wait(NULL);
     close(redirect_fd);
+    return (0);
 }
