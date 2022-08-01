@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:17:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/01 04:55:19 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 			return (ft_putstr_fd("fork error\n", 2), 1);
 		else if (c_pid == 0)
 			exec_child(node, lst_env, fd, s_in);
+		if (check_heredoc(node))
+			wait(NULL);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
