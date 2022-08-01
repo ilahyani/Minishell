@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:45:52 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:58:07 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:35:29 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_error(char *buff)
 	if (!tab)
 		return (ft_putendl_fd("Unexpected error occured\n", 2), 0);
 	if (find_char(tab[0], '+'))
-		if (tab[0][ft_strlen(tab[0]) - 1] != '+')
+		if (tab[0][find_char(tab[0], '+') + 1] != '\0')
 			return (1);
 	free_tab(tab);
 	return (0);
