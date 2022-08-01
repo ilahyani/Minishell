@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 19:42:44 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:59:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	put_error(t_redir data, t_node *cmd, int s_fd[2])
 
 	if (data.in_red == -1)
 	{
-		if (fstat(data.out_red, &buf) == -1)
+		if (!fstat(data.out_red, &buf))
 			close(data.out_red);
 		err_print(cmd->cmd[0], "No such file or directory");
 	}
 	else if (data.out_red == -1)
 	{
-		if (fstat(data.in_red, &buf) == -1)
+		if (!fstat(data.in_red, &buf))
 			close(data.in_red);
 		err_print(cmd->cmd[0], "Error openning file");
 	}
@@ -76,65 +76,65 @@ void	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 	while (cmd && cmd->type != PIPE)
 	{
 		if (cmd->type == HERE_DOC)
-			g_glob.status = set_heredoc_fd(data, lst_env, cmd);
+			g_glob.status = set_heredoc_fd(&data, lst_env, cmd);
 		else
-			g_glob.status = set_fd(data, cmd);
+			g_glob.status = set_fd(&data, cmd);
 		cmd = cmd->next;
 	}
 }
 
-int	set_fd(t_redir *data, t_node *cmd)
+int	set_fd(t_redir **data, t_node *cmd)
 {
 	struct stat	buf;
 
 	if (cmd->type == OUT_REDIR)
 	{
-		if (fstat(data->out_red, &buf) == -1)
-			if (close(data->out_red) < 0)
+		if (!fstat((*data)->out_red, &buf))
+			if (close((*data)->out_red) == -1)
 				return (ft_putendl_fd("unexpected error", 2), 1);
-		data->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
+		(*data)->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 	}
 	else if (cmd->type == RE_ADD)
 	{
-		if (fstat(data->out_red, &buf) == -1)
-			if (close(data->out_red) < 0)
+		if (!fstat((*data)->out_red, &buf))
+			if (close((*data)->out_red) == 0)
 				return (ft_putendl_fd("unexpected error", 2), 1);
-		data->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
+		(*data)->out_red = open(cmd->cmd[0], O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
 	}
 	else if (cmd->type == IN_REDIR)
 	{
-		if (fstat(data->in_red, &buf) == -1)
-			if (close(data->in_red) < 0)
+		if (!fstat((*data)->in_red, &buf))
+			if (close((*data)->in_red) == -1)
 				return (ft_putendl_fd("unexpected error", 2), 1);
-		data->in_red = open(cmd->cmd[0], O_RDONLY, S_IRWXU);
+		(*data)->in_red = open(cmd->cmd[0], O_RDONLY, S_IRWXU);
 	}
 	return (0);
 }
 
-int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
+int	set_heredoc_fd(t_redir **data, t_env *lst_env, t_node *cmd)
 {
 	int			p_fd[2];
 	char		*line;
 	struct stat	buf;
 
-	data->her_doc = cmd->cmd[0];
+	(*data)->her_doc = cmd->cmd[0];
 	if (pipe(p_fd) == -1)
 		return (ft_putendl_fd("Here_Doc error", 2), 1);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, data->her_doc))
+		if (!line || !ft_strcmp(line, (*data)->her_doc))
 			break ;
 		if (line[0] == '$')
 			print_fd(lst_env, line, p_fd[1]);
 		else
 			ft_putendl_fd(line, p_fd[1]);
 	}
-	if (fstat(data->in_red, &buf) == -1)
-		if (close(data->in_red) < 0)
+	if (!fstat((*data)->in_red, &buf))
+		if (close((*data)->in_red) < 0)
 			return (ft_putendl_fd("unexpected error", 2), 1);
-	if (data->in_red != -1)
-		data->in_red = p_fd[0];
+	if ((*data)->in_red != -1)
+		(*data)->in_red = p_fd[0];
 	if (close(p_fd[1]))
 		return (ft_putendl_fd("unexpected error", 2), 1);
 	return (free(line), 0);

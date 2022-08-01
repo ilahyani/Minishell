@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:30:25 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:51:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int		i_redir(t_node *cmd, t_env *lst_env);
 int		ft_heredoc(t_node *node, t_env *lst_env);
 int		tmpfile_redir(int tmpfd, t_node *node, t_env *lst_env);
 int		redir_io_pro_max(t_node *cmd, t_env *lst_env);
-int		set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd);
-int		set_fd(t_redir *data, t_node *cmd);
+int		set_heredoc_fd(t_redir **data, t_env *lst_env, t_node *cmd);
+int		set_fd(t_redir **data, t_node *cmd);
 void	get_data(t_node *cmd, t_redir *data, t_env *lst_env);
 void	fd_reset(int fd[2]);
 char	*check_file(t_node *node);
