@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:08:22 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/01 00:40:58 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ void	word(t_token **tokens, t_node **line)
 	}
 	tmp_2d = add_to_table(tmp_2d, tmp);
 	add_node_parse(line, new_node(WORD, tmp_2d));
-}
-
-void	parse_pipe(t_token **tokens, t_node **line)
-{
-	add_node_parse(line, new_node(PIPE, add_to_table(NULL, NULL)));
-	(*tokens) = (*tokens)->next;
 }
 
 void	parse_re(t_node **line, t_token **tokens)

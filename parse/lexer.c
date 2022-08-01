@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:15:50 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/01 00:37:47 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ int	single_quote(t_token **tokens, char *line, int i)
 	return (i + 1);
 }
 
+int	quotes(t_token **tokens, char *line, int i)
+{
+	if (line[i] == '\'')
+		i = single_quote(tokens, line, i + 1);
+	else if (line[i] == '\"')
+		i = double_quote(tokens, line, i + 1);
+	return (i);
+}
+
 t_token	*lexer(char *line)
 {
 	int		i;
@@ -60,10 +69,8 @@ t_token	*lexer(char *line)
 	tokens = NULL;
 	while (line[i] && i > -1)
 	{
-		if (line[i] == '\'')
-			i = single_quote(&tokens, line, i + 1);
-		else if (line[i] == '\"')
-			i = double_quote(&tokens, line, i + 1);
+		if (line[i] == '\'' || line[i] == '\"')
+			i = quotes(&tokens, line, i);
 		else if (line[i] == '$')
 			i = dollar_sign(&tokens, line, i);
 		else if (line[i] == ' ' || line[i] == '\t')

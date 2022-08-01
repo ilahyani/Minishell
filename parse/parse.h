@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:15:34 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/01 00:45:03 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		get_word(t_token **tokens, char *line, int i);
 int		space(t_token **tokens, char *line, int i);
 int		heredoc_here(int type);
 char	*expand_exit_code(char *arg);
-
 void	word(t_token **tokens, t_node **line);
 void	parse_pipe(t_token **tokens, t_node **line);
 void	parse_re(t_node **line, t_token **tokens);
