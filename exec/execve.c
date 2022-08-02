@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 05:07:30 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:26:29 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_exec(char **data, t_env *lst_env)
 	char	**env;
 
 	env = NULL;
+	path = NULL;
 	env = list_to_tab(lst_env);
 	if ((data[0][0] == '.' && data[0][1] == '/') || data[0][0] == '/')
 	{
@@ -60,7 +61,6 @@ char	*get_path(char *cmd, t_env *lst_env)
 	char	**split_path;
 	char	*path;
 	int		i;
-	// int		j;
 
 	split_path = ft_split(ft_getenv("PATH", lst_env), ':');
 	if (!split_path)
