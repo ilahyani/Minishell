@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 04:18:45 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 04:20:18 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	s_in_reset(int s_in);
 void	set_status(int j);
 void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
 void	next_cmd(t_node **node);
+void	close_fd(int fd[2]);
 
 void	handler(int signum);
 
