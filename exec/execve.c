@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 09:26:29 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:28:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ int	ft_exec(char **data, t_env *lst_env)
 
 int	create_process(char *path, char **data, char **env)
 {
-	pid_t	c_pid;
+	// pid_t	c_pid;
 	int		status;
 
-	c_pid = fork();
-	if (c_pid == -1)
+	g_glob.c_pid = fork();
+	if (g_glob.c_pid == -1)
 		return (ft_putstr_fd("error\n", 2), 1);
-	else if (c_pid == 0)
+	else if (g_glob.c_pid == 0)
 	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_DFL);
 		if (execve(path, data, env) == -1)
 			return (1);
 	}

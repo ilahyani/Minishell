@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 04:20:18 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:33:33 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 typedef struct s_data
 {
-	int	status;
-	int	sig;
+	int		status;
+	pid_t	c_pid;
 }	t_global;
 
 t_global	g_glob;

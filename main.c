@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 04:17:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:36:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av, char **env)
 	(void) av;
 	lst_env = NULL;
 	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, handler);
 	env_init(env, &lst_env);
 	ft_readline(&lst_env);
 	return (g_glob.status);
@@ -32,6 +32,7 @@ void	ft_readline(t_env **lst_env)
 	t_node	*cmd;
 
 	rl_catch_signals = 0;
+	g_glob.c_pid = 1;
 	while (42)
 	{
 		line = readline("🐌🐌🐌 ~ ");
