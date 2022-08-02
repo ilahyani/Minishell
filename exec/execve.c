@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/01 00:37:51 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 05:07:30 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_exec(char **data, t_env *lst_env)
 			return (err_print(data[0], "command not found"), 127);
 	}
 	free_tab(env);
+	free(path);
 	return (g_glob.status);
 }
 
@@ -56,28 +57,24 @@ int	create_process(char *path, char **data, char **env)
 
 char	*get_path(char *cmd, t_env *lst_env)
 {
-	char	**path;
+	char	**split_path;
+	char	*path;
 	int		i;
-	int		j;
+	// int		j;
 
-	path = ft_split(ft_getenv("PATH", lst_env), ':');
-	if (!path)
+	split_path = ft_split(ft_getenv("PATH", lst_env), ':');
+	if (!split_path)
 		return (NULL);
 	i = -1;
-	while (path[++i])
+	while (split_path[++i])
 	{
-		path[i] = strjoin_plus(path[i], "/", cmd);
-		if (!access(path[i], F_OK))
+		split_path[i] = strjoin_plus(split_path[i], "/", cmd);
+		if (!access(split_path[i], F_OK))
 			break ;
 	}
-	j = -1;
-	while (path[++j])
-	{
-		if (path[j] == path[i])
-			j++;
-		free(path[j]);
-	}
-	return (path[i]);
+	path = ft_strdup(split_path[i]);
+	free_tab(split_path);
+	return (path);
 }
 
 char	*strjoin_plus(char *s1, char *s2, char *s3)

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 04:16:04 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 05:00:10 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,7 @@ void	export_data(char *data, t_env **env)
 	if (lst_tmp && !find_char(data, '='))
 		return ;
 	else if (lst_tmp)
-    {
-        printf("here1\n");
 		update_exp(data, &lst_tmp);
-    }
 	else
-    {
-        printf("add_back %s\n", data);
 		env_lstadd_back(env, exprt_lstnew(data));
-        printf("->%s=%s\n", (*env)->var, (*env)->value);
-    }
 }
