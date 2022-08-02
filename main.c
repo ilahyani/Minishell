@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:31:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 04:17:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	check_cmd(char **cmd, t_env **lst_env)
 	else if (!ft_strcmp(cmd[0], "echo"))
 		g_glob.status = my_echo(cmd);
 	else if (!ft_strcmp(cmd[0], "export"))
-		g_glob.status = my_export(cmd, *lst_env);
+		g_glob.status = my_export(cmd, lst_env);
 	else if (!ft_strcmp(cmd[0], "env"))
 		g_glob.status = my_env(*lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "unset"))

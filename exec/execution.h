@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/01 00:51:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/02 04:18:45 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int		my_env(t_env *env, char **data);
 void	my_exit(char **data);
 int		get_status(int arg);
 
-int		my_export(char **data, t_env *env);
+int		my_export(char **data, t_env **env);
 t_env	*lst_copy(t_env *env);
-void	export_data(char *data, t_env *env);
+void	export_data(char *data, t_env **env);
 int		check_error(char *buff);
 int		check_var(char *buff, t_env *lst);
 void	update_exp(char *buff, t_env **lst);
