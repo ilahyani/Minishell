@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:40:58 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:51:04 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 		printf("%s--%c\n", tmp->arg, tmp->type);
 		tmp = tmp->next;
 	}
-} */
+}
 
-/* void	print_list2(t_node *tokens)
+void	print_list2(t_node *tokens)
 {
 	t_node	*tmp;
 	int		i;
@@ -39,8 +39,7 @@
 		printf("--%c\n", tmp->type);
 		tmp = tmp->next;
 	}
-}
- */
+} */
 
 void	word(t_token **tokens, t_node **line)
 {
@@ -172,3 +171,4 @@ t_node	*parser(char *line, t_env *lst_env)
 /* 		printf("------------------------\n");
 		 print_list2(list);
 		printf("------------------------\n"); */
+		/* << '' << '' 'cat' << r | ls */

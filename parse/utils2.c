@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:06:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:08:05 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:09:29 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,8 @@ char	**join_2d(char **arg1, char **arg2)
 	return (tmp);
 }
 
-t_node	*move_node(t_node *node, t_node *head, t_node **origin)
+t_node	*move_head(t_node *node, t_node	*tmp3, t_node **origin, t_node *head)
 {
-	t_node	*tmp;
-	t_node	*tmp2;
-	t_node	*tmp3;
-
-	tmp = head;
-	tmp3 = (*origin);
 	if ((*origin)->type != WORD)
 	{
 		while (tmp3->next != node)
@@ -55,6 +49,28 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 		(*origin) = node;
 		return (head);
 	}
+	else if (head->type != WORD)
+	{
+		while (tmp3->next != head)
+			tmp3 = tmp3->next;
+		tmp3->next = node;
+		head->next = node->next;
+		node->next = head;
+		return (node);
+	}
+	return (NULL);
+}
+
+t_node	*move_node(t_node *node, t_node *head, t_node **origin)
+{
+	t_node	*tmp;
+	t_node	*tmp2;
+	t_node	*tmp3;
+
+	tmp = head;
+	tmp3 = (*origin);
+	if ((*origin)->type != WORD)
+		return (move_head(node, tmp3, origin, head));
 	else if (node != head && head->type == WORD)
 	{
 		while (tmp && tmp->next && tmp->next->type == WORD)
@@ -67,14 +83,7 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 		tmp->next = node;
 	}
 	else if (head->type != WORD)
-	{
-		while (tmp3->next != head)
-			tmp3 = tmp3->next;
-		tmp3->next = node;
-		head->next = node->next;
-		node->next = head;
-		return (node);
-	}
+		return (move_head(node, tmp3, origin, head));
 	return (head);
 }
 
@@ -96,19 +105,6 @@ t_node	*join_words(t_node *list)
 			tof = tmp->next;
 			tmp->next = tmp->next->next;
 			free(tof);
-		}
-		else if (tmp && (tmp->type == OUT_REDIR || tmp->type == RE_ADD
-				|| tmp->type == IN_REDIR))
-		{
-			if (tmp->cmd[0] && tmp->cmd[1])
-			{
-				while (tmp->cmd[i])
-					tmp1 = ft_strjoin(tmp1, tmp->cmd[i++]);
-				free_tab(tmp->cmd);
-				tmp->cmd = add_to_table(NULL, tmp1);
-			}
-			tmp = tmp->next;
-			i = 0;
 		}
 		else
 			tmp = tmp->next;

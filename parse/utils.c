@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:55:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:05:04 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/04 11:31:52 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ char	**add_to_table(char **tmp2, char *tmp1)
 {
 	int		i;
 	char	**tmp;
-	int		j;
 
 	i = 0;
-	j = 0;
 	if (!tmp1)
 	{
 		tmp = malloc(sizeof(char *));
@@ -75,9 +73,7 @@ char	**add_to_table(char **tmp2, char *tmp1)
 		i = -1;
 		while (tmp2[++i])
 			tmp[i] = ft_strdup(tmp2[i]);
-		while (tmp2[j])
-			free(tmp2[j++]);
-		free(tmp2);
+		free_tab(tmp2);
 	}
 	tmp[i++] = ft_strdup(tmp1);
 	tmp[i] = NULL;
