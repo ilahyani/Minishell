@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:45:03 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/04 15:35:59 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ t_token	*lexer(char *line);
 int		pipeline(t_token **tokens);
 void	add_node_parse(t_node **head, t_node *node);
 t_node	*new_node(int type, char **arg);
+int		double_qoute_return(t_token **tokens, char *line, int i, int s);
 
 #endif

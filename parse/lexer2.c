@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:59:01 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 04:54:53 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/04 15:35:35 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int	dollar_sign(t_token **tokens, char *line, int i)
 	return (i);
 }
 
+int	handel_dollar_sign(t_token **tokens, char *line, int i, int s)
+{
+	add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
+	return (i);
+}
+
 int	double_quote(t_token **tokens, char *line, int i)
 {
 	int	s;
@@ -39,10 +45,7 @@ int	double_quote(t_token **tokens, char *line, int i)
 		if (line[i] == '$')
 		{
 			if (i > s)
-			{
-				add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
-				s = i;
-			}
+				s = handel_dollar_sign(tokens, line, i, s);
 			i++;
 			if (line[i] && line[i] == '\"')
 				break ;
@@ -50,22 +53,15 @@ int	double_quote(t_token **tokens, char *line, int i)
 				i++;
 			if (!line[i])
 				return (-1);
-			else
-			{
-				add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
-				if (line[i] == '\"')
-					return (i + 1);
-				s = i;
-			}
+			add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
+			if (line[i] == '\"')
+				return (i + 1);
+			s = i;
 		}
 		if (line[i] != '$')
 			i++;
 	}
-	if (!line[i])
-		return (-1);
-	else
-		add_lst(tokens, lst_new(ft_substr(line, s, i - s), WORD));
-	return (i + 1);
+	return (double_qoute_return(tokens, line, i, s));
 }
 
 int	get_word(t_token **tokens, char *line, int i)
