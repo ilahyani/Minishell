@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 20:06:36 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:02:03 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 	if (chdir(path) != 0)
 	{
 		free(path);
-		return (err_print(data[0], "No such file or directoryy"), 1);
+		return (err_print(data[0], "No such file or directory"), 1);
 	}
 	update_env_cd(lst_env, "PWD", getcwd(cwd, sizeof(cwd)));
 	free(path);

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/01 19:26:38 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/05 18:17:52 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,17 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 {
 	if (check_redir(node))
 	{
-		close(fd[1]);
-		close(fd[0]);
 		if (check_heredoc(node))
+		{
 			dup2(s_in, STDIN_FILENO);
+			close (s_in);
+		}
 		redir_io(node, lst_env);
 	}
-	else
-	{
-		if (!is_last(node))
-			dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		check_cmd(node->cmd, &lst_env);
-	}
+	if (!is_last(node))
+		dup2(fd[1], STDOUT_FILENO);
+	close_fd(fd);
+	check_cmd(node->cmd, &lst_env);
 	exit(g_glob.status);
 }
 
