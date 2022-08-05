@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/05 18:36:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/05 18:42:12 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	check_cmd(char **cmd, t_env **lst_env)
 		g_glob.status = ft_exec(cmd, *lst_env);
 }
 
-//<< '' << '' cat << r | ls
 //segfaults:
 //<< r << n << s > file
 //< main.c > cat 
