@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/04 19:02:03 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/06 11:56:41 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	my_cd(t_env *lst_env, char **data)
 	char	*cwd;
 
 	cwd = NULL;
-	if (!ft_strcmp(data[1], ".") && !getcwd(cwd, sizeof(cwd)))
+	if (!data[1])
+		path = ft_strdup(ft_getenv("HOME", lst_env));
+	else if (!ft_strcmp(data[1], ".") && !getcwd(cwd, sizeof(cwd)))
 	{
 		free (cwd);
 		return (err_print(data[0], "error retrieving current directory"), 1);
