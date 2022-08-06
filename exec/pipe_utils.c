@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:52:31 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:18:50 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/06 15:36:33 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	check_redir(t_node *node)
 {
 	if (node->type == WORD)
 		node = node->next;
-	if (node && (node->type == HERE_DOC || node->type == IN_REDIR
-			|| node->type == OUT_REDIR || node->type == RE_ADD))
+	if (node && (node->type == HERE_DOC || node->type == IN_REDIR))
 		return (1);
+	if (node && (node->type == OUT_REDIR || node->type == RE_ADD))
+		return (2);
 	return (0);
 }
 
