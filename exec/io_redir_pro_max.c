@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/05 18:22:41 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/06 09:36:06 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 int	redir_io_pro_max(t_node *cmd, t_env *lst_env)
 {
 	t_redir		data;
-	int			s_fd[2];
 
-	s_fd[1] = dup(1);
-	s_fd[0] = dup(0);
 	if (!cmd)
 		return (1);
 	get_data(cmd, &data, lst_env);
 	if (data.in_red == -1 || data.out_red == -1)
-		return (put_error(data, cmd, s_fd), 1);
+		return (put_error(data, cmd), 1);
 	if (data.in_red != -11)
 	{
 		dup2(data.in_red, STDIN_FILENO);
@@ -36,18 +33,13 @@ int	redir_io_pro_max(t_node *cmd, t_env *lst_env)
 		if (close(data.out_red) == -1)
 			return (ft_putendl_fd("unexpected error", 2), 1);
 	}
-	// if (data.cmd)
-	// 	check_cmd(data.cmd, &lst_env);
-	// free_tab(data.cmd);
-	// fd_reset(s_fd); 
 	return (0);
 }
 
-void	put_error(t_redir data, t_node *cmd, int s_fd[2])
+void	put_error(t_redir data, t_node *cmd)
 {
 	struct stat	buf;
 
-	(void)s_fd;
 	if (data.in_red == -1)
 	{
 		if (!fstat(data.out_red, &buf))
@@ -60,7 +52,6 @@ void	put_error(t_redir data, t_node *cmd, int s_fd[2])
 			close(data.in_red);
 		err_print(cmd->cmd[0], "Error openning file");
 	}
-	// fd_reset(s_fd);
 }
 
 void	get_data(t_node *cmd, t_redir *data, t_env *lst_env)

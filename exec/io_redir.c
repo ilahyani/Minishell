@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/05 18:30:27 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/06 09:37:54 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,28 @@
 
 int	redir_io(t_node *cmd, t_env *lst_env)
 {
-	int		exit;
-	
-	exit = 0;
 	if (multi_redic_check(cmd) == 1)
 	{
 		if (find_char_2(cmd, OUT_REDIR))
-			exit = o_redir(cmd, lst_env, 0);
+			return (o_redir(cmd, 0));
 		else if (find_char_2(cmd, RE_ADD))
-			exit = o_redir(cmd, lst_env, 1);
+			return (o_redir(cmd, 1));
 		else if (find_char_2(cmd, IN_REDIR))
-			exit = i_redir(cmd, lst_env);
+			return (i_redir(cmd));
 		else if (find_char_2(cmd, HERE_DOC))
-			exit = ft_heredoc(cmd, lst_env);
+			return (ft_heredoc(cmd, lst_env));
 	}
-	else
-		exit = redir_io_pro_max(cmd, lst_env);
-	return (exit);
+	return (redir_io_pro_max(cmd, lst_env));
 }
 
-int	tmpfile_redir(int tmpfd, t_node *node, t_env *lst_env)
+int	tmpfile_redir(int tmpfd)
 {
-	// int	s_in;
-
-	// s_in = dup(0);
-	(void)node;
-	(void)lst_env;
 	tmpfd = open("/tmp/tmpfile", O_RDONLY);
 	if (tmpfd == -1)
 		return (ft_putstr_fd("unexpected error\n", 2), 1);
 	dup2(tmpfd, STDIN_FILENO);
 	if (close(tmpfd) == -1)
 		return (ft_putstr_fd("unexpected error\n", 2), 1);
-	// if (node->type == WORD)
-	// 	check_cmd(node->cmd, &lst_env);
-	// unlink("tmpfile");
-	// dup2(s_in, STDIN_FILENO);
-	// close(s_in);
 	return (0);
 }
 
@@ -73,45 +58,31 @@ int	ft_heredoc(t_node *node, t_env *lst_env)
 			ft_putendl_fd(line, tmpfd);
 	}
 	free(line);
-	close(tmpfd);
-	return (tmpfile_redir(tmpfd, node, lst_env));
+	if (close(tmpfd) == -1)
+		return (ft_putstr_fd("unexpected error\n", 2), 1);
+	return (tmpfile_redir(tmpfd));
 }
 
-int	i_redir(t_node *cmd, t_env *lst_env)
+int	i_redir(t_node *cmd)
 {
-	// pid_t	c_pid;
 	int		redirect_fd;
 	char	*file;
 
-	(void)lst_env;
 	file = check_file(cmd);
 	redirect_fd = open(file, O_RDONLY, S_IRWXU);
 	if (redirect_fd == -1)
 		return (err_print(file, "No such file or directory"), 1);
-	// c_pid = fork();
-	// if (c_pid == -1)
-	// 	return (ft_putstr_fd("fork error\n", 2), 1);
-	// else if (c_pid == 0)
-	// {
-		dup2(redirect_fd, STDIN_FILENO);
-		close(redirect_fd);
-	// 	if (cmd->type == WORD)
-	// 		check_cmd(cmd->cmd, &lst_env);
-	// 	g_glob.status = 0;
-	// 	exit(g_glob.status);
-	// }
-	close(redirect_fd);
-	wait(NULL);
+	dup2(redirect_fd, STDIN_FILENO);
+	if (close(redirect_fd) == -1)
+		return (ft_putstr_fd("unexpected error\n", 2), 1);
 	return (0);
 }
 
-int	o_redir(t_node *cmd, t_env *lst_env, int append)
+int	o_redir(t_node *cmd, int append)
 {
-	// pid_t	c_pid;
 	int		redirect_fd;
 	char	*file;
 
-	(void)lst_env;
 	file = check_file(cmd);
 	if (append)
 		redirect_fd = open(file, O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
@@ -119,18 +90,8 @@ int	o_redir(t_node *cmd, t_env *lst_env, int append)
 		redirect_fd = open(file, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 	if (redirect_fd == -1)
 		return (err_print(file, "Is a directory"), 1);
-	// c_pid = fork();
-	// if (c_pid == -1)
-	// 	return (ft_putstr_fd("fork error\n", 2), 1);
-	// else if (c_pid == 0)
-	// {
-		dup2(redirect_fd, STDOUT_FILENO);
-		close(redirect_fd);
-		// if (cmd->type == WORD)
-		// 	check_cmd(cmd->cmd, &lst_env);
-		// exit(g_glob.status);
-	// }
-	// wait(NULL);
-	close(redirect_fd);
+	dup2(redirect_fd, STDOUT_FILENO);
+	if (close(redirect_fd) == -1)
+		return (ft_putstr_fd("unexpected error\n", 2), 1);
 	return (0);
 }

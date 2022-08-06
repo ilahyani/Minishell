@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/05 18:42:12 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/06 09:39:13 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 		if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR)
 			|| find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
 			g_glob.status = redir_io(cmd, *lst_env);
-		check_cmd(cmd->cmd, lst_env);
+		if (cmd->type == WORD)
+			check_cmd(cmd->cmd, lst_env);
 	}
 	fd_reset(s_fd);
 }
