@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:59:01 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/04 15:35:35 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/06 17:21:53 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	dollar_sign(t_token **tokens, char *line, int i)
 
 	s = i;
 	i++;
-	if (line[i])
+	if (line[i] && line[i] != ' ' && var_delimiter(line, i))
 	{
-		while (line[i] && var_delimiter(line[i]))
+		while (line[i] && var_delimiter(line, i))
 			i++;
 		add_lst(tokens, lst_new(ft_substr(line, s, i - s), EXPAND));
 	}
@@ -49,7 +49,7 @@ int	double_quote(t_token **tokens, char *line, int i)
 			i++;
 			if (line[i] && line[i] == '\"')
 				break ;
-			while (line[i] && var_delimiter(line[i]))
+			while (line[i] && var_delimiter(line, i))
 				i++;
 			if (!line[i])
 				return (-1);

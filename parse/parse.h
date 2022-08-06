@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/04 15:35:59 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/06 17:22:03 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		command(t_token **tokens);
 int		my_pipe(t_token **tokens, int i);
 int		pipeline(t_token **tokens);
 int		my_redirection(t_token **tokens, char *line, int i);
-int		var_delimiter(char c);
+int		var_delimiter(char *line, int i);
 int		special_char(char c);
 int		reserved_char(char c);
 int		single_quote(t_token **tokens, char *line, int i);
