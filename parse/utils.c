@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:55:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/06 17:24:33 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 16:25:08 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	heredoc_here(int type)
 		flag = 0;
 		return (0);
 	}
-	else
-		return (1);
+	flag = 0;
+	return (1);
 }
 
 char	**add_to_table(char **tmp2, char *tmp1)

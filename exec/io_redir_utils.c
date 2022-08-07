@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:32:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 19:16:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:30:23 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,44 @@ void	fd_reset(int fd[2])
 void	print_fd(t_env *lst_env, char *arg, int fd)
 {
 	t_env	*tmp;
+	int		i;
+	int		s;
+	char	*var;
 
-	if (!ft_strcmp(arg, "$?"))
+	i = 0;
+/* 	if (!ft_strcmp(arg, "$?"))
 	{
 		ft_putnbr_fd(g_glob.status, fd);
 		ft_putchar_fd('\n', fd);
 	}
 	else
 	{
-		tmp = lst_env;
-		while (tmp && ft_strcmp(tmp->var, arg + 1))
-			tmp = tmp->next;
+
 		if (tmp)
 			ft_putendl_fd(tmp->value, fd);
 		else
 			ft_putstr_fd("\n", fd);
+	} */
+	while (arg[i])
+	{
+		if (arg[i] == '$')
+		{
+			i++;
+			s = i;
+			while (arg[i] && arg[i] != ' ' && var_delimiter(arg, i))
+				i++;
+			var = ft_substr(arg, s, i - s);
+			tmp = lst_env;
+			while (tmp && ft_strcmp(tmp->var, var))
+				tmp = tmp->next;
+			if (tmp)
+				ft_putstr_fd(tmp->value, fd);
+		}
+		else
+		{
+			ft_putchar_fd(arg[i], fd);
+			i++;
+		}
 	}
+	ft_putchar_fd('\n', fd);
 }

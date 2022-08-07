@@ -6,13 +6,13 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/04 12:51:04 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 16:26:09 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/* void	print_list(t_token *tokens)
+void	print_list(t_token *tokens)
 {
 	t_token	*tmp;
 
@@ -39,7 +39,7 @@ void	print_list2(t_node *tokens)
 		printf("--%c\n", tmp->type);
 		tmp = tmp->next;
 	}
-} */
+}
 
 void	word(t_token **tokens, t_node **line)
 {
@@ -166,9 +166,9 @@ t_node	*parser(char *line, t_env *lst_env)
 	}
 	return (list);
 }
-		/* print_list(tokens); */
-/* 		print_list2(list); */
-/* 		printf("------------------------\n");
+	// print_list(tokens);
+	/* 	printf("------------------------\n");
 		 print_list2(list);
 		printf("------------------------\n"); */
+/* 		print_list2(list); */
 		/* << '' << '' 'cat' << r | ls */
