@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:50:15 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 	char		*line;
 	struct stat	buf;
 
-	set_sig("heredoc");
+	set_signals("heredoc");
 	rl_event_hook = event;
 	(data)->her_doc = cmd->cmd[0];
 	if (pipe(p_fd) == -1)

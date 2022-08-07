@@ -6,13 +6,13 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:05:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	set_sig(char *context)
+void	set_signals(char *context)
 {
 	if (!ft_strcmp(context, "main"))
 	{

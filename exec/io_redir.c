@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:36:26 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_heredoc(t_node *node, t_env *lst_env)
 	char	*line;
 	int		tmpfd;
 
-	set_sig("heredoc");
+	set_signals("heredoc");
 	rl_event_hook = event;
 	tmpfd = open("/tmp/tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
 	if (tmpfd == -1)

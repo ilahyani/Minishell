@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:08:00 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_readline(t_env **lst_env)
 
 	while (42)
 	{
-		set_sig("main");
+		set_signals("main");
 		line = readline("🐌🐌🐌 ~ ");
 		if (!line)
 		{
