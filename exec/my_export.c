@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 18:01:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:25:43 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,7 @@ int	my_export(char **data, t_env **env)
 	t_env	*sorted;
 	int		i;
 
-	sorted = NULL;
-	if (*env)
-	{
-		sorted = lst_copy(*env);
-		ft_sort(sorted);
-	}
+	sorted = get_list(*env);
 	if (sorted && sizeof_array(data) == 1)
 		env_print(sorted);
 	else
@@ -30,47 +25,15 @@ int	my_export(char **data, t_env **env)
 		i = 0;
 		while (data[++i])
 		{
-			if (data[i][0] == '_' && (data[i][1] == '=' || data[i][1] == '+'))
-				return (1);
 			if (check_error(data[i]))
 				return (err_print(data[i], "not a valid identifier"), 1);
+			if (data[i][0] == '_' && (data[i][1] == '=' || data[i][1] == '+'))
+				i++;
 			if (data[i + 1])
 				while (data[i + 1] && !ft_strcmp(data[i], data[i + 1]))
 					i++;
 			export_data(data[i], env);
 		}
 	}
-	free_list(sorted);
-	return (0);
-}
-
-void	export_data(char *data, t_env **env)
-{
-	t_env	*lst_tmp;
-
-	lst_tmp = *env;
-	while (lst_tmp)
-	{
-		if (check_var(data, lst_tmp))
-			break ;
-		lst_tmp = lst_tmp->next;
-	}
-	if (lst_tmp && !find_char(data, '='))
-		return ;
-	else if (lst_tmp)
-		update_exp(data, &lst_tmp);
-	else
-		env_lstadd_back(env, exprt_lstnew(data));
-}
-
-void	free_list(t_env *list)
-{
-	t_env	*tmp;
-
-	while (list)
-	{
-		tmp = list->next;
-		free(list);
-		list = tmp;
-	}
+	return (free_list(sorted), 0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_export_list_update.c                            :+:      :+:    :+:   */
+/*   my_export_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:47:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:56:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:16:07 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,17 @@ int	check_var(char *buf, t_env *lst)
 
 void	update_exp(char *buff, t_env **lst)
 {
+	char	*tmp;
+
 	if (buff[find_char(buff, '=') - 1] == '+')
 	{
 		if ((*lst)->value)
-			(*lst)->value = ft_strjoin((*lst)->value, strchr_plus(buff, '=')); //free
+		{
+			tmp = ft_strdup((*lst)->value);
+			free((*lst)->value);
+			(*lst)->value = ft_strjoin(tmp, strchr_plus(buff, '='));
+			free(tmp);
+		}
 		else
 			(*lst)->value = ft_strdup(strchr_plus(buff, '='));
 	}

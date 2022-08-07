@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:41:35 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 22:01:14 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../minishell.h"
 
@@ -57,10 +56,7 @@ int	ft_heredoc(t_node *node, t_env *lst_env)
 			return (1);
 		if (!line || !ft_strcmp(line, check_file(node)))
 			break ;
-		if (ft_strchr(line, '$'))
-			print_fd(lst_env, line, tmpfd);
-		else
-			ft_putendl_fd(line, tmpfd);
+		print_fd(lst_env, line, tmpfd);
 	}
 	free(line);
 	if (close(tmpfd) == -1)

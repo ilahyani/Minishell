@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:59:40 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:48:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_env	*exprt_lstnew(char *buff);
 void	env_print(t_env	*env);
 char	*ft_strldup(char *src, size_t len);
 void	free_list(t_env *list);
+t_env	*get_list(t_env *env);
 
 int		my_pwd(void);
 
@@ -97,6 +98,8 @@ int		tmpfile_redir(int tmpfd);
 int		redir_io_pro_max(t_node *cmd, t_env *lst_env);
 int		set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd);
 int		set_fd(t_redir *data, t_node *cmd);
+int		set_out_redir(t_redir *data, t_node *cmd, int append);
+int		set_in_redir(t_redir *data, t_node *cmd);
 int		get_data(t_node *cmd, t_redir *data, t_env *lst_env);
 void	fd_reset(int fd[2]);
 char	*check_file(t_node *node);
