@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:54:56 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 			return (1);
 		if (!line || !ft_strcmp(line, (data)->her_doc))
 			break ;
-		if (line[0] == '$')
+		if (ft_strchr(line, '$'))
 			print_fd(lst_env, line, p_fd[1]);
 		else
 			ft_putendl_fd(line, p_fd[1]);
