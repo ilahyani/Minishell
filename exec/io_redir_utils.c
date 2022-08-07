@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:32:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:36:51 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 17:48:11 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,15 @@ void	print_fd(t_env *lst_env, char *arg, int fd)
 			while (arg[i] && arg[i] != ' ' && var_delimiter(arg, i))
 				i++;
 			var = ft_substr(arg, s, i - s);
+			if (var[0] == '?')
+				ft_putstr_fd(expand_exit_code(var), fd);
+			else{		
 			tmp = lst_env;
 			while (tmp && ft_strcmp(tmp->var, var))
 				tmp = tmp->next;
 			if (tmp)
 				ft_putstr_fd(tmp->value, fd);
+			}
 		}
 		else
 		{
