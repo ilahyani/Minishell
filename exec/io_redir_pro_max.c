@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/06 09:36:06 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:50:15 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	redir_io_pro_max(t_node *cmd, t_env *lst_env)
 
 	if (!cmd)
 		return (1);
-	get_data(cmd, &data, lst_env);
+	if (get_data(cmd, &data, lst_env))
+		return (1);
 	if (data.in_red == -1 || data.out_red == -1)
 		return (put_error(data, cmd), 1);
 	if (data.in_red != -11)
@@ -54,7 +55,7 @@ void	put_error(t_redir data, t_node *cmd)
 	}
 }
 
-void	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
+int	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 {
 	int			i;
 
@@ -62,6 +63,8 @@ void	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 	if (cmd->type == WORD)
 	{
 		data->cmd = malloc (sizeof(char *) * (sizeof_array(cmd->cmd) + 1));
+		if (!(data->cmd))
+			return (ft_putendl_fd("Allocation failed", 2), 1);
 		i = -1;
 		while (cmd->cmd[++i])
 			data->cmd[i] = ft_strdup(cmd->cmd[i]);
@@ -70,12 +73,14 @@ void	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 	}
 	while (cmd && cmd->type != PIPE)
 	{
-		if (cmd->type == HERE_DOC)
-			g_glob.status = set_heredoc_fd(data, lst_env, cmd);
+		if (cmd->type == HERE_DOC && set_heredoc_fd(data, lst_env, cmd))
+			return (1);
 		else
-			g_glob.status = set_fd(data, cmd);
+			if (set_fd(data, cmd))
+				return (1);
 		cmd = cmd->next;
 	}
+	return (0);
 }
 
 int	set_fd(t_redir *data, t_node *cmd)
@@ -112,12 +117,16 @@ int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 	char		*line;
 	struct stat	buf;
 
+	set_sig("heredoc");
+	rl_event_hook = event;
 	(data)->her_doc = cmd->cmd[0];
 	if (pipe(p_fd) == -1)
 		return (ft_putendl_fd("Here_Doc error", 2), 1);
 	while (1)
 	{
 		line = readline("> ");
+		if (g_glob.status == -1)
+			return (1);
 		if (!line || !ft_strcmp(line, (data)->her_doc))
 			break ;
 		if (line[0] == '$')
