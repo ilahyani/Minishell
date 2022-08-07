@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	env_init(env, &lst_env);
 	rl_catch_signals = 0;
 	ft_readline(&lst_env);
-	return (g_glob.status);
+	return (g_status);
 }
 
 void	ft_readline(t_env **lst_env)
@@ -36,7 +36,7 @@ void	ft_readline(t_env **lst_env)
 		line = readline("🐌🐌🐌 ~ ");
 		if (!line)
 		{
-			g_glob.status = 0;
+			g_status = 0;
 			break ;
 		}
 		if (!ft_strcmp(line, ""))
@@ -51,7 +51,7 @@ void	ft_readline(t_env **lst_env)
 	}
 	free(line);
 	printf("\bight I'mma head out\n");
-	exit(g_glob.status);
+	exit(g_status);
 }
 
 void	interpret_cmd(t_node *cmd, t_env **lst_env)
@@ -63,7 +63,7 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 	s_fd[0] = dup(0);
 	status = 0;
 	if (find_char_2(cmd, PIPE))
-		g_glob.status = ft_pipe(cmd, *lst_env);
+		g_status = ft_pipe(cmd, *lst_env);
 	else
 	{
 		if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR)
@@ -72,7 +72,7 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 		if (!status && cmd->type == WORD)
 			check_cmd(cmd->cmd, lst_env);
 		else if (status)
-			g_glob.status = 1;
+			g_status = 1;
 	}
 	fd_reset(s_fd);
 }
@@ -80,19 +80,19 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 void	check_cmd(char **cmd, t_env **lst_env)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
-		g_glob.status = my_pwd();
+		g_status = my_pwd();
 	else if (!ft_strcmp(cmd[0], "cd"))
-		g_glob.status = my_cd(*lst_env, cmd);
+		g_status = my_cd(*lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
-		g_glob.status = my_echo(cmd);
+		g_status = my_echo(cmd);
 	else if (!ft_strcmp(cmd[0], "export"))
-		g_glob.status = my_export(cmd, lst_env);
+		g_status = my_export(cmd, lst_env);
 	else if (!ft_strcmp(cmd[0], "env"))
-		g_glob.status = my_env(*lst_env, cmd);
+		g_status = my_env(*lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "unset"))
-		g_glob.status = my_unset(lst_env, cmd);
+		g_status = my_unset(lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "exit"))
 		my_exit(cmd);
 	else
-		g_glob.status = ft_exec(cmd, *lst_env);
+		g_status = ft_exec(cmd, *lst_env);
 }

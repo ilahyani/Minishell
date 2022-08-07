@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:22:59 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handler(int signum)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		g_glob.status = 1;
+		g_status = 1;
 	}
 }
 
@@ -52,12 +52,12 @@ void	child_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		g_glob.status = 130;
+		g_status = 130;
 		printf("\n");
 	}
 	else if (signum == SIGQUIT)
 	{
-		g_glob.status = 131;
+		g_status = 131;
 		printf("Quit: 3\n");
 	}
 }
@@ -66,7 +66,7 @@ void	heredoc_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		g_status = -1;
 		rl_done = 1;
-		g_glob.status = -1;
 	}
 }

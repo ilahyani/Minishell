@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:32:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 19:16:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_fd(t_env *lst_env, char *arg, int fd)
 
 	if (!ft_strcmp(arg, "$?"))
 	{
-		ft_putnbr_fd(g_glob.status, fd);
+		ft_putnbr_fd(g_status, fd);
 		ft_putchar_fd('\n', fd);
 	}
 	else
