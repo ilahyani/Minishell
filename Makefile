@@ -24,7 +24,9 @@ $(LIB):
 
 $(NAME): $(OBJ) $(LIB)
 	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME) && clear
-	@echo "Done"
+	@echo "\033[1;36m"
+	@echo "SUCCESS"
+	@echo "\033[0m"
 
 %.o: %.c $(HDR)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@

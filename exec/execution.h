@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/06 09:36:08 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 11:09:19 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-typedef struct s_data
+typedef struct s_global
 {
 	int		status;
-	pid_t	c_pid;
 }	t_global;
 
 t_global	g_glob;
@@ -86,7 +85,8 @@ char	**list_to_tab(t_env *lst_env);
 
 void	env_init(char **env, t_env **lst_env);
 void	unset_oldpwd(t_env *lst_env);
-void	update_env_var(t_env **lst_env);
+void	update_shlvl(t_env **lst_env);
+void	update_pwd(t_env **lst_env);
 void	env_lstadd_back(t_env **lst, t_env *new);
 t_env	*env_lstnew(char *var, char *value);
 t_env	*env_lstlast(t_env *lst);
@@ -116,7 +116,10 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
 void	next_cmd(t_node **node);
 void	close_fd(int fd[2]);
 
+void	set_sig(char *context);
 void	handler(int signum);
+void	child_handler(int signum);
+void	heredoc_handler(int signum);
 
 int		ft_strcmp(char *s1, char *s2);
 int		sizeof_array(char **arr);

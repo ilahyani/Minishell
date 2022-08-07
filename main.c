@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/06 09:39:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:52:47 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	lst_env = NULL;
-	signal(SIGINT, handler);
-	signal(SIGQUIT, handler);
 	env_init(env, &lst_env);
+	rl_catch_signals = 0;
 	ft_readline(&lst_env);
 	return (g_glob.status);
 }
@@ -31,13 +30,15 @@ void	ft_readline(t_env **lst_env)
 	char	*line;
 	t_node	*cmd;
 
-	rl_catch_signals = 0;
-	g_glob.c_pid = 1;
 	while (42)
 	{
+		set_sig("main");
 		line = readline("🐌🐌🐌 ~ ");
 		if (!line)
+		{
+			g_glob.status = 0;
 			break ;
+		}
 		if (!ft_strcmp(line, ""))
 			continue ;
 		cmd = parser(line, *lst_env);
@@ -49,7 +50,7 @@ void	ft_readline(t_env **lst_env)
 			add_history(line);
 	}
 	free(line);
-	printf("\b   \b\bexit\n");
+	printf("\bight I'mma head out\n");
 	exit(g_glob.status);
 }
 
@@ -91,8 +92,3 @@ void	check_cmd(char **cmd, t_env **lst_env)
 	else
 		g_glob.status = ft_exec(cmd, *lst_env);
 }
-
-//segfaults:
-//<< r << n << s > file
-//< main.c > cat 
-//tmpfile??
