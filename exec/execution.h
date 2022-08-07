@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:21:12 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:59:40 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_sort(t_env *env);
 t_env	*exprt_lstnew(char *buff);
 void	env_print(t_env	*env);
 char	*ft_strldup(char *src, size_t len);
+void	free_list(t_env *list);
 
 int		my_pwd(void);
 

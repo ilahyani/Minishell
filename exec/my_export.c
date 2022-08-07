@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/02 05:00:10 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:01:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	my_export(char **data, t_env **env)
 	int		i;
 
 	sorted = NULL;
-    if (*env)
-    {
-	    sorted = lst_copy(*env);
-	    ft_sort(sorted); //free(sorted);
-    }
+	if (*env)
+	{
+		sorted = lst_copy(*env);
+		ft_sort(sorted);
+	}
 	if (sorted && sizeof_array(data) == 1)
 		env_print(sorted);
 	else
@@ -40,6 +40,7 @@ int	my_export(char **data, t_env **env)
 			export_data(data[i], env);
 		}
 	}
+	free_list(sorted);
 	return (0);
 }
 
@@ -60,4 +61,16 @@ void	export_data(char *data, t_env **env)
 		update_exp(data, &lst_tmp);
 	else
 		env_lstadd_back(env, exprt_lstnew(data));
+}
+
+void	free_list(t_env *list)
+{
+	t_env	*tmp;
+
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
 }
