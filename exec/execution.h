@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:52:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:12 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-typedef struct s_global
-{
-	int		status;
-}	t_global;
-
-t_global	g_glob;
+int	g_status;
 
 typedef struct s_env
 {

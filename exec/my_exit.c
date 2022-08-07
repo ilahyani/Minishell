@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:35 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:31:27 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	my_exit(char **data)
 {
 	printf("exit\n");
 	if (sizeof_array(data) == 1)
-		g_glob.status = 0;
+		g_status = 0;
 	else if (sizeof_array(data) == 2)
 	{
 		if (is_int(data[1]))
-			g_glob.status = get_status(ft_atoi(data[1]));
+			g_status = get_status(ft_atoi(data[1]));
 		else
 		{
 			err_print(data[0], "numeric argument required");
-			g_glob.status = 255;
+			g_status = 255;
 		}
 	}
 	else
 	{
 		err_print(data[0], " too many arguments");
-		g_glob.status = 0;
+		g_status = 0;
 	}
-	exit(g_glob.status);
+	exit(g_status);
 }
 
 int	get_status(int arg)

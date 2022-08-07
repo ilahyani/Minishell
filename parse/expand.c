@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:05:24 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:42:24 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*expand_exit_code(char *arg)
 	char	*tmp;
 
 	tmp = NULL;
-	tmp = ft_strdup(ft_itoa(g_glob.status));
+	tmp = ft_strdup(ft_itoa(g_status));
 	tmp = ft_strjoin(tmp, arg + 2);
 	free(arg);
 	return (tmp);

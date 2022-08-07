@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:52:31 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/06 15:36:33 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	set_status(int j)
 
 	while (j--)
 		wait(&status);
-	g_glob.status = WEXITSTATUS(status);
+	g_status = WEXITSTATUS(status);
 }

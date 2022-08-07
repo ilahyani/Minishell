@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/06 15:36:58 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 		next_cmd(&node);
 	}
 	set_status(j);
-	return (s_in_reset(s_in), g_glob.status);
+	return (s_in_reset(s_in), g_status);
 }
 
 void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
@@ -56,7 +56,7 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 		dup2(fd[1], STDOUT_FILENO);
 	close_fd(fd);
 	check_cmd(node->cmd, &lst_env);
-	exit(g_glob.status);
+	exit(g_status);
 }
 
 void	next_cmd(t_node **node)
