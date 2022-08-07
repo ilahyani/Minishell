@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 11:09:19 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:06:06 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		multi_redic_check(t_node *cmd);
 int		o_redir(t_node *cmd, int append);
 int		i_redir(t_node *cmd);
 int		ft_heredoc(t_node *node, t_env *lst_env);
+int		event(void);
 int		tmpfile_redir(int tmpfd);
 int		redir_io_pro_max(t_node *cmd, t_env *lst_env);
 int		set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd);

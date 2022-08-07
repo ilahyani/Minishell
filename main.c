@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 10:52:47 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:08:00 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,22 @@ void	ft_readline(t_env **lst_env)
 void	interpret_cmd(t_node *cmd, t_env **lst_env)
 {
 	int		s_fd[2];
+	int		status;
 
 	s_fd[1] = dup(1);
 	s_fd[0] = dup(0);
+	status = 0;
 	if (find_char_2(cmd, PIPE))
 		g_glob.status = ft_pipe(cmd, *lst_env);
-	else 
+	else
 	{
 		if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR)
 			|| find_char_2(cmd, RE_ADD) || find_char_2(cmd, HERE_DOC))
-			g_glob.status = redir_io(cmd, *lst_env);
-		if (cmd->type == WORD)
+			status = redir_io(cmd, *lst_env);
+		if (!status && cmd->type == WORD)
 			check_cmd(cmd->cmd, lst_env);
+		else if (status)
+			g_glob.status = 1;
 	}
 	fd_reset(s_fd);
 }

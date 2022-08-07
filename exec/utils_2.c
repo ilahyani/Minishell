@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:58:54 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/04 18:59:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:05:53 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,9 @@ char	*ft_getenv(char *env, t_env *env_list)
 	if (env_list)
 		return (env_list->value);
 	return (NULL);
+}
+
+int	event(void)
+{
+	return (0);
 }

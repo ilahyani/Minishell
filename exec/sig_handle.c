@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 11:00:08 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 16:05:05 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ void	heredoc_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(1, "hh\n", 3);
-		rl_replace_line("\0", 0);
 		rl_done = 1;
-		g_glob.status = 1;
-		g_glob.here_doc = 0;
+		g_glob.status = -1;
 	}
 }
