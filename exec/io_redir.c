@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:01:14 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 22:15:42 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int	ft_heredoc(t_node *node, t_env *lst_env)
 		if (g_status == -1)
 			return (1);
 		if (!line || !ft_strcmp(line, check_file(node)))
+		{
+			heredoc_here(RESET);
 			break ;
+		}
 		print_fd(lst_env, line, tmpfd);
 	}
 	free(line);

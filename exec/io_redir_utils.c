@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:32:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 21:16:47 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 22:31:37 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ void	fd_reset(int fd[2])
 
 void	print_fd(t_env *lst_env, char *arg, int fd)
 {
-	t_env	*tmp;
 	int		i;
-	int		s;
-	char	*var;
 
 	i = 0;
 	while (arg[i])
@@ -64,20 +61,7 @@ void	print_fd(t_env *lst_env, char *arg, int fd)
 		if (arg[i] == '$')
 		{
 			i++;
-			s = i;
-			while (arg[i] && arg[i] != ' ' && var_delimiter(arg, i))
-				i++;
-			var = ft_substr(arg, s, i - s);
-			if (var[0] == '?')
-				ft_putstr_fd(expand_exit_code(var), fd);
-			else
-			{		
-				tmp = lst_env;
-				while (tmp && ft_strcmp(tmp->var, var))
-					tmp = tmp->next;
-				if (tmp)
-					ft_putstr_fd(tmp->value, fd);
-			}
+			i = dollar_sign_here_doc(lst_env, arg, fd, i);
 		}
 		else
 		{

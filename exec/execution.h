@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 21:48:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 22:32:28 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,5 @@ void	err_print(char *cmd, char *buff);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 void	free_tab(char **tab);
 void	print_fd(t_env *lst_env, char *arg, int fd);
-
+int		dollar_sign_here_doc(t_env *lst_env, char *arg, int fd, int i);
 #	endif

@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:55:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/07 16:25:08 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 22:13:45 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,17 @@ int	heredoc_here(int type)
 	static int	flag = 0;
 
 	if (type == HERE_DOC)
+	{
 		flag = 1;
+		return (0);
+	}
 	if (type == EXPAND && flag)
 	{
 		flag = 0;
 		return (0);
 	}
-	flag = 0;
+	if (type == RESET)
+		flag = 0;
 	return (1);
 }
 

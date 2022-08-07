@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/06 17:22:03 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 22:10:43 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define W_SPACE 'S'
 # define RE_ADD 'A'
 # define HERE_DOC 'H'
+# define RESET 0
 
 typedef struct s_token{
 	int				type;

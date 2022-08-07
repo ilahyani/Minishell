@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:24:59 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 22:13:08 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	heredoc_handler(int signum)
 		g_status = -1;
 		rl_done = 1;
 	}
+	heredoc_here(RESET);
 }
