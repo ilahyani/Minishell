@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 10:09:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_exec(char **data, t_env *lst_env)
 	}
 	free_tab(env);
 	free(path);
-	return (g_glob.status);
+	return (g_status);
 }
 
 int	create_process(char *path, char **data, char **env)
@@ -43,7 +43,7 @@ int	create_process(char *path, char **data, char **env)
 	int		status;
 	pid_t	c_pid;
 
-	set_sig(path);
+	set_signals(path);
 	c_pid = fork();
 	if (c_pid == -1)
 		return (ft_putstr_fd("error\n", 2), 1);
@@ -54,7 +54,7 @@ int	create_process(char *path, char **data, char **env)
 	}
 	waitpid(-1, &status, 0);
 	if (!WIFSIGNALED(status))
-		g_glob.status = WEXITSTATUS(status);
+		g_status = WEXITSTATUS(status);
 	return (0);
 }
 

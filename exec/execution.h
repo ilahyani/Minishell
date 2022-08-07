@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:06:06 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 17:21:12 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-typedef struct s_global
-{
-	int		status;
-}	t_global;
-
-t_global	g_glob;
+int	g_status;
 
 typedef struct s_env
 {
@@ -101,7 +96,7 @@ int		tmpfile_redir(int tmpfd);
 int		redir_io_pro_max(t_node *cmd, t_env *lst_env);
 int		set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd);
 int		set_fd(t_redir *data, t_node *cmd);
-void	get_data(t_node *cmd, t_redir *data, t_env *lst_env);
+int		get_data(t_node *cmd, t_redir *data, t_env *lst_env);
 void	fd_reset(int fd[2]);
 char	*check_file(t_node *node);
 void	data_init(t_redir *data);
@@ -117,7 +112,7 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
 void	next_cmd(t_node **node);
 void	close_fd(int fd[2]);
 
-void	set_sig(char *context);
+void	set_signals(char *context);
 void	handler(int signum);
 void	child_handler(int signum);
 void	heredoc_handler(int signum);

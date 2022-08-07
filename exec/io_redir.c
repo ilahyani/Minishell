@@ -6,9 +6,10 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 16:37:05 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 17:36:38 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../minishell.h"
 
@@ -44,15 +45,15 @@ int	ft_heredoc(t_node *node, t_env *lst_env)
 	char	*line;
 	int		tmpfd;
 
-	set_sig("heredoc");
+	set_signals("heredoc");
+	rl_event_hook = event;
 	tmpfd = open("/tmp/tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
 	if (tmpfd == -1)
 		return (ft_putstr_fd("unexpected error\n", 2), 1);
-	rl_event_hook = event;
 	while (1)
 	{
 		line = readline("> ");
-		if (g_glob.status == -1)
+		if (g_status == -1)
 			return (1);
 		if (!line || !ft_strcmp(line, check_file(node)))
 			break ;
