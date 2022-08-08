@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 02:27:34 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 02:40:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 {
 	int		s_fd[2];
 	int		status;
+	t_node	*lst;
 
+	lst = cmd;
 	s_fd[1] = dup(1);
 	s_fd[0] = dup(0);
 	status = 0;
@@ -85,6 +87,7 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 			g_status = 1;
 	}
 	fd_reset(s_fd);
+	free_cmd(lst);
 }
 
 void	check_cmd(char **cmd, t_env **lst_env)

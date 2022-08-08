@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 20:28:16 by mjlem             #+#    #+#             */
-/*   Updated: 2022/07/25 19:52:40 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 02:40:56 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,10 @@ void	add_node_parse(t_node **head, t_node *node)
 			tmp = tmp->next;
 		tmp->next = node;
 	}
+}
+
+void	cmd_error(t_node *cmd)
+{
+	printf("syntax error\n");
+	free_cmd(cmd);
 }
