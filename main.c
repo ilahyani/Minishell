@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 07:32:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:08:45 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 void	check_cmd(char **cmd, t_env **lst_env)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
-		g_status = my_pwd();
+		g_status = my_pwd(*lst_env);
 	else if (!ft_strcmp(cmd[0], "cd"))
 		g_status = my_cd(*lst_env, cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))

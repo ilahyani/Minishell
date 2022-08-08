@@ -6,19 +6,14 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 06:44:04 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:09:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	my_pwd(void)
+int	my_pwd(t_env *lst_env)
 {
-	char	*cwd;
-
-	cwd = NULL;
-	cwd = getcwd(NULL, sizeof(NULL));
-	printf("%s\n", cwd);
-	free(cwd);
+	printf("%s\n", ft_getenv("PWD", lst_env));
 	return (0);
 }
