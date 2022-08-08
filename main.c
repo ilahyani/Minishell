@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 02:27:34 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ void	ft_readline(t_env **lst_env)
 	exit(g_status);
 }
 
+int	exec_pipe(t_node *cmd, t_env **lst_env)
+{
+	int	status;
+
+	status = ft_pipe(cmd, *lst_env);
+	if (status)
+		return (1);
+	return (0);
+}
+
 void	interpret_cmd(t_node *cmd, t_env **lst_env)
 {
 	int		s_fd[2];
@@ -63,7 +73,7 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env)
 	s_fd[0] = dup(0);
 	status = 0;
 	if (find_char_2(cmd, PIPE))
-		g_status = ft_pipe(cmd, *lst_env);
+		g_status = exec_pipe(cmd, lst_env);
 	else
 	{
 		if (find_char_2(cmd, OUT_REDIR) || find_char_2(cmd, IN_REDIR)
