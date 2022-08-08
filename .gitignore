@@ -2,3 +2,4 @@
 *.o
 minishell
 *.a
+*.dSYM
