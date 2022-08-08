@@ -1,0 +1,12 @@
+Makefile
+README.md
+exec
+file
+libft
+main.c
+main.o
+minishell
+minishell.dSYM
+minishell.h
+parse
+testsandbugs

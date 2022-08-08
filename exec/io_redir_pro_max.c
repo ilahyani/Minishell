@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:01:47 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 06:51:04 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,9 @@ int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 		if (!line || !ft_strcmp(line, cmd->cmd[0]))
 			break ;
 		print_fd(lst_env, line, p_fd[1]);
+		free(line);
 	}
+	free(line);
 	if (!fstat((data)->in_red, &buf))
 		if (close((data)->in_red) == -1 || close(p_fd[1]) == -1)
 			return (ft_putendl_fd("unexpected error", 2), 1);

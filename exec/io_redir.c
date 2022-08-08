@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:15:42 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 06:49:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	ft_heredoc(t_node *node, t_env *lst_env)
 			break ;
 		}
 		print_fd(lst_env, line, tmpfd);
+		free(line);
 	}
 	free(line);
 	if (close(tmpfd) == -1)

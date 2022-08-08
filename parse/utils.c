@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:55:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/07 22:13:45 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 06:46:56 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ char	**add_to_table(char **tmp2, char *tmp1)
 	i = 0;
 	if (!tmp1)
 	{
-		tmp = malloc(sizeof(char *));
-		tmp[0] = NULL;
+		tmp = NULL;
 	}	
 	if (!tmp2)
 		tmp = malloc(sizeof(char *) * 2);
