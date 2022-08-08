@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/07 23:49:35 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 	int		fd[2];
 	int		s_in;
 	int		j;
+	int		status;
 	pid_t	c_pid;
 
 	s_in = dup(0);
 	j = 0;
+	set_signals("pipe");
 	while (node)
 	{
 		j++;
@@ -32,7 +34,10 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 		else if (c_pid == 0)
 			exec_child(node, lst_env, fd, s_in);
 		if (check_heredoc(node))
-			wait(NULL);
+			wait(&status);
+		if (WIFEXITED(status))
+			if (WEXITSTATUS(status) == 57)
+				return (1);
 		dup2(fd[0], STDIN_FILENO);
 		close_fd(fd);
 		next_cmd(&node);
@@ -43,6 +48,9 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 
 void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 {
+	int	status;
+
+	status = 0;
 	if (check_redir(node))
 	{
 		if (check_heredoc(node))
@@ -50,8 +58,10 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 			dup2(s_in, STDIN_FILENO);
 			close (s_in);
 		}
-		redir_io(node, lst_env);
+		status = redir_io(node, lst_env);
 	}
+	if (status)
+		exit(1337);
 	if (!is_last(node) && check_redir(node) != 2)
 		dup2(fd[1], STDOUT_FILENO);
 	close_fd(fd);

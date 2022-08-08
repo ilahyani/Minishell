@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:13 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:13:08 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 23:48:18 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	set_signals(char *context)
 		signal(SIGINT, heredoc_handler);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (!ft_strcmp(context, "./minishell"))
+	else if (!ft_strcmp(context, "./minishell") || !ft_strcmp(context, "pipe"))
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
+		heredoc_here(RESET);
 	}
 	else
 	{
