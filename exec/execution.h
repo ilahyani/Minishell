@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 05:09:36 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 07:34:16 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,15 @@ void	data_init(t_redir *data);
 void	put_error(t_redir data, t_node *cmd);
 
 int		ft_pipe(t_node *node, t_env *lst_env);
+void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
 int		check_redir(t_node *node);
 int		check_heredoc(t_node *node);
 int		is_last(t_node *node);
 void	s_in_reset(int s_in);
 void	set_status(int j);
-void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in);
 void	next_cmd(t_node **node);
 void	close_fd(int fd[2]);
+void	pipe_init(int *j, int *status, int *s_in);
 
 void	set_signals(char *context);
 void	handler(int signum);
