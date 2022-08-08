@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:47:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 21:16:07 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 20:50:23 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,24 @@ t_env	*exprt_lstnew(char *buff)
 
 int	check_var(char *buf, t_env *lst)
 {
+	char	*tmp;
+
 	if (find_char(buf, '='))
 	{
-		if ((find_char(buf, '+')
-				&& !ft_strcmp(lst->var, ft_strldup(buf, find_char(buf, '+')))))
-			return (1);
-		else if (find_char(buf, '=')
-			&& !ft_strcmp(lst->var, ft_strldup(buf, find_char(buf, '='))))
-			return (1);
+		if ((find_char(buf, '+')))
+		{
+			tmp = ft_strldup(buf, find_char(buf, '+'));
+			if (ft_strcmp(lst->var, tmp))
+				return (free(tmp), 1);
+			free(tmp);
+		}
+		else if (find_char(buf, '='))
+		{
+			tmp = ft_strldup(buf, find_char(buf, '='));
+			if (ft_strcmp(lst->var, tmp))
+				return (free(tmp), 1);
+			free(tmp);
+		}
 	}
 	else if (!ft_strcmp(lst->var, buf))
 		return (1);
