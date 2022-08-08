@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 05:34:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 06:08:57 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,13 @@ void	update_pwd(t_env **lst_env)
 	char	*cwd;
 
 	tmp = *lst_env;
-	cwd = NULL;
-	getcwd(cwd, sizeof(cwd));
+	cwd = getcwd(NULL, sizeof(NULL));
 	while (tmp && ft_strcmp(tmp->var, "PWD"))
 		tmp = tmp->next;
 	if (tmp && tmp->value)
 	{
 			free(tmp->value);
-			tmp->value = NULL;
-			tmp->value = cwd;
+			tmp->value = ft_strdup(cwd);
 	}
 	else
 		env_lstadd_back(lst_env, env_lstnew("PWD", cwd));
