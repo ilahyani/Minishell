@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:52:31 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 07:31:04 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:16:52 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ void	s_in_reset(int s_in)
 	close(s_in);
 }
 
-void	set_status(int j)
+void	set_status(int j, int s_in)
 {
 	int	status;
 
 	while (j--)
 		wait(&status);
 	g_status = WEXITSTATUS(status);
+	s_in_reset(s_in);
 }

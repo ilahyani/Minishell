@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 07:37:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:18:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 		close_fd(fd);
 		next_cmd(&node);
 	}
-	set_status(j);
-	return (s_in_reset(s_in), g_status);
+	return (set_status(j, s_in), g_status);
 }
 
 void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
