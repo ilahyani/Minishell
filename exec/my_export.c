@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 21:25:43 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:27:35 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	my_export(char **data, t_env **env)
 		while (data[++i])
 		{
 			if (check_error(data[i]))
+			{
+				free_list(sorted);
 				return (err_print(data[i], "not a valid identifier"), 1);
+			}
 			if (data[i][0] == '_' && (data[i][1] == '=' || data[i][1] == '+'))
 				i++;
 			if (data[i + 1])
