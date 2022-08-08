@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/07 22:20:17 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 02:31:24 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	word(t_token **tokens, t_node **line)
 		}
 	}
 	tmp_2d = add_to_table(tmp_2d, tmp);
+	if (tmp)
+		free(tmp);
 	add_node_parse(line, new_node(WORD, tmp_2d));
 }
 
@@ -90,6 +92,8 @@ void	parse_re(t_node **line, t_token **tokens)
 		tmp2 = add_to_table(tmp2, tmp);
 		add_node_parse(line, new_node(type, tmp2));
 	}
+	if (tmp)
+		free(tmp);
 }
 /* 			if (!(*tokens) || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR)
 			{
@@ -122,6 +126,8 @@ void	parse_heredoc(t_node **line, t_token **tokens)
 		tmp2 = add_to_table(tmp2, tmp);
 		add_node_parse(line, new_node(type, tmp2));
 	}
+	if (tmp)
+		free(tmp);
 }
 
 t_node	*parse(t_token **tokens)
@@ -152,18 +158,23 @@ t_node	*parser(char *line, t_env *lst_env)
 	t_token	*tokens;
 	t_node	*list;
 	t_token	*tmp;
+	t_token	*tof;
 
 	list = NULL;
+	tof = NULL;
 	tokens = lexer(line);
 	if (!tokens)
 		return (list);
 	tmp = tokens;
+	tof = tokens;
 	if (pipeline(&tmp) == 1)
 	{
 		tokens = expand_var(tokens, lst_env);
+		tof = tokens;
 		list = parse(&tokens);
 		list = adjuste_list(list);
 	}
+	free_token_lst(tof);
 	return (list);
 }
 	// print_list(tokens);

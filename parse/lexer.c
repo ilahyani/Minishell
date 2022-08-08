@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/01 00:37:47 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 02:28:23 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	my_pipe(t_token **tokens, int i)
 {
-	add_lst(tokens, lst_new("|", PIPE));
+	add_lst(tokens, lst_new(ft_strdup("|"), PIPE));
 	return (i + 1);
 }
 
@@ -22,18 +22,18 @@ int	my_redirection(t_token **tokens, char *line, int i)
 {
 	if (line[i] == '>' && line[i + 1] == '>')
 	{
-		add_lst(tokens, lst_new(">>", RE_ADD));
+		add_lst(tokens, lst_new(ft_strdup(">>"), RE_ADD));
 		return (i + 2);
 	}
 	else if (line[i] == '<' && line[i + 1] == '<')
 	{
-		add_lst(tokens, lst_new("<<", HERE_DOC));
+		add_lst(tokens, lst_new(ft_strdup("<<"), HERE_DOC));
 		return (i + 2);
 	}
 	else if (line[i] == '>')
-		add_lst(tokens, lst_new(">", OUT_REDIR));
+		add_lst(tokens, lst_new(ft_strdup(">"), OUT_REDIR));
 	else
-		add_lst(tokens, lst_new("<", IN_REDIR));
+		add_lst(tokens, lst_new(ft_strdup("<"), IN_REDIR));
 	return (i + 1);
 }
 

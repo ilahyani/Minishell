@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:59:01 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/06 17:21:53 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 02:31:02 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	space(t_token **tokens, char *line, int i)
 		i++;
 	if (s == 0)
 		return (i);
-	add_lst(tokens, lst_new(" ", W_SPACE));
+	add_lst(tokens, lst_new(ft_strdup(" "), W_SPACE));
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:06:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/04 12:09:29 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 23:21:57 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	**join_2d(char **arg1, char **arg2)
 		i++;
 	}
 	tmp[i] = NULL;
+	free_tab(arg1);
+	free_tab(arg2);
 	return (tmp);
 }
 
