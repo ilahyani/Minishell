@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:32:28 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/07 23:30:35 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	set_signals(char *context);
 void	handler(int signum);
 void	child_handler(int signum);
 void	heredoc_handler(int signum);
+void	pipe_handler(int signum);
 
 int		ft_strcmp(char *s1, char *s2);
 int		sizeof_array(char **arr);
