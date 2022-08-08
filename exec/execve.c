@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 05:25:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*get_path(char *cmd, t_env *lst_env)
 {
 	char	**split_path;
 	char	*path;
+	char	*tmp;
 	int		i;
 
 	split_path = ft_split(ft_getenv("PATH", lst_env), ':');
@@ -70,7 +71,10 @@ char	*get_path(char *cmd, t_env *lst_env)
 	i = -1;
 	while (split_path[++i])
 	{
-		split_path[i] = strjoin_plus(split_path[i], "/", cmd);
+		tmp = ft_strdup(split_path[i]);
+		free(split_path[i]);
+		split_path[i] = strjoin_plus(tmp, "/", cmd);
+		free(tmp);
 		if (!access(split_path[i], F_OK))
 			break ;
 	}
@@ -85,15 +89,13 @@ char	*strjoin_plus(char *s1, char *s2, char *s3)
 	int		j;
 	char	*str;
 
-	i = 0;
-	j = 0;
-	if (!s1)
-		s1 = ft_strdup("");
 	if (!s2)
 		s2 = ft_strdup("");
 	if (!s3)
 		s3 = ft_strdup("");
 	str = (char *) malloc (ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1);
+	i = 0;
+	j = 0;
 	while (s1[i])
 		str[j++] = s1[i++];
 	i = 0;
@@ -103,6 +105,10 @@ char	*strjoin_plus(char *s1, char *s2, char *s3)
 	while (s3[i])
 		str[j++] = s3[i++];
 	str[j] = '\0';
+	if (!ft_strcmp(s2, ""))
+		free(s2);
+	if (!ft_strcmp(s3, ""))
+		free(s3);
 	return (str);
 }
 

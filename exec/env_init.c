@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:57:15 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/06 17:24:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 05:34:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ void	update_shlvl(t_env **lst_env)
 		lvl = ft_strdup(tmp->value);
 		free(tmp->value);
 		new_lvl = ft_atoi(lvl) + 1;
+		tmp->value = NULL;
 		if (new_lvl < 0)
 			new_lvl = 0;
 		tmp->value = ft_itoa(new_lvl);
 		free(lvl);
+		lvl = NULL;
 	}
 	else
 		env_lstadd_back(lst_env, env_lstnew("SHLVL", "1"));
@@ -78,18 +80,20 @@ void	update_shlvl(t_env **lst_env)
 void	update_pwd(t_env **lst_env)
 {
 	t_env	*tmp;
+	char	*cwd;
 
 	tmp = *lst_env;
+	cwd = NULL;
+	getcwd(cwd, sizeof(cwd));
 	while (tmp && ft_strcmp(tmp->var, "PWD"))
 		tmp = tmp->next;
-	if (tmp)
+	if (tmp && tmp->value)
 	{
-		if (tmp->value)
-		{
 			free(tmp->value);
-			tmp->value = getcwd(NULL, sizeof(NULL));
-		}
+			tmp->value = NULL;
+			tmp->value = cwd;
 	}
 	else
-		env_lstadd_back(lst_env, env_lstnew("PWD", getcwd(NULL, sizeof(NULL))));
+		env_lstadd_back(lst_env, env_lstnew("PWD", cwd));
+	free(cwd);
 }

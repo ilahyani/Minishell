@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:25:33 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 21:25:53 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 05:38:38 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	free_list(t_env *list)
 	while (list)
 	{
 		tmp = list->next;
+		free(list->var);
+		free(list->value);
 		free(list);
 		list = tmp;
 	}

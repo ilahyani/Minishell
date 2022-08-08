@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 23:49:35 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 04:20:21 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 
 	s_in = dup(0);
 	j = 0;
+	status = 0;
 	set_signals("pipe");
 	while (node)
 	{

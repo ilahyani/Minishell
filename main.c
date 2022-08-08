@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:26 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 02:40:48 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/08 05:40:07 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char **av, char **env)
 	env_init(env, &lst_env);
 	rl_catch_signals = 0;
 	ft_readline(&lst_env);
+	free_list(lst_env);
 	return (g_status);
 }
 
@@ -45,13 +46,13 @@ void	ft_readline(t_env **lst_env)
 		if (cmd)
 			interpret_cmd(cmd, lst_env);
 		else
-			printf("syntax error\n");
+			cmd_error(cmd);
 		if (ft_strlen(line) > 0)
 			add_history(line);
+		free(line);
 	}
-	free(line);
 	printf("\bight I'mma head out\n");
-	exit(g_status);
+	return ;
 }
 
 int	exec_pipe(t_node *cmd, t_env **lst_env)

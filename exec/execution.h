@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 23:30:35 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 05:09:36 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int		find_char(char *s, char c);
 char	*ft_getenv(char *env, t_env *env_list);
 int		check_arg(char **args);
 void	err_print(char *cmd, char *buff);
-char	*strjoin_plus(char *s1, char *s2, char *s3);
 void	free_tab(char **tab);
 void	print_fd(t_env *lst_env, char *arg, int fd);
 int		dollar_sign_here_doc(t_env *lst_env, char *arg, int fd, int i);
