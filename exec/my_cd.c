@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 06:14:16 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/08 07:03:48 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ int	my_cd(t_env *lst_env, char **data)
 	char	*cwd;
 
 	cwd = NULL;
+	cwd = getcwd(NULL, sizeof(NULL));
 	if (!data[1])
 		path = ft_strdup(ft_getenv("HOME", lst_env));
-	else if (!ft_strcmp(data[1], ".") && !getcwd(cwd, sizeof(cwd)))
-	{
-		free (cwd);
+	else if (!ft_strcmp(data[1], ".") && !cwd)
 		return (err_print(data[0], "error retrieving current directory"), 1);
-	}
 	else if (!ft_strcmp(data[1], "-"))
 	{
 		path = ft_getenv("OLDPWD", lst_env);
@@ -63,9 +61,9 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 	char	*cwd;
 
 	cwd = NULL;
-	getcwd(cwd, sizeof(cwd));
+	cwd = getcwd(NULL, sizeof(NULL));
 	update_env_cd(lst_env, "OLDPWD", cwd);
-	if (!getcwd(cwd, sizeof(cwd)))
+	if (!cwd)
 		update_env_cd(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
 	if (chdir(path) != 0)
 	{
