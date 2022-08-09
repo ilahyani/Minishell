@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 14:47:17 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:29:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		my_pwd(t_env *lst_env);
 int		my_unset(t_env **env, char **data);
 void	remove_head(t_env **env);
 void	remove_node(t_env **env, char *data);
+int		unset_error_check(char *var);
 
 int		ft_exec(char **data, t_env *lst_env);
 char	*get_path(char *cmd, t_env *lst_env);
