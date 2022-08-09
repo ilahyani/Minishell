@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 14:03:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:15:32 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 		return (err_print(data[0], "HOME not set"), 1);
 	}
 	pwd = getcwd(NULL, sizeof(NULL));
+	if (!pwd)
+	{
+		ft_putendl_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory", 2);
+		free(pwd);
+		pwd = strjoin_plus(ft_getenv("PWD", lst_env), "/", "..");
+	}
 	update_env_cd(lst_env, "OLDPWD", oldpwd);
 	if (!oldpwd)
 		update_env_cd(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
