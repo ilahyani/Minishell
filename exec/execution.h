@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 22:17:14 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:47:17 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		flag_check(char *arg);
 int		my_cd(t_env *lst_env, char **data);
 int		exec_cd(t_env *lst_env, char **data, char *path);
 void	update_env_cd(t_env *env_list, char *env, char *val);
+int		exit_error(char **data, char *path, char *oldpwd);
 
 int		my_env(t_env *env, char **data);
 

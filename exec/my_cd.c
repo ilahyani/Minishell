@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 14:15:32 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:47:55 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,14 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 
 	oldpwd = NULL;
 	oldpwd = getcwd(NULL, sizeof(NULL));
-	if (chdir(path) != 0)
-	{
-		free(path);
-		free(oldpwd);
-		if (data[1])
-		{
-			ft_putstr_fd("minishell: cd: ", 2);
-			ft_putstr_fd(data[1], 2);
-			return (ft_putendl_fd(": No such file or directory", 2), 1);
-		}
-		return (err_print(data[0], "HOME not set"), 1);
-	}
+	if (chdir(path))
+		return (exit_error(data, path, oldpwd));
 	pwd = getcwd(NULL, sizeof(NULL));
 	if (!pwd)
 	{
-		ft_putendl_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory", 2);
+		ft_putstr_fd("cd: error retrieving current directory: ", 2);
+		ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
+		ft_putendl_fd("No such file or directory", 2);
 		free(pwd);
 		pwd = strjoin_plus(ft_getenv("PWD", lst_env), "/", "..");
 	}
@@ -89,4 +81,19 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 	free(pwd);
 	free(oldpwd);
 	return (free(path), 0);
+}
+
+int	exit_error(char **data, char *path, char *oldpwd)
+{
+	free(path);
+	free(oldpwd);
+	if (data[1])
+	{
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(data[1], 2);
+		ft_putendl_fd(": No such file or directory", 2);
+		return (1);
+	}
+	err_print(data[0], "HOME not set");
+	return (1);	
 }
