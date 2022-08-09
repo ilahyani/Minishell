@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:48 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/08 02:28:23 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/09 15:51:32 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ t_token	*lexer(char *line)
 			i = get_word(&tokens, line, i);
 	}
 	if (i == -1)
-		return (NULL);
+		return (free_token_lst(tokens), NULL);
 	return (tokens);
 }
