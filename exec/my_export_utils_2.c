@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:47:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 15:02:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:21:55 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_env	*exprt_lstnew(char *buff)
 		res->var = ft_strldup(buff, find_char(buff, '='));
 		res->value = ft_strdup(strchr_plus(buff, '='));
 	}
+	res->next = NULL;
 	return (res);
 }
 
