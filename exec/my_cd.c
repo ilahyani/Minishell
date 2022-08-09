@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 14:47:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:50:52 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,5 @@ int	exit_error(char **data, char *path, char *oldpwd)
 		return (1);
 	}
 	err_print(data[0], "HOME not set");
-	return (1);	
+	return (1);
 }
