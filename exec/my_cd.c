@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 13:58:17 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:03:55 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,15 @@ void	update_env_cd(t_env *env_list, char *env, char *val)
 
 int	exec_cd(t_env *lst_env, char **data, char *path)
 {
-	char	*cwd;
+	char	*pwd;
+	char	*oldpwd;
 
-	cwd = NULL;
-	cwd = getcwd(NULL, sizeof(NULL));
-	update_env_cd(lst_env, "OLDPWD", cwd);
-	if (!cwd)
-		update_env_cd(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
+	oldpwd = NULL;
+	oldpwd = getcwd(NULL, sizeof(NULL));
 	if (chdir(path) != 0)
 	{
 		free(path);
-		free(cwd);
+		free(oldpwd);
 		if (data[1])
 		{
 			ft_putstr_fd("minishell: cd: ", 2);
@@ -77,10 +75,12 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 		}
 		return (err_print(data[0], "HOME not set"), 1);
 	}
-	free(cwd);
-	cwd = getcwd(NULL, sizeof(NULL));
-	update_env_cd(lst_env, "PWD", cwd);
-	free(path);
-	free(cwd);
-	return (0);
+	pwd = getcwd(NULL, sizeof(NULL));
+	update_env_cd(lst_env, "OLDPWD", oldpwd);
+	if (!oldpwd)
+		update_env_cd(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
+	update_env_cd(lst_env, "PWD", pwd);
+	free(pwd);
+	free(oldpwd);
+	return (free(path), 0);
 }
