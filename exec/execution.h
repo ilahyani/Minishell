@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 21:29:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:51:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	set_status(int j, int s_in);
 void	next_cmd(t_node **node);
 void	close_fd(int fd[2]);
 void	pipe_init(int *j, int *status, int *s_in);
+int		exec_pipe(t_node *cmd, t_env **lst_env);
 
 void	set_signals(char *context);
 void	handler(int signum);
