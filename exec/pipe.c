@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 22:19:50 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:28:22 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 			exec_child(node, lst_env, fd, s_in);
 		if (check_heredoc(node))
 			wait(&status);
-		if (WIFEXITED(status) && WEXITSTATUS(status) == 57)
+		if (WEXITSTATUS(status) == 57)
 			return (1);
 		close_fd(fd);
 		next_cmd(&node);

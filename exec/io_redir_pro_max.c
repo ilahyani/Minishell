@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 22:07:36 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:23:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,10 @@ void	put_error(t_redir data, t_node *cmd)
 
 int	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 {
-	int			i;
 
 	data_init(data);
 	if (cmd->type == WORD)
 	{
-		data->cmd = malloc (sizeof(char *) * (sizeof_array(cmd->cmd) + 1));
-		if (!(data->cmd))
-			return (ft_putendl_fd("Allocation failed", 2), 1);
-		i = -1;
-		while (cmd->cmd[++i])
-			data->cmd[i] = ft_strdup(cmd->cmd[i]);
-		data->cmd[i] = NULL;
 		cmd = cmd->next;
 	}
 	while (cmd && cmd->type != PIPE)
@@ -85,28 +77,26 @@ int	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 
 int	set_fd(t_redir *data, t_node *cmd)
 {
-	int	fd;
-
 	if (cmd->type == OUT_REDIR)
 	{
-		fd = set_out_redir(data, cmd, 0);
-		if (fd == 1)
+		if (set_out_redir(data, cmd, 0) == 1)
 			return (1);
-		(data)->out_red = fd;
+		if ((data)->out_red != -1)
+			(data)->out_red = set_out_redir(data, cmd, 0);
 	}
 	else if (cmd->type == RE_ADD)
 	{
-		fd = set_out_redir(data, cmd, 1);
-		if (fd == 1)
+		if (set_out_redir(data, cmd, 1) == 1)
 			return (1);
-		(data)->out_red = fd;
+		if ((data)->out_red != -1)
+			(data)->out_red = set_out_redir(data, cmd, 1);
 	}
 	else if (cmd->type == IN_REDIR)
 	{
-		fd = set_in_redir(data, cmd);
-		if (fd == 1)
+		if (set_in_redir(data, cmd) == 1)
 			return (1);
-		(data)->in_red = fd;
+		if ((data)->in_red != -1)
+			(data)->in_red = set_in_redir(data, cmd);
 	}
 	return (0);
 }
