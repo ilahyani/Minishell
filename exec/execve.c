@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 15:40:44 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:47:17 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_exec(char **data, t_env *lst_env)
 		if (create_process(data[0], data, env))
 		{
 			err_print(data[0], "permission denied");
-			g_status = 127;
+			g_status = 126;
 			exit(g_status);
 		}
 	}
@@ -33,9 +33,15 @@ int	ft_exec(char **data, t_env *lst_env)
 	{
 		path = get_path(data[0], lst_env);
 		if (!path)
-			return (err_print(data[0], "No such file or directory"), 127);
+		{
+			err_print(data[0], "No such file or directory");
+			return (free_tab(env), 127);
+		}
 		else if (create_process(path, data, env))
-			return (err_print(data[0], "command not found"), 127);
+		{
+			err_print(data[0], "command not found");
+			return (free_tab(env), 127);
+		}
 	}
 	free(path);
 	return (free_tab(env), g_status);
