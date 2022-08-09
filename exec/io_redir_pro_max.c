@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 18:23:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:41:31 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	put_error(t_redir data, t_node *cmd)
 
 int	get_data(t_node *cmd, t_redir *data, t_env *lst_env)
 {
-
 	data_init(data);
 	if (cmd->type == WORD)
 	{

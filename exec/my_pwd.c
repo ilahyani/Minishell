@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 21:36:48 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:41:43 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	my_pwd(t_env *lst_env)
 {
-	char *pwd;
+	char	*pwd;
 
 	(void)lst_env;
 	pwd = getcwd(NULL, sizeof(NULL));
