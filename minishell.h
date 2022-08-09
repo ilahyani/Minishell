@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:12 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/09 18:20:58 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:40:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	interpret_cmd(t_node *cmd, t_env **lst_env);
 void	check_cmd(char **cmd, t_env **lst_env);
 void	cmd_error(t_node *cmd);
 void	free_cmd(t_node *cmd);
+int		empty_line(char *line);
 void	free_token_lst(t_token *tokens);
 
 #endif
