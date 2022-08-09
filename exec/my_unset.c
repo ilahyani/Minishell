@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:20:18 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:15:17 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:38:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	remove_head(t_env **env)
 	t_env	*tmp;
 
 	tmp = (*env)->next;
+	free((*env)->var);
+	free((*env)->value);
 	free(*env);
 	(*env) = tmp;
 }
@@ -57,6 +59,8 @@ void	remove_node(t_env **env, char *data)
 	{
 		tmp2 = tmp->next;
 		tmp->next = tmp->next->next;
+		free(tmp2->var);
+		free(tmp2->value);
 		free(tmp2);
 	}
 }
