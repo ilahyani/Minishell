@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:20:18 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 13:38:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:44:31 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	my_unset(t_env **env, char **data)
 			ft_putstr_fd("minishell: unset: ", 2);
 			ft_putstr_fd(data[i], 2);
 			ft_putstr_fd(": not a valid identifier\n", 2);
-			return (1);
+			continue ;
 		}
 		if ((*env)->var && !ft_strcmp((*env)->var, data[i]))
 			remove_head(env);

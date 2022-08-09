@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:52 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 22:12:29 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:27:14 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	my_env(t_env *env, char **data)
 	if (sizeof_array(data) > 1)
 	{
 		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(data[0], 2);
+		ft_putstr_fd(data[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		return (127);
 	}

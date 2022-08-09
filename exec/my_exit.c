@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:18:35 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 17:21:46 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:12:39 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ void	my_exit(char **data)
 	}
 	else
 	{
-		err_print(data[0], " too many arguments");
-		g_status = 0;
+		if (is_int(data[1]))
+		{
+			err_print(data[0], "too many arguments");
+			g_status = 0;
+			return ;
+		}
+		err_print(data[0], "numeric argument required");
 	}
 	exit(g_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 15:47:17 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:32:27 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	create_process(char *path, char **data, char **env)
 	else if (c_pid == 0)
 	{
 		if (execve(path, data, env) == -1)
-			return (1);
+		{
+			g_status = 1;
+			exit(g_status);
+		}
 	}
 	waitpid(-1, &status, 0);
 	if (!WIFSIGNALED(status))
