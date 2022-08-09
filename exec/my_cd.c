@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 21:26:12 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:58:17 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,13 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 	{
 		free(path);
 		free(cwd);
-		return (err_print(data[0], "No such file or directory"), 1);
+		if (data[1])
+		{
+			ft_putstr_fd("minishell: cd: ", 2);
+			ft_putstr_fd(data[1], 2);
+			return (ft_putendl_fd(": No such file or directory", 2), 1);
+		}
+		return (err_print(data[0], "HOME not set"), 1);
 	}
 	free(cwd);
 	cwd = getcwd(NULL, sizeof(NULL));
