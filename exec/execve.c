@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:19:07 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 05:25:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:40:44 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	ft_exec(char **data, t_env *lst_env)
 	if ((data[0][0] == '.' && data[0][1] == '/') || data[0][0] == '/')
 	{
 		if (create_process(data[0], data, env))
-			return (err_print(data[0], "command not found"), 127);
+		{
+			err_print(data[0], "permission denied");
+			g_status = 127;
+			exit(g_status);
+		}
 	}
 	else
 	{
@@ -33,9 +37,8 @@ int	ft_exec(char **data, t_env *lst_env)
 		else if (create_process(path, data, env))
 			return (err_print(data[0], "command not found"), 127);
 	}
-	free_tab(env);
 	free(path);
-	return (g_status);
+	return (free_tab(env), g_status);
 }
 
 int	create_process(char *path, char **data, char **env)
@@ -46,7 +49,7 @@ int	create_process(char *path, char **data, char **env)
 	set_signals(path);
 	c_pid = fork();
 	if (c_pid == -1)
-		return (ft_putstr_fd("error\n", 2), 1);
+		return (ft_putstr_fd("fork error\n", 2), 1);
 	else if (c_pid == 0)
 	{
 		if (execve(path, data, env) == -1)
