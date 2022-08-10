@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 17:28:22 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:30:51 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 		dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	close(fd[1]);
-	check_cmd(node->cmd, &lst_env);
+	if (node->type == WORD)
+		check_cmd(node->cmd, &lst_env);
+	ft_putendl_fd("leaving", 2);
 	exit(g_status);
 }

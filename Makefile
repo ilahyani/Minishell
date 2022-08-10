@@ -24,7 +24,7 @@ $(LIB):
 	@make -C libft
 
 $(NAME): $(OBJ) $(LIB)
-	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME) && clear
+	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME)
 	@echo "\033[1;36m"
 	@echo "SUCCESS"
 	@echo "\033[0m"

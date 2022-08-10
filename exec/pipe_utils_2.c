@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 22:19:32 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 22:20:13 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:18:40 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	close_fd(int fd[2])
 	dup2(fd[0], STDIN_FILENO);
 	if (close(fd[0]) == -1)
 	{
-		ft_putstr_fd("fork error\n", 2);
+		ft_putstr_fd("error\n", 2);
 		return ;
 	}
 	if (close(fd[1]) == -1)
 	{
-		ft_putstr_fd("fork error\n", 2);
+		ft_putstr_fd("error\n", 2);
 		return ;
 	}
 }
