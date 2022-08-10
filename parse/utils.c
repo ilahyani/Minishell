@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:55:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/08 06:46:56 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/10 17:07:37 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	special_char(char c)
 int	var_delimiter(char *line, int i)
 {
 	if (line[i] == '?' && line[i - 1] != '$')
+		return (0);
+	if ((line[i] >= '0' && line[i] <= '9') && line[i - 1] != '$')
 		return (0);
 	if (!(line[i] >= '0' && line[i] <= '9')
 		&& !(line[i] >= 'A' && line[i] <= 'Z')
