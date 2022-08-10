@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:10:42 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/10 14:11:42 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/10 16:44:38 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,18 @@ char	*strjoin_plus(char *s1, char *s2, char *s3)
 	int		j;
 	char	*str;
 
-	if (!s2)
-		s2 = ft_strdup("");
-	if (!s3)
-		s3 = ft_strdup("");
 	str = (char *) malloc (ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1);
 	i = 0;
 	j = 0;
-	while (s1[i])
+	while (s1 && s1[i])
 		str[j++] = s1[i++];
 	i = 0;
-	while (s2[i])
+	while (s2 && s2[i])
 		str[j++] = s2[i++];
 	i = 0;
-	while (s3[i])
+	while (s3 && s3[i])
 		str[j++] = s3[i++];
 	str[j] = '\0';
-	if (!ft_strcmp(s2, ""))
-		free(s2);
-	if (!ft_strcmp(s3, ""))
-		free(s3);
 	return (str);
 }
 
