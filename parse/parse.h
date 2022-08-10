@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:05:11 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/07 23:33:49 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/10 21:01:13 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_token	*lexer(char *line);
 char	**add_to_table(char **tmp2, char *tmp1);
 char	**join_2d(char **arg1, char **arg2);
 void	add_lst(t_token **head, t_token *node);
-t_node	*move_node(t_node *node, t_node *head, t_node **origin);
+t_node	*move_node(t_node *node, t_node *head, t_node **origin, int lock);
 t_node	*join_words(t_node *list);
 t_node	*adjuste_list(t_node *list);
 t_token	*lst_new(char	*arg, int type);
@@ -82,5 +82,6 @@ int		pipeline(t_token **tokens);
 void	add_node_parse(t_node **head, t_node *node);
 t_node	*new_node(int type, char **arg);
 int		double_qoute_return(t_token **tokens, char *line, int i, int s);
+t_node	*move_1(t_node *node, t_node	*tmp3, t_node *head);
 
 #endif

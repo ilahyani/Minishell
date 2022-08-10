@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:06:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/07 23:21:57 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/10 20:58:35 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,10 @@ t_node	*move_head(t_node *node, t_node	*tmp3, t_node **origin, t_node *head)
 		(*origin) = node;
 		return (head);
 	}
-	else if (head->type != WORD)
-	{
-		while (tmp3->next != head)
-			tmp3 = tmp3->next;
-		tmp3->next = node;
-		head->next = node->next;
-		node->next = head;
-		return (node);
-	}
 	return (NULL);
 }
 
-t_node	*move_node(t_node *node, t_node *head, t_node **origin)
+t_node	*move_node(t_node *node, t_node *head, t_node **origin, int lock)
 {
 	t_node	*tmp;
 	t_node	*tmp2;
@@ -71,7 +62,7 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 
 	tmp = head;
 	tmp3 = (*origin);
-	if ((*origin)->type != WORD)
+	if ((*origin)->type != WORD && lock)
 		return (move_head(node, tmp3, origin, head));
 	else if (node != head && head->type == WORD)
 	{
@@ -85,7 +76,7 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin)
 		tmp->next = node;
 	}
 	else if (head->type != WORD)
-		return (move_head(node, tmp3, origin, head));
+		return (move_1(node, tmp3, head));
 	return (head);
 }
 
@@ -118,19 +109,22 @@ t_node	*adjuste_list(t_node *list)
 {
 	t_node	*tmp;
 	t_node	*tmp2;
+	int		lock;
 
 	tmp = list;
 	tmp2 = list;
+	lock = 1;
 	while (tmp)
 	{
 		while (tmp && tmp->type != PIPE)
 		{
 			if (tmp->type == WORD)
 			{
-				tmp2 = move_node(tmp, tmp2, &list);
+				tmp2 = move_node(tmp, tmp2, &list, lock);
 			}
 			tmp = tmp->next;
 		}
+		lock = 0;
 		if (!tmp)
 			break ;
 		tmp = tmp->next;

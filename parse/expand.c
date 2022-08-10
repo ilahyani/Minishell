@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:05:24 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/09 15:43:38 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/10 20:58:56 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,18 @@ t_token	*expand_var(t_token *tokens, t_env *list_env)
 		mv = mv->next;
 	}
 	return (tokens);
+}
+
+t_node	*move_1(t_node *node, t_node	*tmp3, t_node *head)
+{
+	if (head->type != WORD)
+	{
+		while (tmp3->next != head)
+			tmp3 = tmp3->next;
+		tmp3->next = node;
+		head->next = node->next;
+		node->next = head;
+		return (node);
+	}
+	return (NULL);
 }
