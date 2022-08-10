@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 14:50:52 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/10 17:48:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	my_cd(t_env *lst_env, char **data)
 		return (err_print(data[0], "error retrieving current directory"), 1);
 	else if (!ft_strcmp(data[1], "-"))
 	{
-		path = ft_getenv("OLDPWD", lst_env);
+		path = ft_strdup(ft_getenv("OLDPWD", lst_env));
 		if (!path)
 		{
 			free(cwd);
@@ -74,10 +74,10 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 		free(pwd);
 		pwd = strjoin_plus(ft_getenv("PWD", lst_env), "/", "..");
 	}
-	update_env_cd(lst_env, "OLDPWD", oldpwd);
-	if (!oldpwd)
-		update_env_cd(lst_env, "OLDPWD", ft_getenv("PWD", lst_env));
 	update_env_cd(lst_env, "PWD", pwd);
+	if (!oldpwd)
+		update_env_cd(lst_env, "OLDPWD", pwd);
+	update_env_cd(lst_env, "OLDPWD", oldpwd);
 	free(pwd);
 	free(oldpwd);
 	return (free(path), 0);
