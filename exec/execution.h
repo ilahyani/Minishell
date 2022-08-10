@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 22:51:39 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:12:36 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char	*get_path(char *cmd, t_env *lst_env);
 int		create_process(char *path, char **data, char **env);
 char	*strjoin_plus(char *s1, char *s2, char *s3);
 char	**list_to_tab(t_env *lst_env);
+void	run_executable(char **data, char **env);
 
 void	env_init(char **env, t_env **lst_env);
 void	unset_oldpwd(t_env *lst_env);
