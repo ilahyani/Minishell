@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:32:14 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:31:37 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/11 17:29:56 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	multi_redic_check(t_node *cmd)
 {
-	int	i;
+	int		i;
+	t_node	*tmp;
 
 	i = 0;
-	while (cmd && cmd->type != PIPE)
+	tmp = cmd;
+	while (tmp && tmp->type != PIPE)
 	{
-		if (cmd->type == OUT_REDIR || cmd->type == IN_REDIR
-			|| cmd->type == RE_ADD || cmd->type == HERE_DOC)
+		if (tmp->type == OUT_REDIR || tmp->type == IN_REDIR
+			|| tmp->type == RE_ADD || tmp->type == HERE_DOC)
 			i++;
-		cmd = cmd->next;
+		tmp = tmp->next;
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:28:22 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/07/31 23:20:18 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:32:10 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,16 @@ int	find_char(char *s, char c)
 
 int	find_char_2(t_node *cmd, int type)
 {
-	if (!cmd)
+	t_node	*tmp;
+
+	tmp = cmd;
+	if (!tmp)
 		return (0);
-	while (cmd)
+	while (tmp)
 	{
-		if (cmd->type == type)
+		if (tmp->type == type)
 			return (1);
-		cmd = cmd->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }

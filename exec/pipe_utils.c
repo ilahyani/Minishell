@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:52:31 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/11 02:15:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:16:46 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ int	check_out_redir(t_node *node)
 	t_node	*tmp;
 
 	tmp = node;
-	if (tmp->type == WORD)
-		tmp = tmp->next;
 	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->type == OUT_REDIR)
+		if (tmp->type == OUT_REDIR || tmp->type == RE_ADD)
 			return (1);
 		tmp = tmp->next;
 	}
