@@ -123,12 +123,8 @@ int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 		print_fd(lst_env, line, tmpfd);
 		free(line);
 	}
-	if (close(tmpfd) == -1)
-		return (ft_putstr_fd("unexpected error\n", 2), 1);
-	tmpfd = open("/tmp/tmpfile", O_RDONLY);
-	if (tmpfd == -1)
-		return (ft_putstr_fd("unexpected error\n", 2), 1);
+	close(tmpfd) == -1;
 	if ((data)->in_red != -1)
-		(data)->in_red = tmpfd;
+		(data)->in_red = open("/tmp/tmpfile", O_RDONLY);
 	return (free(line), 0);
 }

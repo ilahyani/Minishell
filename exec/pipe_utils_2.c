@@ -43,3 +43,9 @@ void	pipe_init(int *j, int *status, int *s_in)
 	*s_in = dup(STDIN_FILENO);
 	set_signals("pipe");
 }
+
+void	s_in_reset(int s_in)
+{
+	dup2(s_in, STDIN_FILENO);
+	close(s_in);
+}

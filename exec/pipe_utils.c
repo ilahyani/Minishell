@@ -65,12 +65,6 @@ int	is_last(t_node *node)
 	return (0);
 }
 
-void	s_in_reset(int s_in)
-{
-	dup2(s_in, STDIN_FILENO);
-	close(s_in);
-}
-
 void	set_status(int j, int s_in)
 {
 	int	status;

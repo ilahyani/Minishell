@@ -74,7 +74,6 @@ int	i_redir(t_node *cmd)
 	char	*file;
 
 	file = check_file(cmd);
-	// printf("in_put: %s\n", file);
 	redirect_fd = open(file, O_RDONLY, S_IRWXU);
 	if (redirect_fd == -1)
 		return (err_print(file, "No such file or directory"), 1);
@@ -90,7 +89,6 @@ int	o_redir(t_node *cmd, int append)
 	char	*file;
 
 	file = check_file(cmd);
-	// printf("out_put: %s\n", file);
 	if (append)
 		redirect_fd = open(file, O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
 	else
