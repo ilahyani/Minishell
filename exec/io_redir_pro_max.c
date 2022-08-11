@@ -123,7 +123,7 @@ int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 		print_fd(lst_env, line, tmpfd);
 		free(line);
 	}
-	close(tmpfd) == -1;
+	close(tmpfd);
 	if ((data)->in_red != -1)
 		(data)->in_red = open("/tmp/tmpfile", O_RDONLY);
 	return (free(line), 0);
