@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:52:31 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/08 22:16:52 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/11 02:15:37 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,50 @@ int	check_redir(t_node *node)
 	if (node && (node->type == HERE_DOC || node->type == IN_REDIR))
 		return (1);
 	if (node && (node->type == OUT_REDIR || node->type == RE_ADD))
-		return (2);
+		return (1);
+	return (0);
+}
+
+int	check_out_redir(t_node *node)
+{
+	t_node	*tmp;
+
+	tmp = node;
+	if (tmp->type == WORD)
+		tmp = tmp->next;
+	while (tmp && tmp->type != PIPE)
+	{
+		if (tmp->type == OUT_REDIR)
+			return (1);
+		tmp = tmp->next;
+	}
 	return (0);
 }
 
 int	check_heredoc(t_node *node)
 {
-	while (node && node->type != PIPE)
+	t_node	*tmp;
+
+	tmp = node;
+	while (tmp && tmp->type != PIPE)
 	{
-		if (node->type == HERE_DOC)
+		if (tmp->type == HERE_DOC)
 			return (1);
-		node = node->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }
 
 int	is_last(t_node *node)
 {
-	if (!(node->next))
+	t_node	*tmp;
+
+	tmp = node;
+	if (!(tmp->next))
 		return (1);
-	while (check_redir(node))
-		node = node->next;
-	if (!node)
+	while (tmp && check_redir(tmp))
+		tmp = tmp->next;
+	if (!tmp)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 06:29:30 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 22:41:31 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/11 01:55:08 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,28 +102,33 @@ int	set_fd(t_redir *data, t_node *cmd)
 
 int	set_heredoc_fd(t_redir *data, t_env *lst_env, t_node *cmd)
 {
-	int			p_fd[2];
-	char		*line;
-	struct stat	buf;
+	char	*line;
+	int		tmpfd;
 
 	set_signals("heredoc");
 	rl_event_hook = event;
-	if (pipe(p_fd) == -1)
-		return (ft_putendl_fd("Here_Doc error", 2), 1);
+	tmpfd = open("/tmp/tmpfile", O_CREAT | O_TRUNC | O_RDWR, 0777);
+	if (tmpfd == -1)
+		return (ft_putstr_fd("unexpected error\n", 2), 1);
 	while (1)
 	{
 		line = readline("> ");
 		if (g_status == -1)
 			return (1);
-		if (!line || !ft_strcmp(line, cmd->cmd[0]))
+		if (!line || !ft_strcmp(line, check_file(cmd)))
+		{
+			heredoc_here(RESET);
 			break ;
-		print_fd(lst_env, line, p_fd[1]);
+		}
+		print_fd(lst_env, line, tmpfd);
 		free(line);
 	}
-	if (!fstat((data)->in_red, &buf))
-		if (close((data)->in_red) == -1 || close(p_fd[1]) == -1)
-			return (ft_putendl_fd("unexpected error", 2), 1);
+	if (close(tmpfd) == -1)
+		return (ft_putstr_fd("unexpected error\n", 2), 1);
+	tmpfd = open("/tmp/tmpfile", O_RDONLY);
+	if (tmpfd == -1)
+		return (ft_putstr_fd("unexpected error\n", 2), 1);
 	if ((data)->in_red != -1)
-		(data)->in_red = p_fd[0];
+		(data)->in_red = tmpfd;
 	return (free(line), 0);
 }

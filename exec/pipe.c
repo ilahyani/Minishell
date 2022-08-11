@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:53:48 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/10 22:30:51 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/11 02:22:48 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_pipe(t_node *node, t_env *lst_env)
 		else if (c_pid == 0)
 			exec_child(node, lst_env, fd, s_in);
 		if (check_heredoc(node))
-			wait(&status);
+			waitpid(c_pid, &status, 0);
 		if (WEXITSTATUS(status) == 57)
 			return (1);
 		close_fd(fd);
@@ -57,12 +57,11 @@ void	exec_child(t_node *node, t_env *lst_env, int fd[2], int s_in)
 	}
 	if (status)
 		exit(1337);
-	if (!is_last(node) && check_redir(node) != 2)
+	if (!is_last(node) && !check_out_redir(node))
 		dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	if (node->type == WORD)
 		check_cmd(node->cmd, &lst_env);
-	ft_putendl_fd("leaving", 2);
 	exit(g_status);
 }

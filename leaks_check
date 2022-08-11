@@ -1,1 +1,1 @@
-while true; do clear && leaks --list minishell; sleep 3; done
+while true; do clear && leaks --list minishell; sleep 2; done
