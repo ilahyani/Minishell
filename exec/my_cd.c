@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/10 17:48:37 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/12 10:41:54 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	my_cd(t_env *lst_env, char **data)
 		if (!path)
 		{
 			free(cwd);
-			return (ft_putstr_fd("OLDPWD not set\n", 2), 1);
+			return (ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2), 1);
 		}
 		printf("%s\n", ft_getenv("OLDPWD", lst_env));
 	}
