@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 22:39:06 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/11 18:13:49 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:40:18 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	redir_io(t_node *cmd, t_env *lst_env)
 {
 	if (multi_redic_check(cmd) == 1)
 	{
-		if (find_char_2(cmd, HERE_DOC))
+		if (redir_type(cmd) == HERE_DOC)
 			return (ft_heredoc(cmd, lst_env));
-		else if (find_char_2(cmd, IN_REDIR))
+		else if (redir_type(cmd) == IN_REDIR)
 			return (i_redir(cmd));
-		else if (find_char_2(cmd, OUT_REDIR))
+		else if (redir_type(cmd) == OUT_REDIR)
 			return (o_redir(cmd, 0));
-		else if (find_char_2(cmd, RE_ADD))
+		else if (redir_type(cmd) == RE_ADD)
 			return (o_redir(cmd, 1));
 	}
 	return (redir_io_pro_max(cmd, lst_env));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:37:23 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/07 22:31:43 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/12 12:36:17 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ int	set_in_redir(t_redir *data, t_node *cmd)
 		if (close((data)->in_red) == -1)
 			return (ft_putendl_fd("unexpected error", 2), 1);
 	return (open(cmd->cmd[0], O_RDONLY, S_IRWXU));
+}
+
+int	redir_type(t_node *node)
+{
+	if (node->type == WORD)
+		node = node->next;
+	if (node && (node->type == HERE_DOC))
+		return (HERE_DOC);
+	if (node && (node->type == IN_REDIR))
+		return (IN_REDIR);
+	if (node && (node->type == OUT_REDIR))
+		return (OUT_REDIR);
+	if (node && (node->type == RE_ADD))
+		return (RE_ADD);
+	return (0);
 }
 
 int	dollar_sign_here_doc(t_env *lst_env, char *arg, int fd, int i)

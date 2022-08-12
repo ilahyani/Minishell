@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:41:56 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/11 02:05:05 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/12 12:38:02 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_env	*env_lstlast(t_env *lst);
 
 int		redir_io(t_node *cmd, t_env *lst_env);
 int		multi_redic_check(t_node *cmd);
+int		redir_type(t_node *node);
 int		o_redir(t_node *cmd, int append);
 int		i_redir(t_node *cmd);
 int		ft_heredoc(t_node *node, t_env *lst_env);
