@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/10 23:42:49 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/12 21:13:13 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,13 +173,13 @@ t_node	*parser(char *line, t_env *lst_env)
 		tof = tokens;
 		list = parse(&tokens);
 		list = adjuste_list(list);
-	// printf("------------------------\n");
-	// 	 print_list2(list);
-	// 	printf("------------------------\n");	
 	}
 	free_token_lst(tof);
 	return (list);
 }
+	// printf("------------------------\n");
+	// 	 print_list2(list);
+	// 	printf("------------------------\n");	
 	// print_list(tokens);
 /* 		print_list2(list); */
 		/* << '' << '' 'cat' << r | ls */

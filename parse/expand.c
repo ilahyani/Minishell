@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:05:24 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/10 20:58:56 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/12 21:07:07 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,21 @@ t_token	*expand_var(t_token *tokens, t_env *list_env)
 	return (tokens);
 }
 
-t_node	*move_1(t_node *node, t_node	*tmp3, t_node *head)
+t_node	*move_1(t_node *node, t_node **origen, t_node *head)
 {
+	t_node	*tmp3;
+	t_node	*tmp2;
+
+	tmp3 = (*origen);
+	tmp2 = head;
 	if (head->type != WORD)
 	{
 		while (tmp3->next != head)
 			tmp3 = tmp3->next;
 		tmp3->next = node;
-		head->next = node->next;
+		while (tmp2->next != node)
+			tmp2 = tmp2->next;
+		tmp2->next = node->next;
 		node->next = head;
 		return (node);
 	}

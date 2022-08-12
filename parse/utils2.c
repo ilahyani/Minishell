@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 00:06:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/10 20:58:35 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/12 20:47:01 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_node	*move_node(t_node *node, t_node *head, t_node **origin, int lock)
 		tmp->next = node;
 	}
 	else if (head->type != WORD)
-		return (move_1(node, tmp3, head));
+		return (move_1(node, origin, head));
 	return (head);
 }
 
