@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 22:40:21 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/09 22:41:12 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/13 09:12:00 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_readline(t_env **lst_env)
 		free(line);
 	}
 	free(line);
-	printf("ight I'mma head out\n");
+	printf("exit\n");
 }
 
 void	interpret_cmd(t_node *cmd, t_env **lst_env)
