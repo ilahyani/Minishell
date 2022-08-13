@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 22:40:21 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/13 15:22:24 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/13 15:34:05 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int	empty_line(char *line)
 	tmp = ft_strtrim(line, " ");
 	if (!ft_strcmp(tmp, ""))
 		return (free(line), free(tmp), 1);
+	free(tmp);
 	return (0);
 }
