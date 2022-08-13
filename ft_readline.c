@@ -6,7 +6,7 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 22:40:21 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/13 15:19:52 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/13 15:22:24 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ int	empty_line(char *line)
 
 	tmp = ft_strtrim(line, " ");
 	if (!ft_strcmp(tmp, ""))
-		return (free(line),free(tmp), 1);
+		return (free(line), free(tmp), 1);
 	return (0);
 }

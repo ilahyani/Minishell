@@ -23,7 +23,9 @@ all: $(NAME)
 $(LIB):
 	@make -C libft
 
-$(NAME): $(OBJ) $(LIB)
+HDR = minishell.h
+
+$(NAME): $(OBJ) $(LIB) $(HDR)
 	@cc $(CFLAGS) $(LDFLAGS) $(LIB) -lreadline $(OBJ) -o $(NAME)
 	@echo "\033[1;36m"
 	@echo "SUCCESS"

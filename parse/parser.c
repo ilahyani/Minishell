@@ -6,40 +6,11 @@
 /*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:04:53 by mjlem             #+#    #+#             */
-/*   Updated: 2022/08/12 21:13:13 by mjlem            ###   ########.fr       */
+/*   Updated: 2022/08/13 15:22:14 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// void	print_list(t_token *tokens)
-// {
-// 	t_token	*tmp;
-
-// 	tmp = tokens;
-// 	while (tmp)
-// 	{
-// 		printf("%s--%c\n", tmp->arg, tmp->type);
-// 		tmp = tmp->next;
-// 	}
-// }
-
-// void	print_list2(t_node *tokens)
-// {
-// 	t_node	*tmp;
-// 	int		i;
-
-// 	tmp = tokens;
-// 	i = 0;
-// 	while (tmp)
-// 	{
-// 		i = 0;
-// 		while (tmp->cmd[i])
-// 			printf("|%s|", tmp->cmd[i++]);
-// 		printf("--%c\n", tmp->type);
-// 		tmp = tmp->next;
-// 	}
-// }
 
 void	word(t_token **tokens, t_node **line)
 {
@@ -95,12 +66,6 @@ void	parse_re(t_node **line, t_token **tokens)
 	if (tmp)
 		free(tmp);
 }
-/* 			if (!(*tokens) || (*tokens)->type == EXPAND || (*tokens)->type == SQ_STR)
-			{
-				tmp2 = add_to_table(tmp2, tmp);
-				free(tmp);
-				tmp = NULL;
-			} */
 
 void	parse_heredoc(t_node **line, t_token **tokens)
 {
@@ -177,9 +142,3 @@ t_node	*parser(char *line, t_env *lst_env)
 	free_token_lst(tof);
 	return (list);
 }
-	// printf("------------------------\n");
-	// 	 print_list2(list);
-	// 	printf("------------------------\n");	
-	// print_list(tokens);
-/* 		print_list2(list); */
-		/* << '' << '' 'cat' << r | ls */
