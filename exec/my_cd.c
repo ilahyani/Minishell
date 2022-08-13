@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:17:12 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/12 10:41:54 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:01:31 by ilahyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	my_cd(t_env *lst_env, char **data)
 
 	cwd = NULL;
 	cwd = getcwd(NULL, sizeof(NULL));
-	if (!data[1])
-		path = ft_strdup(ft_getenv("HOME", lst_env));
+	if (!data[1] && !check_home(lst_env))
+		return (free(cwd), 1);
+	else if (!data[1] && check_home(lst_env))
+		path = ft_strdup(check_home(lst_env));
 	else if (!ft_strcmp(data[1], ".") && !cwd)
 		return (err_print(data[0], "error retrieving current directory"), 1);
 	else if (!ft_strcmp(data[1], "-"))
@@ -36,7 +38,7 @@ int	my_cd(t_env *lst_env, char **data)
 	else
 		path = ft_strdup(data[1]);
 	free(cwd);
-	return (exec_cd(lst_env, data, path));
+	return (exec_cd(lst_env, path));
 }
 
 void	update_env_cd(t_env *env_list, char *env, char *val)
@@ -56,7 +58,7 @@ void	update_env_cd(t_env *env_list, char *env, char *val)
 		env_lstadd_back(&env_list, env_lstnew(env, val));
 }
 
-int	exec_cd(t_env *lst_env, char **data, char *path)
+int	exec_cd(t_env *lst_env, char *path)
 {
 	char	*pwd;
 	char	*oldpwd;
@@ -64,7 +66,7 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 	oldpwd = NULL;
 	oldpwd = getcwd(NULL, sizeof(NULL));
 	if (chdir(path))
-		return (exit_error(data, path, oldpwd));
+		return (exit_error(path, oldpwd));
 	pwd = getcwd(NULL, sizeof(NULL));
 	if (!pwd)
 	{
@@ -80,20 +82,26 @@ int	exec_cd(t_env *lst_env, char **data, char *path)
 	update_env_cd(lst_env, "OLDPWD", oldpwd);
 	free(pwd);
 	free(oldpwd);
-	return (free(path), 0);
+	free(path);
+	return (0);
 }
 
-int	exit_error(char **data, char *path, char *oldpwd)
+int	exit_error(char *path, char *oldpwd)
 {
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putendl_fd(": No such file or directory", 2);
 	free(path);
 	free(oldpwd);
-	if (data[1])
-	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(data[1], 2);
-		ft_putendl_fd(": No such file or directory", 2);
-		return (1);
-	}
-	err_print(data[0], "HOME not set");
 	return (1);
+}
+
+char	*check_home(t_env *lst_env)
+{
+	char	*home;
+
+	home = ft_getenv("HOME", lst_env);
+	if (!home)
+		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), NULL);
+	return (home);
 }
