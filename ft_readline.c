@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 22:40:21 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/08/13 09:12:00 by ilahyani         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:19:52 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ void	check_cmd(char **cmd, t_env **lst_env)
 
 int	empty_line(char *line)
 {
-	if (!ft_strcmp(line, ""))
-		return (free(line), 1);
+	char	*tmp;
+
+	tmp = ft_strtrim(line, " ");
+	if (!ft_strcmp(tmp, ""))
+		return (free(line),free(tmp), 1);
 	return (0);
 }
